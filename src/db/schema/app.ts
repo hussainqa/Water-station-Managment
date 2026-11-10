@@ -239,7 +239,7 @@ export const assessments = pgTable(
       name: "assessments_plant_fk",
       columns: [t.plantId, t.ownerId],
       foreignColumns: [plants.id, plants.ownerId],
-    }).onDelete("cascade"),
+    }), // no cascade: a plant with assessments (drafts included) cannot be deleted
     unique("assessments_plant_period_uq").on(
       t.plantId,
       t.periodStart,

@@ -41,9 +41,10 @@ This Next.js version differs from older ones (for example `src/proxy.ts` replace
 ```bash
 cp .env.example .env     # first time only
 npm run db:up            # start Postgres (localhost:54329) and Mailpit (UI http://localhost:54326)
-npm run db:migrate       # apply drizzle/*.sql as the owner role
+npm run db:migrate       # create/repair the database and roles (db:roles), then apply drizzle/*.sql
 npm run db:seed          # load docs/handoff/data into the reference tables (idempotent)
 npm run db:reset         # LOCAL ONLY: drop everything, migrate, seed
+npm run clean            # remove .next (build and dev caches), tsbuildinfo, Playwright output; stop dev first
 npm run db:down          # stop the containers (data volume is kept)
 npm run db:generate -- --name <what_changed>   # new migration after editing src/db/schema
 
@@ -63,10 +64,9 @@ Ports are non-default on purpose (3100, 54329, 54325, 54326) so they do not coll
 
 ```
 docs/handoff/          the original handoff package (spec, seed JSON, prototype, thesis files)
-docker/initdb/         creates the two database roles on first start
 drizzle/               SQL migrations. 0001_security.sql: grants, RLS policies, ranked view. 0002: auth role, my_profile
 messages/<locale>/     UI strings, one file per namespace (common, auth, shell, ...)
-scripts/               owner-role scripts: seed.ts, db-drop.ts, lib/owner-db.ts
+scripts/               db-roles.ts (admin: creates database + roles), seed.ts, db-drop.ts, clean.ts, lib/owner-db.ts
 src/app/[locale]/      root layout (fonts, theme, i18n providers)
 src/app/[locale]/(auth)/   login, signup, forgot-password, reset-password (signed-out only)
 src/app/[locale]/(app)/    everything behind sign-in; layout.tsx calls requireUser() and renders the shell
@@ -91,7 +91,8 @@ docs/screenshots/      screenshots of this app, written by the e2e tests
 
 ## Data access rule
 
-Three database roles exist (created in `docker/initdb/01-roles.sh`):
+Three database roles exist. `scripts/db-roles.ts` creates or repairs them and the database on every `npm run db:migrate` (idempotent; works on a fresh server and on an existing one; no manual steps). It connects with `DATABASE_ADMIN_URL` (needs CREATEROLE and CREATEDB) and takes role names, passwords and the database name from the three `DATABASE_*_URL` values. Table grants stay in the migrations.
+
 
 - `wtp_owner` owns the tables. It is used **only** by `drizzle-kit` and the scripts in `scripts/`.
 - `wtp_auth` is used **only** by Better Auth (`src/lib/auth/db.ts`). It can reach the four auth tables (`users`, `sessions`, `accounts`, `verifications`) and nothing else.
@@ -143,4 +144,5 @@ Never edit a migration that has been committed; add a new one.
 - New rules in `src/lib/evaluation` have unit tests; new user-owned tables are covered by RLS.
 - The screen works in Arabic (RTL) and English (LTR) at 390, 768 and 1440 px.
 - The relevant client notes in HANDOFF section 2 are satisfied.
+- After `next build`, run `npm run clean` before going back to `npm run dev` if anything looks stale (dev uses `.next/dev`, build uses `.next`).
 - Changes are committed in small commits; a phase ends with a report and the open questions for the next one.

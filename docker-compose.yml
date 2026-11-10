@@ -5,21 +5,17 @@ services:
     image: postgres:16
     restart: unless-stopped
     environment:
-      # The superuser is used only by docker/initdb to create the two roles below.
+      # The superuser is used only by scripts/db-roles.ts (first step of `npm run db:migrate`),
+      # which creates the application database and its three roles.
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: ${POSTGRES_SUPERUSER_PASSWORD:-postgres_dev}
       POSTGRES_DB: postgres
-      APP_DB_NAME: ${APP_DB_NAME:-wtp_sqms}
-      DB_OWNER_PASSWORD: ${DB_OWNER_PASSWORD:-wtp_owner_dev}
-      DB_APP_PASSWORD: ${DB_APP_PASSWORD:-wtp_app_dev}
-      DB_AUTH_PASSWORD: ${DB_AUTH_PASSWORD:-wtp_auth_dev}
     ports:
       - "${DB_PORT:-54329}:5432"
     volumes:
       - pgdata:/var/lib/postgresql/data
-      - ./docker/initdb:/docker-entrypoint-initdb.d:ro
     healthcheck:
-      test: ["CMD-SHELL", "psql -U postgres -d $${APP_DB_NAME} -c 'select 1' >/dev/null 2>&1"]
+      test: ["CMD-SHELL", "psql -U postgres -d postgres -c 'select 1' >/dev/null 2>&1"]
       interval: 2s
       timeout: 3s
       retries: 30

@@ -7,7 +7,13 @@ import { routing } from "./routing";
  * The file name is the top-level key, so t("auth.login.title") lives in auth.json.
  * Add a namespace here when you add a file.
  */
-const namespaces = ["common", "auth", "shell"] as const;
+const namespaces = [
+  "common",
+  "auth",
+  "shell",
+  "plants",
+  "indicators",
+] as const;
 
 export default getRequestConfig(async ({ requestLocale }) => {
   const requested = await requestLocale;

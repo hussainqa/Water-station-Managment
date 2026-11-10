@@ -15,9 +15,11 @@
     "db:up": "docker compose up -d --wait",
     "db:down": "docker compose down",
     "db:generate": "drizzle-kit generate",
-    "db:migrate": "drizzle-kit migrate",
+    "db:roles": "tsx scripts/db-roles.ts",
+    "db:migrate": "tsx scripts/db-roles.ts && drizzle-kit migrate",
     "db:seed": "tsx scripts/seed.ts",
-    "db:reset": "tsx scripts/db-drop.ts && drizzle-kit migrate && tsx scripts/seed.ts",
+    "db:reset": "tsx scripts/db-drop.ts && npm run db:migrate && tsx scripts/seed.ts",
+    "clean": "tsx scripts/clean.ts",
     "test:e2e": "playwright test"
   },
   "dependencies": {
