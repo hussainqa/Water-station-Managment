@@ -17,7 +17,12 @@ export async function sendMail(message: {
   text: string;
 }) {
   await transport.sendMail({
-    from: process.env.SMTP_FROM ?? "WTP-SQMS <no-reply@wtp.local>",
+    from: {
+      name:
+        process.env.SMTP_FROM_NAME ??
+        "نظام مراقبة جودة الخدمة / Service Quality Monitoring System",
+      address: process.env.SMTP_FROM_ADDRESS ?? "no-reply@wtp.local",
+    },
     ...message,
   });
 }

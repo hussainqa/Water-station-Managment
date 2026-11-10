@@ -9,6 +9,7 @@ import {
   integer,
   jsonb,
   pgTable,
+  pgView,
   text,
   timestamp,
   unique,
@@ -489,3 +490,19 @@ export const auditEvents = pgTable(
   },
   (t) => [index("audit_events_entity_idx").on(t.ownerId, t.entity, t.entityId)],
 );
+
+// --- The signed-in user's own profile ---------------------------------------------------
+
+/**
+ * One row: the current user (drizzle/0002_auth_role.sql). The app role cannot read the
+ * `users` table itself. Query inside withUser(); outside it the view is empty.
+ * To change these fields call Better Auth (auth.api.updateUser), not SQL.
+ */
+export const myProfile = pgView("my_profile", {
+  id: uuid("id").notNull(),
+  fullName: text("full_name").notNull(),
+  jobTitle: text("job_title").notNull(),
+  email: text("email").notNull(),
+  locale: text("locale").notNull(),
+  theme: text("theme").notNull(),
+}).existing();

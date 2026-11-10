@@ -12,8 +12,9 @@ import {
  * column names are ours.
  *
  * `users` doubles as the profile (HANDOFF 5.2 `profiles`): full_name, job_title, locale.
- * These four tables are NOT under row-level security: the auth layer must look up
- * users and sessions before any user is known. They hold no domain data.
+ * Only the `wtp_auth` role (src/lib/auth/db.ts) can read or write these four tables.
+ * The app role has no access; it sees the signed-in user's own profile through the
+ * `my_profile` view (drizzle/0002_auth_role.sql).
  */
 export const users = pgTable("users", {
   id: uuid("id").primaryKey().defaultRandom(),
@@ -23,6 +24,8 @@ export const users = pgTable("users", {
   image: text("image"),
   jobTitle: text("job_title").notNull().default(""),
   locale: text("locale").notNull().default("ar"),
+  /** "system" | "light" | "dark" */
+  theme: text("theme").notNull().default("system"),
   createdAt: timestamp("created_at", { withTimezone: true })
     .notNull()
     .defaultNow(),
