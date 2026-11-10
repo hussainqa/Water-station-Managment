@@ -74,7 +74,9 @@ function calculate(method: Method, p: Record<string, number>, raw: RawInputs): n
       return unit === "min" ? p.value / 60 : p.value;
     }
     case "ratio":
-      return (p.numerator / p.denominator) * 100;
+      // Multiply first: (29 / 100) * 100 is 28.999999999999996, which would push a value
+      // sitting exactly on a limit to the worse status.
+      return (p.numerator * 100) / p.denominator;
     case "average":
       return p.total / p.count;
   }

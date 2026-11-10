@@ -14,6 +14,7 @@ const namespaces = [
   "plants",
   "indicators",
   "assessments",
+  "wizard",
 ] as const;
 
 export default getRequestConfig(async ({ requestLocale }) => {

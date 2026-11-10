@@ -152,3 +152,14 @@ describe("computeValue", () => {
     expect(computeValue("ratio", { numerator: 1 })).toBeNull();
   });
 });
+
+describe("ratio keeps exact values exact", () => {
+  it.each([
+    [29, 100, 29],
+    [57, 100, 57],
+    [950, 1000, 95],
+    [676, 720, (676 * 100) / 720],
+  ])("%d / %d", (numerator, denominator, expected) => {
+    expect(computeValue("ratio", { numerator, denominator })).toBe(expected);
+  });
+});
