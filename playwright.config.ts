@@ -1,4 +1,6 @@
 import "dotenv/config";
+import os from "node:os";
+import path from "node:path";
 import { defineConfig } from "@playwright/test";
 
 const baseURL = process.env.BETTER_AUTH_URL ?? "http://localhost:3100";
@@ -6,6 +8,8 @@ const baseURL = process.env.BETTER_AUTH_URL ?? "http://localhost:3100";
 // End-to-end tests. Needs the database (npm run db:up && db:migrate && db:seed).
 export default defineConfig({
   testDir: "tests/e2e",
+  // Kept outside the repository so traces written during a run cannot disturb the dev server's file watcher.
+  outputDir: path.join(os.tmpdir(), "wtp-sqms-playwright"),
   fullyParallel: false,
   workers: 1,
   reporter: [["list"]],

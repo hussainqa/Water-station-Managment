@@ -30,7 +30,7 @@ export default async function DashboardPage({
             text={t("dashboard.empty.text")}
             action={
               <Link
-                href="/plants"
+                href="/plants?new=1"
                 className={cn(buttonVariants({ size: "lg" }), "h-11 gap-2 rounded-[13px] px-5 text-[15px]")}
               >
                 <Plus aria-hidden="true" className="size-[18px]" />

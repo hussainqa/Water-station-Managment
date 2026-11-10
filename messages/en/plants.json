@@ -1,1 +1,116 @@
-{"_": ""}
+{
+  "title": "Water plants",
+  "add": "Add a new plant",
+  "search": {
+    "placeholder": "Search by plant name, location or water source",
+    "label": "Search plants"
+  },
+  "list": "Water plants",
+  "empty": {
+    "title": "No plants in your account",
+    "text": "Add one or more plants to start monitoring and assessment.",
+    "cta": "Add a plant"
+  },
+  "noResults": {
+    "title": "No matching plants",
+    "text": "No plant matches “{query}”."
+  },
+  "card": {
+    "waterSource": "Water source",
+    "engineer": "Engineer in charge",
+    "capacity": "Actual / design capacity",
+    "utilisation": "Utilisation",
+    "utilisationBar": "Utilisation {percent}",
+    "unit": "m³/day",
+    "past": "{count, plural, =0 {No past assessments} one {# past assessment} other {# past assessments}}",
+    "noHistory": "No history yet",
+    "edit": "Edit {name}",
+    "delete": "Delete {name}",
+    "none": "—"
+  },
+  "state": {
+    "stable": "Stable",
+    "warnings": "Warnings",
+    "review": "Needs review",
+    "notAssessed": "Not assessed yet"
+  },
+  "form": {
+    "addTitle": "Add a new plant",
+    "editTitle": "Edit plant",
+    "close": "Close",
+    "cancel": "Cancel",
+    "save": "Save plant",
+    "saveEdit": "Save changes",
+    "name": "Plant name",
+    "namePlaceholder": "e.g. Al-Wathba Water Treatment Plant",
+    "governorate": "Governorate",
+    "location": "Location",
+    "locationPlaceholder": "District or area",
+    "source": "Water supply source",
+    "engineer": "Engineer in charge",
+    "design": "Design capacity",
+    "actual": "Actual capacity",
+    "actualHint": "Current average actual production",
+    "unit": "m³/day",
+    "notes": "Additional notes"
+  },
+  "errors": {
+    "nameRequired": "Enter the plant name.",
+    "governorateRequired": "Choose the governorate.",
+    "locationRequired": "Enter the location within the governorate.",
+    "sourceRequired": "Choose the water supply source.",
+    "designRequired": "Enter the design capacity.",
+    "designInvalid": "Enter a number greater than zero.",
+    "actualInvalid": "Enter a valid number.",
+    "actualTooHigh": "Actual capacity exceeds design by more than 20%. Check the unit (m³/day).",
+    "tooLong": "This text is too long.",
+    "validation": "Check the marked fields and try again.",
+    "generic": "The plant could not be saved. Try again.",
+    "notFound": "This plant no longer exists.",
+    "hasAssessments": "A plant that has assessments, drafts included, cannot be deleted.",
+    "deleteFailed": "The plant could not be deleted. Try again."
+  },
+  "delete": {
+    "title": "Delete plant",
+    "text": "Delete “{name}”? This cannot be undone.",
+    "confirm": "Delete",
+    "cancel": "Cancel",
+    "blockedTitle": "This plant cannot be deleted",
+    "blocked": "A plant that has assessments, drafts included, cannot be deleted.",
+    "ok": "OK"
+  },
+  "toast": {
+    "added": "Plant added.",
+    "updated": "Changes saved.",
+    "deleted": "Plant deleted."
+  },
+  "governorates": {
+    "baghdad": "Baghdad",
+    "basra": "Basra",
+    "nineveh": "Nineveh",
+    "anbar": "Anbar",
+    "babil": "Babil",
+    "diyala": "Diyala",
+    "karbala": "Karbala",
+    "najaf": "Najaf",
+    "wasit": "Wasit",
+    "dhiqar": "Dhi Qar",
+    "maysan": "Maysan",
+    "salahaddin": "Salah al-Din",
+    "kirkuk": "Kirkuk",
+    "qadisiyah": "Al-Qadisiyah",
+    "muthanna": "Al-Muthanna",
+    "erbil": "Erbil",
+    "sulaymaniyah": "Sulaymaniyah",
+    "duhok": "Duhok"
+  },
+  "sources": {
+    "tigris": "Tigris River",
+    "euphrates": "Euphrates River",
+    "shatt": "Shatt al-Arab",
+    "diyala": "Diyala River",
+    "lake": "Lake or reservoir",
+    "wells": "Groundwater (wells)",
+    "other": "Other"
+  }
+}

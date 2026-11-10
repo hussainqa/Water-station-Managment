@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useTransition } from "react";
+import { useOptimistic, useTransition } from "react";
 import { Calendar, ChevronDown, Factory } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { toast } from "sonner";
@@ -21,17 +21,18 @@ const select =
 /** Plant and monitoring-period selectors. The choice is saved in cookies and the page refreshes. */
 export function ContextSelectors({ plants, plantId, range }: Props) {
   const t = useTranslations("shell");
-  const [plant, setPlant] = useState(plantId ?? "all");
-  const [period, setPeriod] = useState<string>(String(range));
+  // Optimistic values fall back to the server's (props) once the action settles, so a
+  // plant that was deleted elsewhere in the app no longer shows as selected.
+  const [plant, setPlant] = useOptimistic(plantId ?? "all");
+  const [period, setPeriod] = useOptimistic(String(range));
   const [, startTransition] = useTransition();
 
-  function save(input: { plantId?: string | null; range?: Range }, revert: () => void) {
+  function save(input: { plantId?: string | null; range?: Range }) {
     startTransition(async () => {
+      if (input.plantId !== undefined) setPlant(input.plantId ?? "all");
+      if (input.range !== undefined) setPeriod(String(input.range));
       const r = await setFilters(input);
-      if (!r.ok) {
-        revert();
-        toast.error(t("filters.saveFailed"));
-      }
+      if (!r.ok) toast.error(t("filters.saveFailed"));
     });
   }
 
@@ -46,10 +47,8 @@ export function ContextSelectors({ plants, plantId, range }: Props) {
           value={plant}
           disabled={plants.length === 0}
           onChange={(e) => {
-            const prev = plant;
             const next = e.target.value;
-            setPlant(next);
-            save({ plantId: next === "all" ? null : next }, () => setPlant(prev));
+            save({ plantId: next === "all" ? null : next });
           }}
         >
           <option value="all">{t("filters.allPlants")}</option>
@@ -70,12 +69,9 @@ export function ContextSelectors({ plants, plantId, range }: Props) {
           className={select}
           value={period}
           onChange={(e) => {
-            const prev = period;
-            const next = e.target.value;
-            setPeriod(next);
-            const parsed = RANGE_VALUES.find((v) => String(v) === next);
+            const parsed = RANGE_VALUES.find((v) => String(v) === e.target.value);
             if (parsed === undefined) return;
-            save({ range: parsed }, () => setPeriod(prev));
+            save({ range: parsed });
           }}
         >
           {RANGE_VALUES.map((v) => (

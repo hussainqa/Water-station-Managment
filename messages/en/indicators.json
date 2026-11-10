@@ -1,1 +1,158 @@
-{"_": ""}
+{
+  "title": "Performance indicators",
+  "subtitle": "Choose which indicators each plant adopts and set the limits used to evaluate them.",
+  "add": "Add indicator",
+  "close": "Close",
+  "cancel": "Cancel",
+  "filter": {
+    "label": "Group",
+    "all": "All"
+  },
+  "plant": {
+    "label": "Plant",
+    "adoptionAt": "Adoption at: {plant}",
+    "choose": "Choose a plant…",
+    "prompt": "Choose a plant above to set its adopted indicators.",
+    "none": "Add a plant to choose its adopted indicators.",
+    "addPlant": "Add plant"
+  },
+  "group": {
+    "count": "{count, plural, =0 {No indicators} one {# indicator} other {# indicators}}",
+    "userTag": "Added group",
+    "empty": "No indicators in this group yet.",
+    "rename": "Rename group",
+    "delete": "Delete group",
+    "deleteBlocked": "The group has indicators; move or delete them first.",
+    "renameTitle": "Rename group",
+    "nameAr": "Group name (Arabic)",
+    "nameEn": "English name (optional)",
+    "save": "Save name",
+    "deleteTitle": "Delete group?",
+    "deleteText": "The group “{name}” will be deleted. It contains no indicators."
+  },
+  "card": {
+    "userTag": "User-added",
+    "adopted": "Adopted at this plant",
+    "notAdopted": "Not adopted at this plant",
+    "switchLabel": "{name} — {plant}",
+    "limits": "Edit limits",
+    "edit": "Edit",
+    "delete": "Delete",
+    "deleteBlocked": "Used in assessments; cannot be deleted"
+  },
+  "scale": {
+    "noLimits": "No approved limits for evaluation",
+    "noValue": "No value",
+    "higher": "Higher is better: target {target}, warning below {warning}, critical below {critical}",
+    "lower": "Lower is better: target {target}, warning above {warning}, critical above {critical}",
+    "range": "Acceptable range {minOk} to {maxOk}; critical below {critMin} or above {critMax}",
+    "value": "Value {value}",
+    "band": {
+      "ok": "Within limits",
+      "warning": "Warning",
+      "critical": "Critical"
+    }
+  },
+  "limits": {
+    "title": "Limits: {name}",
+    "unit": "Unit",
+    "method": "Calculation",
+    "kind": "Better direction",
+    "kinds": {
+      "higher": "Higher is better",
+      "lower": "Lower is better",
+      "range": "Min and max range"
+    },
+    "none": "No approved limits for this indicator (values are recorded without evaluation)",
+    "target": "Target",
+    "warning": "Warning limit",
+    "critical": "Critical limit",
+    "minOk": "Acceptable min",
+    "maxOk": "Acceptable max",
+    "critMin": "Critical min",
+    "critMax": "Critical max",
+    "preview": "Scale preview",
+    "testValue": "Test value",
+    "previewIncomplete": "Complete the limits with valid values to see the preview.",
+    "save": "Save limits"
+  },
+  "form": {
+    "addTitle": "Add a performance indicator",
+    "addText": "A new indicator added to your system",
+    "editTitle": "Edit indicator",
+    "nameAr": "Indicator name (Arabic)",
+    "nameEn": "English name (optional)",
+    "nameEnHint": "Shown when the interface is in English",
+    "group": "Group",
+    "newGroup": "+ New group",
+    "newGroupAr": "New group name (Arabic)",
+    "newGroupEn": "New group name in English (optional)",
+    "description": "Description",
+    "method": "Measurement & calculation",
+    "methodLocked": "The calculation cannot change because the indicator is used in assessments.",
+    "labelValue": "Input field label",
+    "labelNumerator": "Numerator (e.g. compliant samples)",
+    "labelDenominator": "Denominator (e.g. samples tested)",
+    "labelTotal": "Total (e.g. total response time)",
+    "labelCount": "Count (e.g. number of incidents)",
+    "labelEn": "In English (optional)",
+    "unit": "Unit",
+    "unitFixedPercent": "% (fixed)",
+    "unitFixedHours": "Hours (entered in hours or minutes, calculated in hours)",
+    "better": "Better direction",
+    "adoptAll": "Adopt it at all my plants",
+    "info": "The indicator is added to your account only and appears for all your plants and in assessment forms under its group. After saving, set its limits from “Edit limits”.",
+    "create": "Add indicator",
+    "save": "Save changes"
+  },
+  "methods": {
+    "direct": "Value recorded directly",
+    "direct_percent": "Direct percentage (0–100)",
+    "duration": "Duration (hours or minutes)",
+    "ratio": "Percentage: numerator ÷ denominator × 100",
+    "average": "Average: total ÷ count"
+  },
+  "better": {
+    "higher": "Higher is better",
+    "lower": "Lower is better"
+  },
+  "delete": {
+    "title": "Delete indicator?",
+    "text": "“{name}” will be removed from your indicators and all your plants. It has not been used in any assessment.",
+    "confirm": "Delete indicator"
+  },
+  "units": {
+    "%": "%",
+    "h": "h",
+    "events": "events",
+    "tests": "tests",
+    "complaints": "complaints"
+  },
+  "toast": {
+    "saved": "Changes saved",
+    "added": "Indicator added — set its limits from “Edit limits”",
+    "deleted": "Indicator deleted"
+  },
+  "errors": {
+    "validation": "Check the highlighted fields and try again.",
+    "notFound": "This item no longer exists. Refresh the page.",
+    "plantNotFound": "We could not find this plant in your account.",
+    "inUse": "Used in assessments; cannot be deleted.",
+    "hasIndicators": "The group has indicators; it cannot be deleted.",
+    "methodLocked": "The calculation cannot change because the indicator is used in assessments.",
+    "generic": "The operation could not be completed. Try again.",
+    "nameRequired": "Enter the indicator name.",
+    "groupNameRequired": "Enter the group name.",
+    "groupInvalid": "Choose a valid group.",
+    "unitRequired": "This field is required.",
+    "labelRequired": "This field is required.",
+    "tooLong": "The text is too long.",
+    "incomplete": "Enter the target, warning and critical limits.",
+    "incompleteRange": "Fill all four limits with numbers.",
+    "notNumber": "Enter valid numbers.",
+    "badOrderHigher": "When higher is better: critical < warning ≤ target.",
+    "badOrderLower": "When lower is better: target ≤ warning < critical.",
+    "badOrderRange": "Values must be ordered: critical min < acceptable min < acceptable max < critical max.",
+    "outOfPercentRange": "Limits must be between 0 and 100 because the indicator is a percentage."
+  }
+}

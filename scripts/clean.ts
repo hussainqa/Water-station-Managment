@@ -7,7 +7,7 @@ import { rmSync } from "node:fs";
 import path from "node:path";
 
 const root = path.resolve(import.meta.dirname, "..");
-const targets = [".next", "tsconfig.tsbuildinfo", "test-results", "playwright-report"];
+const targets = [".next", ".next-dev", "tsconfig.tsbuildinfo", "test-results", "playwright-report"];
 
 for (const target of targets) {
   rmSync(path.join(root, target), { recursive: true, force: true });

@@ -44,7 +44,7 @@ npm run db:up            # start Postgres (localhost:54329) and Mailpit (UI http
 npm run db:migrate       # create/repair the database and roles (db:roles), then apply drizzle/*.sql
 npm run db:seed          # load docs/handoff/data into the reference tables (idempotent)
 npm run db:reset         # LOCAL ONLY: drop everything, migrate, seed
-npm run clean            # remove .next (build and dev caches), tsbuildinfo, Playwright output; stop dev first
+npm run clean            # remove .next, .next-dev, tsbuildinfo, Playwright output; stop dev first
 npm run db:down          # stop the containers (data volume is kept)
 npm run db:generate -- --name <what_changed>   # new migration after editing src/db/schema
 
@@ -55,7 +55,8 @@ npm run typecheck
 npm test                 # unit tests, no database needed
 npm run test:db          # database tests: needs db:up, db:migrate, db:seed
 npm run test:all
-npm run test:e2e         # Playwright journey (starts the dev server if needed); rewrites docs/screenshots/
+npm run test:e2e         # Playwright journeys (starts the dev server if needed); rewrites docs/screenshots/
+                         # E2E_KEEP_USERS=1 skips test-user cleanup when two runs share the database
 ```
 
 Ports are non-default on purpose (3100, 54329, 54325, 54326) so they do not collide with other local projects.
@@ -81,6 +82,10 @@ src/i18n/              next-intl routing, navigation wrappers, request config
 src/lib/auth/          Better Auth instance, its own DB connection, session helpers, mailer
 src/lib/evaluation/    pure evaluation rules (HANDOFF section 4) and their unit tests
 src/lib/account/       server actions: locale, theme, sign out
+src/lib/plants/        plants: constants, schemas, state helpers, service (data functions), actions
+src/lib/indicators/    indicators, limits, adoption, user-defined indicators and groups; ref.ts ("sys:SC-01" / "usr:<uuid>")
+src/components/shared/ ResponsiveDialog (dialog on desktop, bottom sheet on phones)
+src/components/plants/, src/components/indicators/   feature UI; ThresholdScale lives in indicators/
 src/lib/context/       top-bar filters (plant, monitoring period) stored in cookies: getFilters(), setFilters
 src/proxy.ts           locale routing
 tests/db/              database tests: RLS isolation, RLS coverage, auth isolation, reference access, seed
@@ -127,6 +132,10 @@ Never edit a migration that has been committed; add a new one.
 ## Conventions
 
 - **Writes are server actions** (or route handlers), validated with a Zod schema that the client form reuses. Authorise first, then `withUser`.
+- **Feature layout:** `src/lib/<feature>/service.ts` holds data functions that take the `tx` from `withUser` (tested in `tests/db/`); `actions.ts` is a thin `"use server"` wrapper: `requireUser()`, validate, `withUser`, `revalidatePath`, typed result with error codes. Dialogs use `ResponsiveDialog`.
+- **Limits are per user per indicator**, not per plant. `ensureDefaultLimits` copies the seeded defaults once and never overwrites; user-defined indicators start with no approved limits. **Adoption is per plant**; a missing `plant_indicators` row means not adopted. New plants adopt all system indicators plus the user's adopt-all indicators.
+- **A plant with assessments (drafts included) cannot be deleted**; the database refuses too.
+- **Threshold scale:** use `ThresholdScale` wherever an indicator value appears.
 - **Evaluation logic lives in `src/lib/evaluation`** and stays pure (no I/O, no dates from the clock). Comparisons with limits are strict: a value exactly on a limit gets the better status. Results always use the limits snapshot stored on the assessment, never current limits.
 - **References to an indicator or obstacle** are two nullable columns (system code, user-defined id) with a check that exactly one is set. Keep that shape.
 - **Pages behind sign-in** live in `(app)/`, call `requireUser()` themselves, and start with `PageHeader`. Read the selected plant and period with `getFilters()`. Add new destinations to `src/components/shell/nav.ts`.
@@ -144,5 +153,5 @@ Never edit a migration that has been committed; add a new one.
 - New rules in `src/lib/evaluation` have unit tests; new user-owned tables are covered by RLS.
 - The screen works in Arabic (RTL) and English (LTR) at 390, 768 and 1440 px.
 - The relevant client notes in HANDOFF section 2 are satisfied.
-- After `next build`, run `npm run clean` before going back to `npm run dev` if anything looks stale (dev uses `.next/dev`, build uses `.next`).
+- The dev server writes to `.next-dev` and the production build to `.next` (see `next.config.ts`). Do not merge them: with a shared directory, the first `next dev` after a `next build` reloads every page in a loop.
 - Changes are committed in small commits; a phase ends with a report and the open questions for the next one.
