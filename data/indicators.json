@@ -1,0 +1,412 @@
+{
+ "_about": "System indicators from the thesis indicator table (Excel). Axis: مؤشرات الخدمة التشغيلية في محطات المياه. Calculation methods and default limits were proposed during prototyping (not from the thesis) — confirm with the researcher. SC-02 reflects client note 10.",
+ "axis": {
+  "ar": "مؤشرات الخدمة التشغيلية في محطات المياه",
+  "en": "Operational service indicators for water plants"
+ },
+ "groups": [
+  {
+   "code": "continuity",
+   "name": {
+    "ar": "مؤشرات استمرارية الخدمة",
+    "en": "Service continuity indicators"
+   }
+  },
+  {
+   "code": "quality",
+   "name": {
+    "ar": "مؤشرات الالتزام بجودة المياه",
+    "en": "Water-quality compliance indicators"
+   }
+  },
+  {
+   "code": "satisfaction",
+   "name": {
+    "ar": "مؤشرات رضا المستفيدين",
+    "en": "Customer satisfaction indicators"
+   }
+  },
+  {
+   "code": "response",
+   "name": {
+    "ar": "مؤشرات زمن الاستجابة للمشاكل التشغيلية",
+    "en": "Operational response-time indicators"
+   }
+  }
+ ],
+ "methods": {
+  "direct": "single recorded value",
+  "direct_percent": "single percentage (0-100) entered by the engineer",
+  "duration": "hours or minutes, stored in hours",
+  "ratio": "numerator / denominator x 100",
+  "average": "total / count"
+ },
+ "indicators": [
+  {
+   "code": "SC-01",
+   "group": "continuity",
+   "name": {
+    "ar": "استمرارية الخدمة (استمرار تجهيز المياه دون انقطاع أو توقف)",
+    "en": "Service continuity (water supplied without interruption or stoppage)"
+   },
+   "method": "ratio",
+   "unit": "%",
+   "better": "higher",
+   "inputs": {
+    "numerator": {
+     "ar": "ساعات التجهيز الفعلية",
+     "en": "Actual supply hours"
+    },
+    "denominator": {
+     "ar": "ساعات التجهيز المخططة للفترة",
+     "en": "Planned supply hours in the period"
+    }
+   },
+   "default_limits_illustrative": {
+    "target": 98,
+    "warning": 95,
+    "critical": 90
+   }
+  },
+  {
+   "code": "SC-02",
+   "group": "continuity",
+   "name": {
+    "ar": "نسبة المستفيدين الذين يعانون من انقطاع الخدمة",
+    "en": "Percentage of customers affected by service interruptions"
+   },
+   "method": "direct_percent",
+   "unit": "%",
+   "better": "lower",
+   "inputs": {
+    "value": {
+     "ar": "النسبة المئوية التي يحددها المهندس المقيم",
+     "en": "Percentage set by the resident engineer"
+    }
+   },
+   "default_limits_illustrative": {
+    "target": 5,
+    "warning": 10,
+    "critical": 20
+   }
+  },
+  {
+   "code": "SC-03",
+   "group": "continuity",
+   "name": {
+    "ar": "معدل حدوث الانقطاعات غير المخططة (عدد مرات الانقطاع غير المخطط خلال فترة محددة)",
+    "en": "Unplanned interruption frequency (number of unplanned interruptions in the period)"
+   },
+   "method": "direct",
+   "unit": "events",
+   "better": "lower",
+   "inputs": {
+    "value": {
+     "ar": "عدد مرات الانقطاع غير المخطط",
+     "en": "Number of unplanned interruptions"
+    }
+   },
+   "default_limits_illustrative": {
+    "target": 2,
+    "warning": 4,
+    "critical": 6
+   }
+  },
+  {
+   "code": "SC-04",
+   "group": "continuity",
+   "name": {
+    "ar": "مدة الانقطاعات غير المخططة أو مدة توقف الخدمة (إجمالي زمن الانقطاع أو التوقف)",
+    "en": "Duration of unplanned interruptions or service stoppage (total interruption time)"
+   },
+   "method": "duration",
+   "unit": "h",
+   "better": "lower",
+   "inputs": {
+    "value": {
+     "ar": "إجمالي زمن الانقطاع (ساعة أو دقيقة)",
+     "en": "Total interruption time (hours or minutes)"
+    }
+   },
+   "default_limits_illustrative": {
+    "target": 2,
+    "warning": 3,
+    "critical": 5
+   }
+  },
+  {
+   "code": "WQ-01",
+   "group": "quality",
+   "name": {
+    "ar": "عدد فحوصات الكلور المتبقي في المياه المجهزة",
+    "en": "Residual chlorine tests on supplied water"
+   },
+   "method": "direct",
+   "unit": "tests",
+   "better": "higher",
+   "inputs": {
+    "value": {
+     "ar": "عدد فحوصات الكلور المتبقي المنفّذة",
+     "en": "Residual chlorine tests carried out"
+    }
+   },
+   "default_limits_illustrative": {
+    "target": 120,
+    "warning": 100,
+    "critical": 80
+   }
+  },
+  {
+   "code": "WQ-02",
+   "group": "quality",
+   "name": {
+    "ar": "عدد العينات المطابقة لمتطلبات الكلور المتبقي",
+    "en": "Samples compliant with residual chlorine requirements"
+   },
+   "method": "ratio",
+   "unit": "%",
+   "better": "higher",
+   "inputs": {
+    "numerator": {
+     "ar": "عدد العينات المطابقة",
+     "en": "Compliant samples"
+    },
+    "denominator": {
+     "ar": "العدد الكلي للعينات",
+     "en": "Total samples"
+    }
+   },
+   "default_limits_illustrative": {
+    "target": 98,
+    "warning": 95,
+    "critical": 90
+   }
+  },
+  {
+   "code": "WQ-03",
+   "group": "quality",
+   "name": {
+    "ar": "جودة مياه الشرب (مدى مطابقة المياه المجهزة للمعايير المعتمدة)",
+    "en": "Drinking-water quality (compliance of supplied water with approved standards)"
+   },
+   "method": "ratio",
+   "unit": "%",
+   "better": "higher",
+   "inputs": {
+    "numerator": {
+     "ar": "العينات المطابقة للمعايير المعتمدة",
+     "en": "Samples meeting approved standards"
+    },
+    "denominator": {
+     "ar": "العينات المفحوصة",
+     "en": "Samples tested"
+    }
+   },
+   "default_limits_illustrative": {
+    "target": 98,
+    "warning": 95,
+    "critical": 90
+   }
+  },
+  {
+   "code": "WQ-04",
+   "group": "quality",
+   "name": {
+    "ar": "الشكاوى المتعلقة بجودة المياه",
+    "en": "Water-quality complaints"
+   },
+   "method": "direct",
+   "unit": "complaints",
+   "better": "lower",
+   "inputs": {
+    "value": {
+     "ar": "عدد الشكاوى المتعلقة بجودة المياه",
+     "en": "Water-quality complaints received"
+    }
+   },
+   "default_limits_illustrative": {
+    "target": 5,
+    "warning": 10,
+    "critical": 20
+   }
+  },
+  {
+   "code": "CS-01",
+   "group": "satisfaction",
+   "name": {
+    "ar": "عدد الشكاوى المتعلقة بخدمة المياه خلال فترة التقييم",
+    "en": "Water-service complaints in the assessment period"
+   },
+   "method": "direct",
+   "unit": "complaints",
+   "better": "lower",
+   "inputs": {
+    "value": {
+     "ar": "عدد الشكاوى المتعلقة بخدمة المياه",
+     "en": "Water-service complaints received"
+    }
+   },
+   "default_limits_illustrative": {
+    "target": 20,
+    "warning": 30,
+    "critical": 45
+   }
+  },
+  {
+   "code": "CS-02",
+   "group": "satisfaction",
+   "name": {
+    "ar": "رضا المستفيدين (مدى رضا المستفيدين عن مستوى خدمة المياه)",
+    "en": "Customer satisfaction (how satisfied customers are with the water service)"
+   },
+   "method": "ratio",
+   "unit": "%",
+   "better": "higher",
+   "inputs": {
+    "numerator": {
+     "ar": "المستفيدون الراضون",
+     "en": "Satisfied respondents"
+    },
+    "denominator": {
+     "ar": "إجمالي المستفيدين المستطلعة آراؤهم",
+     "en": "Total respondents surveyed"
+    }
+   },
+   "default_limits_illustrative": {
+    "target": 80,
+    "warning": 70,
+    "critical": 60
+   }
+  },
+  {
+   "code": "CS-03",
+   "group": "satisfaction",
+   "name": {
+    "ar": "معالجة الشكاوى",
+    "en": "Complaint resolution"
+   },
+   "method": "ratio",
+   "unit": "%",
+   "better": "higher",
+   "inputs": {
+    "numerator": {
+     "ar": "الشكاوى التي عولجت",
+     "en": "Complaints resolved"
+    },
+    "denominator": {
+     "ar": "الشكاوى المستلمة",
+     "en": "Complaints received"
+    }
+   },
+   "default_limits_illustrative": {
+    "target": 95,
+    "warning": 85,
+    "critical": 70
+   }
+  },
+  {
+   "code": "RT-01",
+   "group": "response",
+   "name": {
+    "ar": "متوسط زمن الاستجابة لحوادث المياه",
+    "en": "Average response time to water incidents"
+   },
+   "method": "average",
+   "unit": "h",
+   "better": "lower",
+   "inputs": {
+    "count": {
+     "ar": "عدد الحوادث",
+     "en": "Incidents"
+    },
+    "total": {
+     "ar": "مجموع أزمنة الاستجابة",
+     "en": "Total response time"
+    }
+   },
+   "default_limits_illustrative": {
+    "target": 2,
+    "warning": 4,
+    "critical": 8
+   }
+  },
+  {
+   "code": "RT-02",
+   "group": "response",
+   "name": {
+    "ar": "متوسط الزمن اللازم لمعالجة اضطرابات خدمة المياه",
+    "en": "Average time to resolve water-service disruptions"
+   },
+   "method": "average",
+   "unit": "h",
+   "better": "lower",
+   "inputs": {
+    "count": {
+     "ar": "عدد الاضطرابات",
+     "en": "Disruptions"
+    },
+    "total": {
+     "ar": "مجموع أزمنة المعالجة",
+     "en": "Total resolution time"
+    }
+   },
+   "default_limits_illustrative": {
+    "target": 6,
+    "warning": 12,
+    "critical": 24
+   }
+  },
+  {
+   "code": "RT-03",
+   "group": "response",
+   "name": {
+    "ar": "متوسط زمن الاستجابة للشكاوى (الوقت اللازم لبدء التعامل مع الشكوى)",
+    "en": "Average complaint response time (time to start handling a complaint)"
+   },
+   "method": "average",
+   "unit": "h",
+   "better": "lower",
+   "inputs": {
+    "count": {
+     "ar": "عدد الشكاوى",
+     "en": "Complaints"
+    },
+    "total": {
+     "ar": "مجموع أزمنة بدء التعامل",
+     "en": "Total time to start handling"
+    }
+   },
+   "default_limits_illustrative": {
+    "target": 12,
+    "warning": 24,
+    "critical": 48
+   }
+  },
+  {
+   "code": "RT-04",
+   "group": "response",
+   "name": {
+    "ar": "زمن الاستجابة لشكاوى المستفيدين ومعالجتها (المدة من استلام الشكوى إلى الاستجابة لها ومعالجتها)",
+    "en": "Time to respond to and resolve customer complaints (from receipt to response and resolution)"
+   },
+   "method": "average",
+   "unit": "h",
+   "better": "lower",
+   "inputs": {
+    "count": {
+     "ar": "عدد الشكاوى المعالجة",
+     "en": "Complaints resolved"
+    },
+    "total": {
+     "ar": "مجموع المدد من الاستلام حتى المعالجة",
+     "en": "Total time from receipt to resolution"
+    }
+   },
+   "default_limits_illustrative": {
+    "target": 24,
+    "warning": 48,
+    "critical": 72
+   }
+  }
+ ]
+}

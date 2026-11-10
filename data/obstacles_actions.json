@@ -1,0 +1,2731 @@
+{
+ "_about": "Obstacles (40), corrective actions (65), and significant obstacle→action links with research rank, correlation r and priority %. Source: thesis files in reference/source-files. Only significant correlations are listed; all other axis actions are non-significant for that obstacle. RII is stored for ordering but must NOT be shown in the UI (client note 13).",
+ "axes": [
+  {
+   "index": 1,
+   "obstacle_axis": {
+    "ar": "العوائق الفنية",
+    "en": "Technical obstacles"
+   },
+   "action_axis": {
+    "ar": "الإجراءات التصحيحية الفنية",
+    "en": "Technical corrective actions"
+   }
+  },
+  {
+   "index": 2,
+   "obstacle_axis": {
+    "ar": "العوائق التشغيلية",
+    "en": "Operational obstacles"
+   },
+   "action_axis": {
+    "ar": "الإجراءات التصحيحية التشغيلية",
+    "en": "Operational corrective actions"
+   }
+  },
+  {
+   "index": 3,
+   "obstacle_axis": {
+    "ar": "عوائق الصيانة",
+    "en": "Maintenance obstacles"
+   },
+   "action_axis": {
+    "ar": "الإجراءات التصحيحية المرتبطة بالصيانة",
+    "en": "Maintenance corrective actions"
+   }
+  },
+  {
+   "index": 4,
+   "obstacle_axis": {
+    "ar": "العوائق الإدارية والتنظيمية",
+    "en": "Administrative & organisational obstacles"
+   },
+   "action_axis": {
+    "ar": "الإجراءات التصحيحية الإدارية والتنظيمية",
+    "en": "Administrative & organisational corrective actions"
+   }
+  },
+  {
+   "index": 5,
+   "obstacle_axis": {
+    "ar": "العوائق المالية والمرتبطة بالموارد",
+    "en": "Financial & resource obstacles"
+   },
+   "action_axis": {
+    "ar": "الإجراءات التصحيحية المالية والمرتبطة بالموارد",
+    "en": "Financial & resource corrective actions"
+   }
+  },
+  {
+   "index": 6,
+   "obstacle_axis": {
+    "ar": "عوائق الموارد البشرية والتدريب",
+    "en": "Human resources & training obstacles"
+   },
+   "action_axis": {
+    "ar": "الإجراءات التصحيحية للموارد البشرية والتدريب",
+    "en": "Human resources & training corrective actions"
+   }
+  },
+  {
+   "index": 7,
+   "obstacle_axis": {
+    "ar": "عوائق المراقبة والسيطرة",
+    "en": "Monitoring & control obstacles"
+   },
+   "action_axis": {
+    "ar": "الإجراءات التصحيحية للمراقبة والسيطرة",
+    "en": "Monitoring & control corrective actions"
+   }
+  }
+ ],
+ "obstacles": [
+  {
+   "code": "O-01",
+   "source_row": 1,
+   "axis": 1,
+   "seq_in_axis": 1,
+   "text": {
+    "ar": "نقص أو عطل في معدات المراقبة والاختبار، مثل عدادات التدفق، وعدادات العكارة، وعدادات الأس الهيدروجيني (pH)، وعدادات الكلور، وأدوات المراقبة عبر الإنترنت.",
+    "en": "Shortage or failure of monitoring and testing equipment, such as flow meters, turbidity meters, pH meters, chlorine meters and online monitoring tools."
+   },
+   "importance_order_in_axis": 5,
+   "linked_actions": [
+    {
+     "action": "A-35",
+     "rank": 1,
+     "correlation_r": 0.353,
+     "priority_pct": 27.48
+    },
+    {
+     "action": "A-34",
+     "rank": 2,
+     "correlation_r": 0.28,
+     "priority_pct": 23.2
+    }
+   ],
+   "note": null
+  },
+  {
+   "code": "O-02",
+   "source_row": 2,
+   "axis": 1,
+   "seq_in_axis": 2,
+   "text": {
+    "ar": "سعة هيدروليكية غير كافية أو تحميل وحدات المعالجة أكثر من طاقتها التصميمية.",
+    "en": "Insufficient hydraulic capacity, or treatment units loaded beyond their design capacity."
+   },
+   "importance_order_in_axis": 3,
+   "linked_actions": [],
+   "note": null
+  },
+  {
+   "code": "O-03",
+   "source_row": 3,
+   "axis": 1,
+   "seq_in_axis": 3,
+   "text": {
+    "ar": "ضعف أداء الترشيح، بما في ذلك اختراق الفلتر أو انسداده أو الفقد المفرط في الضغط أو عدم فعالية عملية الغسل العكسي.",
+    "en": "Poor filtration performance, including filter breakthrough or clogging, excessive head loss or ineffective backwashing."
+   },
+   "importance_order_in_axis": 1,
+   "linked_actions": [
+    {
+     "action": "A-03",
+     "rank": 1,
+     "correlation_r": 0.378,
+     "priority_pct": 33.62
+    }
+   ],
+   "note": null
+  },
+  {
+   "code": "O-04",
+   "source_row": 4,
+   "axis": 1,
+   "seq_in_axis": 4,
+   "text": {
+    "ar": "عدم فعالية التعقيم أو عدم كفاية الكلور المتبقي في المياه المعالجة وشبكات التوزيع.",
+    "en": "Ineffective disinfection or insufficient residual chlorine in treated water and distribution networks."
+   },
+   "importance_order_in_axis": 2,
+   "linked_actions": [
+    {
+     "action": "A-01",
+     "rank": 1,
+     "correlation_r": 0.294,
+     "priority_pct": 23.09
+    }
+   ],
+   "note": null
+  },
+  {
+   "code": "O-05",
+   "source_row": 5,
+   "axis": 1,
+   "seq_in_axis": 5,
+   "text": {
+    "ar": "عدم دقة أنظمة جرعات المواد الكيميائية أو ضعف السيطرة عليها، بما في ذلك جرعات مواد التخثير والتطهير.",
+    "en": "Inaccurate or poorly controlled chemical dosing systems, including coagulant and disinfectant dosing."
+   },
+   "importance_order_in_axis": 4,
+   "linked_actions": [
+    {
+     "action": "A-05",
+     "rank": 1,
+     "correlation_r": 0.436,
+     "priority_pct": 37.06
+    },
+    {
+     "action": "A-34",
+     "rank": 2,
+     "correlation_r": 0.386,
+     "priority_pct": 31.98
+    }
+   ],
+   "note": null
+  },
+  {
+   "code": "O-06",
+   "source_row": 6,
+   "axis": 2,
+   "seq_in_axis": 1,
+   "text": {
+    "ar": "الاعتماد على التعديلات اليدوية واختبارات (Jar) الدورية وخبرة المشغل في تحديد جرعات المواد الكيميائية.",
+    "en": "Reliance on manual adjustments, periodic jar tests and operator experience to set chemical doses."
+   },
+   "importance_order_in_axis": 5,
+   "linked_actions": [
+    {
+     "action": "A-06",
+     "rank": 1,
+     "correlation_r": 0.567,
+     "priority_pct": 44.15
+    },
+    {
+     "action": "A-36",
+     "rank": 2,
+     "correlation_r": 0.388,
+     "priority_pct": 33.81
+    },
+    {
+     "action": "A-09",
+     "rank": 3,
+     "correlation_r": 0.419,
+     "priority_pct": 31.87
+    },
+    {
+     "action": "A-10",
+     "rank": 4,
+     "correlation_r": 0.338,
+     "priority_pct": 30.06
+    },
+    {
+     "action": "A-38",
+     "rank": 5,
+     "correlation_r": 0.343,
+     "priority_pct": 27.68
+    },
+    {
+     "action": "A-08",
+     "rank": 6,
+     "correlation_r": 0.308,
+     "priority_pct": 25.08
+    },
+    {
+     "action": "A-07",
+     "rank": 7,
+     "correlation_r": 0.295,
+     "priority_pct": 24.02
+    }
+   ],
+   "note": null
+  },
+  {
+   "code": "O-07",
+   "source_row": 7,
+   "axis": 2,
+   "seq_in_axis": 2,
+   "text": {
+    "ar": "ضعف الاستجابة للتقلبات الديناميكية وغير الخطية في جودة المياه الخام.",
+    "en": "Weak response to dynamic and non-linear fluctuations in raw-water quality."
+   },
+   "importance_order_in_axis": 4,
+   "linked_actions": [
+    {
+     "action": "A-06",
+     "rank": 1,
+     "correlation_r": 0.534,
+     "priority_pct": 41.58
+    },
+    {
+     "action": "A-36",
+     "rank": 2,
+     "correlation_r": 0.471,
+     "priority_pct": 41.04
+    },
+    {
+     "action": "A-10",
+     "rank": 3,
+     "correlation_r": 0.453,
+     "priority_pct": 40.29
+    },
+    {
+     "action": "A-07",
+     "rank": 4,
+     "correlation_r": 0.475,
+     "priority_pct": 38.68
+    },
+    {
+     "action": "A-37",
+     "rank": 5,
+     "correlation_r": 0.463,
+     "priority_pct": 37.7
+    },
+    {
+     "action": "A-08",
+     "rank": 6,
+     "correlation_r": 0.414,
+     "priority_pct": 33.71
+    },
+    {
+     "action": "A-60",
+     "rank": 7,
+     "correlation_r": 0.403,
+     "priority_pct": 32.24
+    },
+    {
+     "action": "A-09",
+     "rank": 8,
+     "correlation_r": 0.379,
+     "priority_pct": 28.83
+    }
+   ],
+   "note": null
+  },
+  {
+   "code": "O-08",
+   "source_row": 8,
+   "axis": 2,
+   "seq_in_axis": 3,
+   "text": {
+    "ar": "معدلات جرعات كيميائية غير صحيحة تؤدي إلى الجرعات الزائدة أو الناقصة.",
+    "en": "Incorrect chemical dosing rates leading to over- or under-dosing."
+   },
+   "importance_order_in_axis": 2,
+   "linked_actions": [
+    {
+     "action": "A-08",
+     "rank": 1,
+     "correlation_r": 0.393,
+     "priority_pct": 32.0
+    },
+    {
+     "action": "A-07",
+     "rank": 2,
+     "correlation_r": 0.377,
+     "priority_pct": 30.69
+    },
+    {
+     "action": "A-36",
+     "rank": 3,
+     "correlation_r": 0.328,
+     "priority_pct": 28.58
+    },
+    {
+     "action": "A-09",
+     "rank": 4,
+     "correlation_r": 0.344,
+     "priority_pct": 26.17
+    },
+    {
+     "action": "A-37",
+     "rank": 5,
+     "correlation_r": 0.286,
+     "priority_pct": 23.29
+    },
+    {
+     "action": "A-38",
+     "rank": 6,
+     "correlation_r": 0.285,
+     "priority_pct": 23.0
+    },
+    {
+     "action": "A-06",
+     "rank": 7,
+     "correlation_r": 0.264,
+     "priority_pct": 20.56
+    }
+   ],
+   "note": null
+  },
+  {
+   "code": "O-09",
+   "source_row": 9,
+   "axis": 2,
+   "seq_in_axis": 4,
+   "text": {
+    "ar": "ضعف إجراءات السيطرة التشغيلية وأنظمة الإنذار والإجراءات التصحيحية أثناء تشغيل المحطة.",
+    "en": "Weak operational control procedures, alarm systems and corrective procedures during plant operation."
+   },
+   "importance_order_in_axis": 3,
+   "linked_actions": [
+    {
+     "action": "A-37",
+     "rank": 1,
+     "correlation_r": 0.492,
+     "priority_pct": 40.06
+    },
+    {
+     "action": "A-09",
+     "rank": 2,
+     "correlation_r": 0.41,
+     "priority_pct": 31.19
+    },
+    {
+     "action": "A-06",
+     "rank": 3,
+     "correlation_r": 0.391,
+     "priority_pct": 30.44
+    },
+    {
+     "action": "A-08",
+     "rank": 4,
+     "correlation_r": 0.371,
+     "priority_pct": 30.21
+    },
+    {
+     "action": "A-36",
+     "rank": 5,
+     "correlation_r": 0.338,
+     "priority_pct": 29.45
+    },
+    {
+     "action": "A-60",
+     "rank": 6,
+     "correlation_r": 0.314,
+     "priority_pct": 25.12
+    },
+    {
+     "action": "A-38",
+     "rank": 7,
+     "correlation_r": 0.274,
+     "priority_pct": 22.11
+    }
+   ],
+   "note": null
+  },
+  {
+   "code": "O-10",
+   "source_row": 10,
+   "axis": 2,
+   "seq_in_axis": 5,
+   "text": {
+    "ar": "الفشل في الحفاظ على تشغيل معالجة فعال في ظل الظروف غير الطبيعية، مثل ارتفاع العكورة أو ضعف التطهير أو الأحداث المناخية المتطرفة.",
+    "en": "Failure to maintain effective treatment under abnormal conditions, such as high turbidity, weak disinfection or extreme weather events."
+   },
+   "importance_order_in_axis": 1,
+   "linked_actions": [],
+   "note": null
+  },
+  {
+   "code": "O-11",
+   "source_row": 11,
+   "axis": 3,
+   "seq_in_axis": 1,
+   "text": {
+    "ar": "عدم وجود جداول للصيانة الوقائية لمعدات المعالجة والتطهير.",
+    "en": "No preventive maintenance schedules for treatment and disinfection equipment."
+   },
+   "importance_order_in_axis": 4,
+   "linked_actions": [
+    {
+     "action": "A-39",
+     "rank": 1,
+     "correlation_r": 0.322,
+     "priority_pct": 25.99
+    }
+   ],
+   "note": null
+  },
+  {
+   "code": "O-12",
+   "source_row": 12,
+   "axis": 3,
+   "seq_in_axis": 2,
+   "text": {
+    "ar": "عدم توفر قطع الغيار الحرجة والمعدات الاحتياطية للإصلاح السريع للمكونات المتعطلة.",
+    "en": "Critical spare parts and standby equipment unavailable for fast repair of failed components."
+   },
+   "importance_order_in_axis": 1,
+   "linked_actions": [],
+   "note": null
+  },
+  {
+   "code": "O-13",
+   "source_row": 13,
+   "axis": 3,
+   "seq_in_axis": 3,
+   "text": {
+    "ar": "ضعف سجلات الصيانة وعدم اكتمال توثيق حالة المعدات.",
+    "en": "Poor maintenance records and incomplete documentation of equipment condition."
+   },
+   "importance_order_in_axis": 5,
+   "linked_actions": [
+    {
+     "action": "A-39",
+     "rank": 1,
+     "correlation_r": 0.374,
+     "priority_pct": 30.19
+    },
+    {
+     "action": "A-41",
+     "rank": 2,
+     "correlation_r": 0.284,
+     "priority_pct": 22.52
+    },
+    {
+     "action": "A-12",
+     "rank": 3,
+     "correlation_r": 0.285,
+     "priority_pct": 21.89
+    },
+    {
+     "action": "A-40",
+     "rank": 4,
+     "correlation_r": 0.265,
+     "priority_pct": 20.16
+    }
+   ],
+   "note": null
+  },
+  {
+   "code": "O-14",
+   "source_row": 14,
+   "axis": 3,
+   "seq_in_axis": 4,
+   "text": {
+    "ar": "ضعف صيانة مضخات الجرعات وأجهزة الكلورة ووسائط الترشيح.",
+    "en": "Poor maintenance of dosing pumps, chlorinators and filter media."
+   },
+   "importance_order_in_axis": 2,
+   "linked_actions": [
+    {
+     "action": "A-40",
+     "rank": 1,
+     "correlation_r": 0.286,
+     "priority_pct": 21.76
+    }
+   ],
+   "note": null
+  },
+  {
+   "code": "O-15",
+   "source_row": 15,
+   "axis": 4,
+   "seq_in_axis": 1,
+   "text": {
+    "ar": "عدم وجود إجراءات تشغيل قياسية محدثة ووثائق إدارية واضحة.",
+    "en": "No up-to-date standard operating procedures or clear administrative documents."
+   },
+   "importance_order_in_axis": 5,
+   "linked_actions": [
+    {
+     "action": "A-42",
+     "rank": 1,
+     "correlation_r": 0.58,
+     "priority_pct": 46.4
+    },
+    {
+     "action": "A-19",
+     "rank": 2,
+     "correlation_r": 0.563,
+     "priority_pct": 43.84
+    },
+    {
+     "action": "A-18",
+     "rank": 3,
+     "correlation_r": 0.507,
+     "priority_pct": 41.1
+    },
+    {
+     "action": "A-43",
+     "rank": 4,
+     "correlation_r": 0.528,
+     "priority_pct": 40.36
+    },
+    {
+     "action": "A-15",
+     "rank": 5,
+     "correlation_r": 0.464,
+     "priority_pct": 37.62
+    },
+    {
+     "action": "A-44",
+     "rank": 6,
+     "correlation_r": 0.468,
+     "priority_pct": 37.11
+    },
+    {
+     "action": "A-62",
+     "rank": 7,
+     "correlation_r": 0.455,
+     "priority_pct": 35.91
+    },
+    {
+     "action": "A-17",
+     "rank": 8,
+     "correlation_r": 0.434,
+     "priority_pct": 35.5
+    },
+    {
+     "action": "A-16",
+     "rank": 9,
+     "correlation_r": 0.413,
+     "priority_pct": 32.01
+    },
+    {
+     "action": "A-46",
+     "rank": 10,
+     "correlation_r": 0.391,
+     "priority_pct": 31.0
+    }
+   ],
+   "note": null
+  },
+  {
+   "code": "O-16",
+   "source_row": 16,
+   "axis": 4,
+   "seq_in_axis": 2,
+   "text": {
+    "ar": "ضعف الالتزام بخطط الإدارة المعتمدة وتأخر الإجراءات التصحيحية.",
+    "en": "Weak adherence to approved management plans and delayed corrective actions."
+   },
+   "importance_order_in_axis": 4,
+   "linked_actions": [
+    {
+     "action": "A-44",
+     "rank": 1,
+     "correlation_r": 0.556,
+     "priority_pct": 44.09
+    },
+    {
+     "action": "A-42",
+     "rank": 2,
+     "correlation_r": 0.547,
+     "priority_pct": 43.76
+    },
+    {
+     "action": "A-19",
+     "rank": 3,
+     "correlation_r": 0.53,
+     "priority_pct": 41.27
+    },
+    {
+     "action": "A-18",
+     "rank": 4,
+     "correlation_r": 0.5,
+     "priority_pct": 40.54
+    },
+    {
+     "action": "A-43",
+     "rank": 5,
+     "correlation_r": 0.527,
+     "priority_pct": 40.28
+    },
+    {
+     "action": "A-15",
+     "rank": 6,
+     "correlation_r": 0.486,
+     "priority_pct": 39.4
+    },
+    {
+     "action": "A-16",
+     "rank": 7,
+     "correlation_r": 0.401,
+     "priority_pct": 31.08
+    },
+    {
+     "action": "A-17",
+     "rank": 8,
+     "correlation_r": 0.369,
+     "priority_pct": 30.18
+    },
+    {
+     "action": "A-46",
+     "rank": 9,
+     "correlation_r": 0.374,
+     "priority_pct": 29.65
+    },
+    {
+     "action": "A-62",
+     "rank": 10,
+     "correlation_r": 0.366,
+     "priority_pct": 28.89
+    }
+   ],
+   "note": null
+  },
+  {
+   "code": "O-17",
+   "source_row": 17,
+   "axis": 4,
+   "seq_in_axis": 3,
+   "text": {
+    "ar": "ضعف حفظ سجلات الأنشطة الأساسية لإدارة مياه الشرب.",
+    "en": "Poor record-keeping of core drinking-water management activities."
+   },
+   "importance_order_in_axis": 6,
+   "linked_actions": [
+    {
+     "action": "A-43",
+     "rank": 1,
+     "correlation_r": 0.538,
+     "priority_pct": 41.12
+    },
+    {
+     "action": "A-42",
+     "rank": 2,
+     "correlation_r": 0.491,
+     "priority_pct": 39.28
+    },
+    {
+     "action": "A-44",
+     "rank": 3,
+     "correlation_r": 0.48,
+     "priority_pct": 38.06
+    },
+    {
+     "action": "A-19",
+     "rank": 4,
+     "correlation_r": 0.485,
+     "priority_pct": 37.76
+    },
+    {
+     "action": "A-16",
+     "rank": 5,
+     "correlation_r": 0.46,
+     "priority_pct": 35.65
+    },
+    {
+     "action": "A-18",
+     "rank": 6,
+     "correlation_r": 0.407,
+     "priority_pct": 33.0
+    },
+    {
+     "action": "A-17",
+     "rank": 7,
+     "correlation_r": 0.388,
+     "priority_pct": 31.73
+    },
+    {
+     "action": "A-15",
+     "rank": 8,
+     "correlation_r": 0.388,
+     "priority_pct": 31.46
+    },
+    {
+     "action": "A-62",
+     "rank": 9,
+     "correlation_r": 0.341,
+     "priority_pct": 26.92
+    },
+    {
+     "action": "A-46",
+     "rank": 10,
+     "correlation_r": 0.313,
+     "priority_pct": 24.82
+    }
+   ],
+   "note": null
+  },
+  {
+   "code": "O-18",
+   "source_row": 18,
+   "axis": 4,
+   "seq_in_axis": 4,
+   "text": {
+    "ar": "عدم كفاية الإشراف الإداري على المخاطر وإجراءات التحسين وتوصيات التدقيق.",
+    "en": "Insufficient management oversight of risks, improvement actions and audit recommendations."
+   },
+   "importance_order_in_axis": 3,
+   "linked_actions": [
+    {
+     "action": "A-18",
+     "rank": 1,
+     "correlation_r": 0.59,
+     "priority_pct": 47.83
+    },
+    {
+     "action": "A-15",
+     "rank": 2,
+     "correlation_r": 0.572,
+     "priority_pct": 46.37
+    },
+    {
+     "action": "A-16",
+     "rank": 3,
+     "correlation_r": 0.537,
+     "priority_pct": 41.62
+    },
+    {
+     "action": "A-42",
+     "rank": 4,
+     "correlation_r": 0.466,
+     "priority_pct": 37.28
+    },
+    {
+     "action": "A-44",
+     "rank": 5,
+     "correlation_r": 0.469,
+     "priority_pct": 37.19
+    },
+    {
+     "action": "A-19",
+     "rank": 6,
+     "correlation_r": 0.475,
+     "priority_pct": 36.98
+    },
+    {
+     "action": "A-45",
+     "rank": 7,
+     "correlation_r": 0.362,
+     "priority_pct": 29.61
+    },
+    {
+     "action": "A-17",
+     "rank": 8,
+     "correlation_r": 0.345,
+     "priority_pct": 28.22
+    },
+    {
+     "action": "A-43",
+     "rank": 9,
+     "correlation_r": 0.359,
+     "priority_pct": 27.44
+    },
+    {
+     "action": "A-46",
+     "rank": 10,
+     "correlation_r": 0.32,
+     "priority_pct": 25.37
+    },
+    {
+     "action": "A-62",
+     "rank": 11,
+     "correlation_r": 0.265,
+     "priority_pct": 20.92
+    }
+   ],
+   "note": null
+  },
+  {
+   "code": "O-19",
+   "source_row": 19,
+   "axis": 4,
+   "seq_in_axis": 5,
+   "text": {
+    "ar": "عدم اختبار خطط الاستجابة للطوارئ والاستجابة للحوادث أو ضعف الاستعداد لها.",
+    "en": "Emergency and incident response plans not tested, or weak preparedness for them."
+   },
+   "importance_order_in_axis": 2,
+   "linked_actions": [
+    {
+     "action": "A-19",
+     "rank": 1,
+     "correlation_r": 0.413,
+     "priority_pct": 32.16
+    },
+    {
+     "action": "A-16",
+     "rank": 2,
+     "correlation_r": 0.362,
+     "priority_pct": 28.06
+    },
+    {
+     "action": "A-18",
+     "rank": 3,
+     "correlation_r": 0.341,
+     "priority_pct": 27.64
+    },
+    {
+     "action": "A-42",
+     "rank": 4,
+     "correlation_r": 0.344,
+     "priority_pct": 27.52
+    },
+    {
+     "action": "A-15",
+     "rank": 5,
+     "correlation_r": 0.282,
+     "priority_pct": 22.86
+    }
+   ],
+   "note": null
+  },
+  {
+   "code": "O-20",
+   "source_row": 20,
+   "axis": 5,
+   "seq_in_axis": 1,
+   "text": {
+    "ar": "عدم كفاية التمويل لتقديم خدمة مياه شرب آمنة ومستدامة.",
+    "en": "Insufficient funding to deliver a safe and sustainable drinking-water service."
+   },
+   "importance_order_in_axis": 1,
+   "linked_actions": [
+    {
+     "action": "A-47",
+     "rank": 1,
+     "correlation_r": 0.466,
+     "priority_pct": 41.44
+    },
+    {
+     "action": "A-50",
+     "rank": 2,
+     "correlation_r": 0.479,
+     "priority_pct": 41.4
+    },
+    {
+     "action": "A-21",
+     "rank": 3,
+     "correlation_r": 0.452,
+     "priority_pct": 39.87
+    },
+    {
+     "action": "A-20",
+     "rank": 4,
+     "correlation_r": 0.381,
+     "priority_pct": 33.88
+    },
+    {
+     "action": "A-63",
+     "rank": 5,
+     "correlation_r": 0.364,
+     "priority_pct": 30.68
+    },
+    {
+     "action": "A-22",
+     "rank": 6,
+     "correlation_r": 0.332,
+     "priority_pct": 29.05
+    },
+    {
+     "action": "A-49",
+     "rank": 7,
+     "correlation_r": 0.339,
+     "priority_pct": 27.24
+    }
+   ],
+   "note": null
+  },
+  {
+   "code": "O-21",
+   "source_row": 21,
+   "axis": 5,
+   "seq_in_axis": 2,
+   "text": {
+    "ar": "عدم كفاية تخصيص الموازنة لاحتياجات التشغيل والصيانة والصيانة الرأسمالية.",
+    "en": "Insufficient budget allocation for operation, maintenance and capital maintenance needs."
+   },
+   "importance_order_in_axis": 3,
+   "linked_actions": [
+    {
+     "action": "A-47",
+     "rank": 1,
+     "correlation_r": 0.437,
+     "priority_pct": 38.86
+    },
+    {
+     "action": "A-21",
+     "rank": 2,
+     "correlation_r": 0.421,
+     "priority_pct": 37.14
+    },
+    {
+     "action": "A-50",
+     "rank": 3,
+     "correlation_r": 0.39,
+     "priority_pct": 33.71
+    },
+    {
+     "action": "A-23",
+     "rank": 4,
+     "correlation_r": 0.334,
+     "priority_pct": 27.91
+    },
+    {
+     "action": "A-20",
+     "rank": 5,
+     "correlation_r": 0.304,
+     "priority_pct": 27.03
+    },
+    {
+     "action": "A-63",
+     "rank": 6,
+     "correlation_r": 0.32,
+     "priority_pct": 26.97
+    },
+    {
+     "action": "A-22",
+     "rank": 7,
+     "correlation_r": 0.298,
+     "priority_pct": 26.08
+    },
+    {
+     "action": "A-48",
+     "rank": 8,
+     "correlation_r": 0.29,
+     "priority_pct": 24.75
+    },
+    {
+     "action": "A-49",
+     "rank": 9,
+     "correlation_r": 0.304,
+     "priority_pct": 24.43
+    }
+   ],
+   "note": null
+  },
+  {
+   "code": "O-22",
+   "source_row": 22,
+   "axis": 5,
+   "seq_in_axis": 3,
+   "text": {
+    "ar": "ارتفاع تكاليف التشغيل المرتبطة بالطاقة والمواد الكيميائية ومواد المعالجة.",
+    "en": "High operating costs for energy, chemicals and treatment materials."
+   },
+   "importance_order_in_axis": 5,
+   "linked_actions": [
+    {
+     "action": "A-23",
+     "rank": 1,
+     "correlation_r": 0.309,
+     "priority_pct": 25.82
+    }
+   ],
+   "note": null
+  },
+  {
+   "code": "O-23",
+   "source_row": 23,
+   "axis": 5,
+   "seq_in_axis": 4,
+   "text": {
+    "ar": "عدم كفاية توافر قطع الغيار والمواد الاستهلاكية والموارد الاحتياطية لمعدات المعالجة.",
+    "en": "Insufficient availability of spare parts, consumables and backup resources for treatment equipment."
+   },
+   "importance_order_in_axis": 4,
+   "linked_actions": [
+    {
+     "action": "A-63",
+     "rank": 1,
+     "correlation_r": 0.583,
+     "priority_pct": 49.14
+    },
+    {
+     "action": "A-22",
+     "rank": 2,
+     "correlation_r": 0.557,
+     "priority_pct": 48.74
+    },
+    {
+     "action": "A-21",
+     "rank": 3,
+     "correlation_r": 0.473,
+     "priority_pct": 41.72
+    },
+    {
+     "action": "A-20",
+     "rank": 4,
+     "correlation_r": 0.468,
+     "priority_pct": 41.62
+    },
+    {
+     "action": "A-50",
+     "rank": 5,
+     "correlation_r": 0.469,
+     "priority_pct": 40.54
+    },
+    {
+     "action": "A-47",
+     "rank": 6,
+     "correlation_r": 0.425,
+     "priority_pct": 37.8
+    },
+    {
+     "action": "A-48",
+     "rank": 7,
+     "correlation_r": 0.422,
+     "priority_pct": 36.02
+    },
+    {
+     "action": "A-23",
+     "rank": 8,
+     "correlation_r": 0.405,
+     "priority_pct": 33.85
+    },
+    {
+     "action": "A-49",
+     "rank": 9,
+     "correlation_r": 0.364,
+     "priority_pct": 29.25
+    }
+   ],
+   "note": null
+  },
+  {
+   "code": "O-24",
+   "source_row": 24,
+   "axis": 6,
+   "seq_in_axis": 1,
+   "text": {
+    "ar": "عدم وجود مشغلين مؤهلين وقادرين على تشغيل محطة معالجة المياه.",
+    "en": "No qualified operators capable of running the water treatment plant."
+   },
+   "importance_order_in_axis": 1,
+   "linked_actions": [
+    {
+     "action": "A-28",
+     "rank": 1,
+     "correlation_r": 0.391,
+     "priority_pct": 29.18
+    },
+    {
+     "action": "A-52",
+     "rank": 2,
+     "correlation_r": 0.344,
+     "priority_pct": 26.04
+    },
+    {
+     "action": "A-54",
+     "rank": 3,
+     "correlation_r": 0.29,
+     "priority_pct": 22.68
+    }
+   ],
+   "note": null
+  },
+  {
+   "code": "O-25",
+   "source_row": 25,
+   "axis": 6,
+   "seq_in_axis": 2,
+   "text": {
+    "ar": "عدم كفاية تدريب المشغلين وغياب التدريب التنشيطي المستمر.",
+    "en": "Insufficient operator training and no ongoing refresher training."
+   },
+   "importance_order_in_axis": 4,
+   "linked_actions": [
+    {
+     "action": "A-55",
+     "rank": 1,
+     "correlation_r": 0.556,
+     "priority_pct": 40.11
+    },
+    {
+     "action": "A-53",
+     "rank": 2,
+     "correlation_r": 0.558,
+     "priority_pct": 39.86
+    },
+    {
+     "action": "A-28",
+     "rank": 3,
+     "correlation_r": 0.504,
+     "priority_pct": 37.62
+    },
+    {
+     "action": "A-26",
+     "rank": 4,
+     "correlation_r": 0.476,
+     "priority_pct": 36.38
+    },
+    {
+     "action": "A-25",
+     "rank": 5,
+     "correlation_r": 0.398,
+     "priority_pct": 31.13
+    },
+    {
+     "action": "A-52",
+     "rank": 6,
+     "correlation_r": 0.364,
+     "priority_pct": 27.56
+    },
+    {
+     "action": "A-51",
+     "rank": 7,
+     "correlation_r": 0.336,
+     "priority_pct": 26.76
+    },
+    {
+     "action": "A-64",
+     "rank": 8,
+     "correlation_r": 0.341,
+     "priority_pct": 26.19
+    },
+    {
+     "action": "A-27",
+     "rank": 9,
+     "correlation_r": 0.341,
+     "priority_pct": 25.94
+    },
+    {
+     "action": "A-54",
+     "rank": 10,
+     "correlation_r": 0.293,
+     "priority_pct": 22.92
+    }
+   ],
+   "note": null
+  },
+  {
+   "code": "O-26",
+   "source_row": 26,
+   "axis": 6,
+   "seq_in_axis": 3,
+   "text": {
+    "ar": "انخفاض مستويات التوظيف وعدم كفاية توافر الموظفين لتقديم الخدمة بفعالية.",
+    "en": "Low staffing levels and too few staff available to deliver the service effectively."
+   },
+   "importance_order_in_axis": 2,
+   "linked_actions": [
+    {
+     "action": "A-51",
+     "rank": 1,
+     "correlation_r": 0.518,
+     "priority_pct": 41.25
+    },
+    {
+     "action": "A-28",
+     "rank": 2,
+     "correlation_r": 0.464,
+     "priority_pct": 34.63
+    },
+    {
+     "action": "A-25",
+     "rank": 3,
+     "correlation_r": 0.434,
+     "priority_pct": 33.94
+    },
+    {
+     "action": "A-26",
+     "rank": 4,
+     "correlation_r": 0.408,
+     "priority_pct": 31.18
+    },
+    {
+     "action": "A-27",
+     "rank": 5,
+     "correlation_r": 0.379,
+     "priority_pct": 28.83
+    },
+    {
+     "action": "A-24",
+     "rank": 6,
+     "correlation_r": 0.351,
+     "priority_pct": 28.58
+    },
+    {
+     "action": "A-64",
+     "rank": 7,
+     "correlation_r": 0.366,
+     "priority_pct": 28.11
+    },
+    {
+     "action": "A-52",
+     "rank": 8,
+     "correlation_r": 0.355,
+     "priority_pct": 26.88
+    },
+    {
+     "action": "A-53",
+     "rank": 9,
+     "correlation_r": 0.347,
+     "priority_pct": 24.79
+    },
+    {
+     "action": "A-54",
+     "rank": 10,
+     "correlation_r": 0.291,
+     "priority_pct": 22.76
+    },
+    {
+     "action": "A-55",
+     "rank": 11,
+     "correlation_r": 0.293,
+     "priority_pct": 21.14
+    }
+   ],
+   "note": null
+  },
+  {
+   "code": "O-27",
+   "source_row": 27,
+   "axis": 6,
+   "seq_in_axis": 4,
+   "text": {
+    "ar": "فجوات المهارات وبرامج التدريب التي لا تلبي احتياجات القطاع.",
+    "en": "Skills gaps and training programmes that do not meet the sector’s needs."
+   },
+   "importance_order_in_axis": 5,
+   "linked_actions": [
+    {
+     "action": "A-28",
+     "rank": 1,
+     "correlation_r": 0.537,
+     "priority_pct": 40.08
+    },
+    {
+     "action": "A-55",
+     "rank": 2,
+     "correlation_r": 0.522,
+     "priority_pct": 37.66
+    },
+    {
+     "action": "A-27",
+     "rank": 3,
+     "correlation_r": 0.455,
+     "priority_pct": 34.61
+    },
+    {
+     "action": "A-64",
+     "rank": 4,
+     "correlation_r": 0.443,
+     "priority_pct": 34.02
+    },
+    {
+     "action": "A-53",
+     "rank": 5,
+     "correlation_r": 0.442,
+     "priority_pct": 31.57
+    },
+    {
+     "action": "A-25",
+     "rank": 6,
+     "correlation_r": 0.399,
+     "priority_pct": 31.21
+    },
+    {
+     "action": "A-52",
+     "rank": 7,
+     "correlation_r": 0.405,
+     "priority_pct": 30.66
+    },
+    {
+     "action": "A-51",
+     "rank": 8,
+     "correlation_r": 0.379,
+     "priority_pct": 30.18
+    },
+    {
+     "action": "A-54",
+     "rank": 9,
+     "correlation_r": 0.376,
+     "priority_pct": 29.41
+    },
+    {
+     "action": "A-26",
+     "rank": 10,
+     "correlation_r": 0.379,
+     "priority_pct": 28.97
+    },
+    {
+     "action": "A-24",
+     "rank": 11,
+     "correlation_r": 0.327,
+     "priority_pct": 26.63
+    }
+   ],
+   "note": null
+  },
+  {
+   "code": "O-28",
+   "source_row": 28,
+   "axis": 6,
+   "seq_in_axis": 5,
+   "text": {
+    "ar": "عدم توفر المساعدة الفنية والإشراف والدعم العملي للمشغلين.",
+    "en": "No technical assistance, supervision or hands-on support for operators."
+   },
+   "importance_order_in_axis": 3,
+   "linked_actions": [
+    {
+     "action": "A-25",
+     "rank": 1,
+     "correlation_r": 0.597,
+     "priority_pct": 46.69
+    },
+    {
+     "action": "A-51",
+     "rank": 2,
+     "correlation_r": 0.561,
+     "priority_pct": 44.68
+    },
+    {
+     "action": "A-24",
+     "rank": 3,
+     "correlation_r": 0.541,
+     "priority_pct": 44.05
+    },
+    {
+     "action": "A-26",
+     "rank": 4,
+     "correlation_r": 0.567,
+     "priority_pct": 43.34
+    },
+    {
+     "action": "A-27",
+     "rank": 5,
+     "correlation_r": 0.542,
+     "priority_pct": 41.23
+    },
+    {
+     "action": "A-52",
+     "rank": 6,
+     "correlation_r": 0.534,
+     "priority_pct": 40.43
+    },
+    {
+     "action": "A-28",
+     "rank": 7,
+     "correlation_r": 0.526,
+     "priority_pct": 39.26
+    },
+    {
+     "action": "A-64",
+     "rank": 8,
+     "correlation_r": 0.508,
+     "priority_pct": 39.01
+    },
+    {
+     "action": "A-55",
+     "rank": 9,
+     "correlation_r": 0.477,
+     "priority_pct": 34.41
+    },
+    {
+     "action": "A-53",
+     "rank": 10,
+     "correlation_r": 0.454,
+     "priority_pct": 32.43
+    },
+    {
+     "action": "A-54",
+     "rank": 11,
+     "correlation_r": 0.412,
+     "priority_pct": 32.22
+    }
+   ],
+   "note": null
+  },
+  {
+   "code": "O-29",
+   "source_row": 29,
+   "axis": 7,
+   "seq_in_axis": 1,
+   "text": {
+    "ar": "غياب بروتوكولات واضحة للمراقبة التشغيلية والتحليل الروتيني لنتائج المراقبة.",
+    "en": "No clear protocols for operational monitoring and routine analysis of monitoring results."
+   },
+   "importance_order_in_axis": 6,
+   "linked_actions": [
+    {
+     "action": "A-57",
+     "rank": 1,
+     "correlation_r": 0.71,
+     "priority_pct": 51.48
+    },
+    {
+     "action": "A-33",
+     "rank": 2,
+     "correlation_r": 0.646,
+     "priority_pct": 50.3
+    },
+    {
+     "action": "A-56",
+     "rank": 3,
+     "correlation_r": 0.654,
+     "priority_pct": 47.42
+    },
+    {
+     "action": "A-31",
+     "rank": 4,
+     "correlation_r": 0.563,
+     "priority_pct": 45.64
+    },
+    {
+     "action": "A-65",
+     "rank": 5,
+     "correlation_r": 0.577,
+     "priority_pct": 43.28
+    },
+    {
+     "action": "A-58",
+     "rank": 6,
+     "correlation_r": 0.57,
+     "priority_pct": 41.93
+    },
+    {
+     "action": "A-32",
+     "rank": 7,
+     "correlation_r": 0.554,
+     "priority_pct": 41.75
+    },
+    {
+     "action": "A-30",
+     "rank": 8,
+     "correlation_r": 0.496,
+     "priority_pct": 39.5
+    },
+    {
+     "action": "A-29",
+     "rank": 9,
+     "correlation_r": 0.391,
+     "priority_pct": 30.86
+    }
+   ],
+   "note": null
+  },
+  {
+   "code": "O-30",
+   "source_row": 30,
+   "axis": 7,
+   "seq_in_axis": 2,
+   "text": {
+    "ar": "غياب المراقبة المتصلة أو الآنية للمعايير الرئيسة، مثل العكورة والأس الهيدروجيني (pH) ومعدل التدفق والكلور المتبقي.",
+    "en": "No continuous or real-time monitoring of key parameters such as turbidity, pH, flow rate and residual chlorine."
+   },
+   "importance_order_in_axis": 1,
+   "linked_actions": [
+    {
+     "action": "A-33",
+     "rank": 1,
+     "correlation_r": 0.687,
+     "priority_pct": 53.49
+    },
+    {
+     "action": "A-30",
+     "rank": 2,
+     "correlation_r": 0.575,
+     "priority_pct": 45.79
+    },
+    {
+     "action": "A-56",
+     "rank": 3,
+     "correlation_r": 0.621,
+     "priority_pct": 45.02
+    },
+    {
+     "action": "A-29",
+     "rank": 4,
+     "correlation_r": 0.553,
+     "priority_pct": 43.65
+    },
+    {
+     "action": "A-32",
+     "rank": 5,
+     "correlation_r": 0.57,
+     "priority_pct": 42.96
+    },
+    {
+     "action": "A-58",
+     "rank": 6,
+     "correlation_r": 0.578,
+     "priority_pct": 42.52
+    },
+    {
+     "action": "A-31",
+     "rank": 7,
+     "correlation_r": 0.522,
+     "priority_pct": 42.32
+    },
+    {
+     "action": "A-57",
+     "rank": 8,
+     "correlation_r": 0.574,
+     "priority_pct": 41.62
+    },
+    {
+     "action": "A-65",
+     "rank": 9,
+     "correlation_r": 0.541,
+     "priority_pct": 40.58
+    }
+   ],
+   "note": null
+  },
+  {
+   "code": "O-31",
+   "source_row": 31,
+   "axis": 7,
+   "seq_in_axis": 3,
+   "text": {
+    "ar": "ضعف أنظمة الإنذار وغياب الإيقاف التلقائي أو القفل عند تجاوز الحدود الحرجة.",
+    "en": "Weak alarm systems and no automatic shutdown or interlock when critical limits are exceeded."
+   },
+   "importance_order_in_axis": 2,
+   "linked_actions": [
+    {
+     "action": "A-56",
+     "rank": 1,
+     "correlation_r": 0.442,
+     "priority_pct": 32.05
+    },
+    {
+     "action": "A-57",
+     "rank": 2,
+     "correlation_r": 0.433,
+     "priority_pct": 31.39
+    },
+    {
+     "action": "A-33",
+     "rank": 3,
+     "correlation_r": 0.386,
+     "priority_pct": 30.05
+    },
+    {
+     "action": "A-31",
+     "rank": 4,
+     "correlation_r": 0.347,
+     "priority_pct": 28.13
+    },
+    {
+     "action": "A-58",
+     "rank": 5,
+     "correlation_r": 0.364,
+     "priority_pct": 26.78
+    },
+    {
+     "action": "A-30",
+     "rank": 6,
+     "correlation_r": 0.328,
+     "priority_pct": 26.12
+    },
+    {
+     "action": "A-65",
+     "rank": 7,
+     "correlation_r": 0.3,
+     "priority_pct": 22.5
+    }
+   ],
+   "note": null
+  },
+  {
+   "code": "O-32",
+   "source_row": 32,
+   "axis": 7,
+   "seq_in_axis": 4,
+   "text": {
+    "ar": "ضعف تسجيل بيانات المراقبة التشغيلية ومراجعتها والإبلاغ عنها.",
+    "en": "Poor recording, review and reporting of operational monitoring data."
+   },
+   "importance_order_in_axis": 5,
+   "linked_actions": [
+    {
+     "action": "A-56",
+     "rank": 1,
+     "correlation_r": 0.448,
+     "priority_pct": 32.48
+    },
+    {
+     "action": "A-57",
+     "rank": 2,
+     "correlation_r": 0.403,
+     "priority_pct": 29.22
+    },
+    {
+     "action": "A-30",
+     "rank": 3,
+     "correlation_r": 0.366,
+     "priority_pct": 29.15
+    },
+    {
+     "action": "A-33",
+     "rank": 4,
+     "correlation_r": 0.374,
+     "priority_pct": 29.12
+    },
+    {
+     "action": "A-58",
+     "rank": 5,
+     "correlation_r": 0.379,
+     "priority_pct": 27.88
+    },
+    {
+     "action": "A-29",
+     "rank": 6,
+     "correlation_r": 0.333,
+     "priority_pct": 26.28
+    },
+    {
+     "action": "A-31",
+     "rank": 7,
+     "correlation_r": 0.302,
+     "priority_pct": 24.48
+    }
+   ],
+   "note": null
+  },
+  {
+   "code": "O-33",
+   "source_row": 33,
+   "axis": 7,
+   "seq_in_axis": 5,
+   "text": {
+    "ar": "ضعف الربط بين نتائج المراقبة والإجراءات التصحيحية والاتصال السريع أثناء الظروف غير الطبيعية.",
+    "en": "Weak link between monitoring results, corrective actions and rapid communication during abnormal conditions."
+   },
+   "importance_order_in_axis": 3,
+   "linked_actions": [
+    {
+     "action": "A-57",
+     "rank": 1,
+     "correlation_r": 0.583,
+     "priority_pct": 42.27
+    },
+    {
+     "action": "A-56",
+     "rank": 2,
+     "correlation_r": 0.557,
+     "priority_pct": 40.38
+    },
+    {
+     "action": "A-33",
+     "rank": 3,
+     "correlation_r": 0.516,
+     "priority_pct": 40.18
+    },
+    {
+     "action": "A-31",
+     "rank": 4,
+     "correlation_r": 0.444,
+     "priority_pct": 36.0
+    },
+    {
+     "action": "A-32",
+     "rank": 5,
+     "correlation_r": 0.469,
+     "priority_pct": 35.34
+    },
+    {
+     "action": "A-58",
+     "rank": 6,
+     "correlation_r": 0.457,
+     "priority_pct": 33.62
+    },
+    {
+     "action": "A-30",
+     "rank": 7,
+     "correlation_r": 0.396,
+     "priority_pct": 31.54
+    },
+    {
+     "action": "A-65",
+     "rank": 8,
+     "correlation_r": 0.358,
+     "priority_pct": 26.85
+    },
+    {
+     "action": "A-29",
+     "rank": 9,
+     "correlation_r": 0.29,
+     "priority_pct": 22.89
+    }
+   ],
+   "note": null
+  },
+  {
+   "code": "O-34",
+   "source_row": 34,
+   "axis": 1,
+   "seq_in_axis": 6,
+   "text": {
+    "ar": "تقادم منظومات السيطرة والأتمتة، بما في ذلك أنظمة PLC وSCADA، مما يحد من كفاءة التحكم في عمليات المعالجة ويؤخر اكتشاف الأعطال والانحرافات التشغيلية.",
+    "en": "Outdated control and automation systems, including PLC and SCADA, limiting control of treatment processes and delaying detection of faults and operational deviations."
+   },
+   "importance_order_in_axis": 6,
+   "linked_actions": [
+    {
+     "action": "A-59",
+     "rank": 1,
+     "correlation_r": 0.356,
+     "priority_pct": 29.12
+    },
+    {
+     "action": "A-35",
+     "rank": 2,
+     "correlation_r": 0.323,
+     "priority_pct": 25.15
+    }
+   ],
+   "note": null
+  },
+  {
+   "code": "O-35",
+   "source_row": 35,
+   "axis": 2,
+   "seq_in_axis": 6,
+   "text": {
+    "ar": "عدم وجود برنامج تشغيلي موحد لإدارة تشغيل وإيقاف وتناوب وحدات المعالجة والمضخات، مما يؤدي إلى تفاوت الممارسات التشغيلية والأداء بين المناوبات.",
+    "en": "No unified operating programme for starting, stopping and rotating treatment units and pumps, causing inconsistent practices and performance between shifts."
+   },
+   "importance_order_in_axis": 6,
+   "linked_actions": [
+    {
+     "action": "A-10",
+     "rank": 1,
+     "correlation_r": 0.567,
+     "priority_pct": 50.42
+    },
+    {
+     "action": "A-36",
+     "rank": 2,
+     "correlation_r": 0.491,
+     "priority_pct": 42.79
+    },
+    {
+     "action": "A-06",
+     "rank": 3,
+     "correlation_r": 0.395,
+     "priority_pct": 30.75
+    },
+    {
+     "action": "A-08",
+     "rank": 4,
+     "correlation_r": 0.361,
+     "priority_pct": 29.4
+    }
+   ],
+   "note": null
+  },
+  {
+   "code": "O-36",
+   "source_row": 36,
+   "axis": 3,
+   "seq_in_axis": 5,
+   "text": {
+    "ar": "تأجيل أعمال الصيانة الوقائية والتصحيحية بسبب استمرار تشغيل المحطة وعدم توفر فترات توقف مخططة للمعدات والوحدات.",
+    "en": "Preventive and corrective maintenance postponed because the plant runs continuously and no planned downtime is available for equipment and units."
+   },
+   "importance_order_in_axis": 3,
+   "linked_actions": [
+    {
+     "action": "A-41",
+     "rank": 1,
+     "correlation_r": 0.397,
+     "priority_pct": 31.48
+    }
+   ],
+   "note": null
+  },
+  {
+   "code": "O-37",
+   "source_row": 37,
+   "axis": 4,
+   "seq_in_axis": 6,
+   "text": {
+    "ar": "ضعف التنسيق وتبادل المعلومات بين إدارة المحطة والجهات الساندة، بما في ذلك المختبرات والصيانة والمخازن والدوائر الإدارية، مما يؤدي إلى تأخر معالجة المشكلات التشغيلية وتنفيذ الإجراءات التصحيحية.",
+    "en": "Weak coordination and information sharing between plant management and supporting units (labs, maintenance, stores and administrative departments), delaying the handling of operational problems and corrective actions."
+   },
+   "importance_order_in_axis": 1,
+   "linked_actions": [
+    {
+     "action": "A-19",
+     "rank": 1,
+     "correlation_r": 0.299,
+     "priority_pct": 23.28
+    },
+    {
+     "action": "A-44",
+     "rank": 2,
+     "correlation_r": 0.274,
+     "priority_pct": 21.73
+    },
+    {
+     "action": "A-62",
+     "rank": 3,
+     "correlation_r": 0.265,
+     "priority_pct": 20.92
+    },
+    {
+     "action": "A-16",
+     "rank": 4,
+     "correlation_r": 0.267,
+     "priority_pct": 20.69
+    }
+   ],
+   "note": null
+  },
+  {
+   "code": "O-38",
+   "source_row": 38,
+   "axis": 5,
+   "seq_in_axis": 5,
+   "text": {
+    "ar": "تأخر إطلاق التخصيصات المالية خلال السنة المالية، مما يؤدي إلى تأجيل شراء المواد الكيميائية وقطع الغيار والمستلزمات التشغيلية الضرورية.",
+    "en": "Late release of financial allocations during the fiscal year, postponing purchases of chemicals, spare parts and essential operating supplies."
+   },
+   "importance_order_in_axis": 2,
+   "linked_actions": [
+    {
+     "action": "A-21",
+     "rank": 1,
+     "correlation_r": 0.491,
+     "priority_pct": 43.31
+    },
+    {
+     "action": "A-50",
+     "rank": 2,
+     "correlation_r": 0.465,
+     "priority_pct": 40.19
+    },
+    {
+     "action": "A-20",
+     "rank": 3,
+     "correlation_r": 0.446,
+     "priority_pct": 39.66
+    },
+    {
+     "action": "A-47",
+     "rank": 4,
+     "correlation_r": 0.432,
+     "priority_pct": 38.42
+    },
+    {
+     "action": "A-22",
+     "rank": 5,
+     "correlation_r": 0.398,
+     "priority_pct": 34.83
+    },
+    {
+     "action": "A-49",
+     "rank": 6,
+     "correlation_r": 0.364,
+     "priority_pct": 29.25
+    },
+    {
+     "action": "A-23",
+     "rank": 7,
+     "correlation_r": 0.343,
+     "priority_pct": 28.66
+    },
+    {
+     "action": "A-63",
+     "rank": 8,
+     "correlation_r": 0.337,
+     "priority_pct": 28.41
+    },
+    {
+     "action": "A-48",
+     "rank": 9,
+     "correlation_r": 0.273,
+     "priority_pct": 23.3
+    }
+   ],
+   "note": null
+  },
+  {
+   "code": "O-39",
+   "source_row": 39,
+   "axis": 6,
+   "seq_in_axis": 6,
+   "text": {
+    "ar": "الاعتماد على الخبرة المتراكمة لعدد محدود من العاملين دون توثيقها أو نقلها بصورة منظمة إلى بقية الملاكات، مما يهدد استمرارية المعرفة التشغيلية.",
+    "en": "Reliance on the accumulated experience of a few staff members without documenting it or passing it on systematically, threatening continuity of operating knowledge."
+   },
+   "importance_order_in_axis": null,
+   "linked_actions": null,
+   "note": "No table for this obstacle in the RII source file (HR axis has obstacle 5 duplicated, obstacle 6 missing). Confirm with the researcher."
+  },
+  {
+   "code": "O-40",
+   "source_row": 40,
+   "axis": 7,
+   "seq_in_axis": 6,
+   "text": {
+    "ar": "عدم إجراء مراجعة دورية لمؤشرات الأداء التشغيلية للمحطة، مما يؤدي إلى استمرار انخفاض الأداء أو تكرار الانحرافات دون اكتشافها ومعالجتها في الوقت المناسب.",
+    "en": "No periodic review of the plant’s operational performance indicators, so low performance or repeated deviations continue without being detected and treated in time."
+   },
+   "importance_order_in_axis": 4,
+   "linked_actions": [
+    {
+     "action": "A-57",
+     "rank": 1,
+     "correlation_r": 0.629,
+     "priority_pct": 45.6
+    },
+    {
+     "action": "A-56",
+     "rank": 2,
+     "correlation_r": 0.587,
+     "priority_pct": 42.56
+    },
+    {
+     "action": "A-33",
+     "rank": 3,
+     "correlation_r": 0.529,
+     "priority_pct": 41.19
+    },
+    {
+     "action": "A-31",
+     "rank": 4,
+     "correlation_r": 0.481,
+     "priority_pct": 38.99
+    },
+    {
+     "action": "A-58",
+     "rank": 5,
+     "correlation_r": 0.512,
+     "priority_pct": 37.67
+    },
+    {
+     "action": "A-30",
+     "rank": 6,
+     "correlation_r": 0.458,
+     "priority_pct": 36.48
+    },
+    {
+     "action": "A-32",
+     "rank": 7,
+     "correlation_r": 0.472,
+     "priority_pct": 35.57
+    },
+    {
+     "action": "A-65",
+     "rank": 8,
+     "correlation_r": 0.445,
+     "priority_pct": 33.38
+    },
+    {
+     "action": "A-29",
+     "rank": 9,
+     "correlation_r": 0.415,
+     "priority_pct": 32.76
+    }
+   ],
+   "note": null
+  }
+ ],
+ "actions": [
+  {
+   "code": "A-01",
+   "source_row": 41,
+   "axis": 1,
+   "seq_in_axis": 1,
+   "text": {
+    "ar": "تركيب أجهزة المراقبة المستمرة للمعايير الحرجة في عمليات المعالجة، ومعايرتها وصيانتها بصورة دورية.",
+    "en": "Install continuous monitoring devices for critical treatment parameters, and calibrate and maintain them regularly."
+   },
+   "rii": 0.7857
+  },
+  {
+   "code": "A-02",
+   "source_row": 42,
+   "axis": 1,
+   "seq_in_axis": 2,
+   "text": {
+    "ar": "تطوير وحدات المعالجة أو إعادة تحديد سعاتها بما يستوعب السعة الهيدروليكية المطلوبة والتغير في الطلب على المياه.",
+    "en": "Upgrade treatment units or re-size them to handle the required hydraulic capacity and changing water demand."
+   },
+   "rii": 0.8464
+  },
+  {
+   "code": "A-03",
+   "source_row": 43,
+   "axis": 1,
+   "seq_in_axis": 3,
+   "text": {
+    "ar": "تحسين أداء الترشيح من خلال اعتماد عمق مناسب لوسائط الترشيح، وتحسين عمليات الغسل العكسي، وتعزيز السيطرة التشغيلية.",
+    "en": "Improve filtration through suitable filter-media depth, better backwashing and stronger operational control."
+   },
+   "rii": 0.8893
+  },
+  {
+   "code": "A-04",
+   "source_row": 44,
+   "axis": 1,
+   "seq_in_axis": 4,
+   "text": {
+    "ar": "تحسين عملية التعقيم وضمان فاعليتها من خلال مراقبة الكلور المتبقي وتوفير زمن تماس مناسب.",
+    "en": "Improve disinfection and ensure its effectiveness by monitoring residual chlorine and providing adequate contact time."
+   },
+   "rii": 0.875
+  },
+  {
+   "code": "A-05",
+   "source_row": 45,
+   "axis": 1,
+   "seq_in_axis": 5,
+   "text": {
+    "ar": "توفير مضخات جرعات كيميائية عاملة واحتياطية مع التحويل التلقائي بينهما، وضبط الجرعات وفق معدل التدفق وظروف جودة المياه.",
+    "en": "Provide duty and standby chemical dosing pumps with automatic changeover, and adjust doses to flow rate and water-quality conditions."
+   },
+   "rii": 0.85
+  },
+  {
+   "code": "A-06",
+   "source_row": 46,
+   "axis": 2,
+   "seq_in_axis": 1,
+   "text": {
+    "ar": "إجراء اختبارات (Jar) بصورة روتينية لتحسين جرعات مواد التخثير وفق التغيرات في خصائص المياه الخام.",
+    "en": "Run jar tests routinely to optimise coagulant doses as raw-water characteristics change."
+   },
+   "rii": 0.7786
+  },
+  {
+   "code": "A-07",
+   "source_row": 47,
+   "axis": 2,
+   "seq_in_axis": 2,
+   "text": {
+    "ar": "اعتماد المراقبة التشغيلية المستمرة للتحقق من فاعلية إجراءات السيطرة وتمكين اتخاذ الإجراءات التصحيحية في الوقت المناسب.",
+    "en": "Adopt continuous operational monitoring to verify control measures and enable timely corrective action."
+   },
+   "rii": 0.8143
+  },
+  {
+   "code": "A-08",
+   "source_row": 48,
+   "axis": 2,
+   "seq_in_axis": 3,
+   "text": {
+    "ar": "إجراء التحقق والمعايرة الدورية لأنظمة الجرعات الكيميائية لضمان دقة معدلات التغذية الكيميائية.",
+    "en": "Verify and calibrate chemical dosing systems regularly to ensure accurate feed rates."
+   },
+   "rii": 0.8143
+  },
+  {
+   "code": "A-09",
+   "source_row": 49,
+   "axis": 2,
+   "seq_in_axis": 4,
+   "text": {
+    "ar": "تطبيق خطط للمراقبة التشغيلية تحدد المعايير والمواقع والتكرارات والمسؤوليات والحدود المقبولة والإجراءات التصحيحية.",
+    "en": "Apply operational monitoring plans that define parameters, locations, frequencies, responsibilities, acceptable limits and corrective actions."
+   },
+   "rii": 0.7607
+  },
+  {
+   "code": "A-10",
+   "source_row": 50,
+   "axis": 2,
+   "seq_in_axis": 5,
+   "text": {
+    "ar": "تعديل الجرعات الكيميائية وعمليات الغسل العكسي، مع تطبيق إجراءات استجابة محددة مسبقًا أثناء ظروف المياه الخام والمعالجة غير الطبيعية.",
+    "en": "Adjust chemical doses and backwashing, applying predefined response procedures during abnormal raw-water and treatment conditions."
+   },
+   "rii": 0.8893
+  },
+  {
+   "code": "A-11",
+   "source_row": 51,
+   "axis": 3,
+   "seq_in_axis": 1,
+   "text": {
+    "ar": "تطبيق برامج للصيانة الوقائية لوحدات المعالجة والمعدات.",
+    "en": "Apply preventive maintenance programmes for treatment units and equipment."
+   },
+   "rii": 0.8214
+  },
+  {
+   "code": "A-12",
+   "source_row": 52,
+   "axis": 3,
+   "seq_in_axis": 2,
+   "text": {
+    "ar": "حفظ سجلات الصيانة الوقائية ومراجعة أداء المعدات بصورة منتظمة.",
+    "en": "Keep preventive maintenance records and review equipment performance regularly."
+   },
+   "rii": 0.7679
+  },
+  {
+   "code": "A-13",
+   "source_row": 53,
+   "axis": 3,
+   "seq_in_axis": 3,
+   "text": {
+    "ar": "استبدال أو إعادة تأهيل المعدات ومكونات المعالجة المتدهورة عند إظهار مؤشرات الصيانة انخفاضًا في الأداء.",
+    "en": "Replace or rehabilitate degraded equipment and treatment components when maintenance indicators show declining performance."
+   },
+   "rii": 0.8536
+  },
+  {
+   "code": "A-14",
+   "source_row": 54,
+   "axis": 3,
+   "seq_in_axis": 4,
+   "text": {
+    "ar": "ضمان توفر قطع الغيار الحرجة ومواد الصيانة للحد من مدة توقف المعدات.",
+    "en": "Ensure critical spare parts and maintenance materials are available to limit equipment downtime."
+   },
+   "rii": 0.8857
+  },
+  {
+   "code": "A-15",
+   "source_row": 55,
+   "axis": 4,
+   "seq_in_axis": 1,
+   "text": {
+    "ar": "التحديد الرسمي للأدوار والمسؤوليات والمساءلة، وتعميمها بين وظائف إدارة المحطة والإشراف والتشغيل والصيانة.",
+    "en": "Formally define roles, responsibilities and accountability, and communicate them across plant management, supervision, operation and maintenance."
+   },
+   "rii": 0.8107
+  },
+  {
+   "code": "A-16",
+   "source_row": 56,
+   "axis": 4,
+   "seq_in_axis": 2,
+   "text": {
+    "ar": "إضفاء الطابع المؤسسي على التقارير الإدارية الدورية، وتخطيط الموارد، وإعداد الموازنات، ومتابعة المشتريات وسلسلة التجهيز، ومراقبة التنفيذ.",
+    "en": "Institutionalise periodic management reports, resource planning, budgeting, procurement and supply-chain follow-up, and implementation monitoring."
+   },
+   "rii": 0.775
+  },
+  {
+   "code": "A-17",
+   "source_row": 57,
+   "axis": 4,
+   "seq_in_axis": 3,
+   "text": {
+    "ar": "تكامل الخطط الاستراتيجية والتنفيذية والتشغيلية وخطط الموارد الخاصة بإدارة جودة مياه الشرب، وتطوير القوى العاملة، والتمويل، والتحقق التشغيلي، والاستعداد للطوارئ، ومشاركة المجتمع.",
+    "en": "Integrate strategic, executive, operational and resource plans for drinking-water quality management, workforce development, funding, operational verification, emergency preparedness and community engagement."
+   },
+   "rii": 0.8179
+  },
+  {
+   "code": "A-18",
+   "source_row": 58,
+   "axis": 4,
+   "seq_in_axis": 4,
+   "text": {
+    "ar": "تعزيز الإشراف الإداري والاتصال الداخلي والمتابعة الدورية للامتثال والمخاطر التشغيلية وإجراءات التحسين وتوصيات التدقيق.",
+    "en": "Strengthen management oversight, internal communication and periodic follow-up of compliance, operational risks, improvement actions and audit recommendations."
+   },
+   "rii": 0.8107
+  },
+  {
+   "code": "A-19",
+   "source_row": 59,
+   "axis": 4,
+   "seq_in_axis": 5,
+   "text": {
+    "ar": "الاختبار الدوري لخطط الاستجابة للطوارئ وتحديثها، بالاستناد إلى إجراءات محددة مسبقًا للاستجابة للحوادث، وتوزيع واضح للمسؤوليات، وتدريب العاملين.",
+    "en": "Test and update emergency response plans regularly, based on predefined incident procedures, clear responsibilities and staff training."
+   },
+   "rii": 0.7786
+  },
+  {
+   "code": "A-20",
+   "source_row": 60,
+   "axis": 5,
+   "seq_in_axis": 1,
+   "text": {
+    "ar": "توفير موازنات شاملة لدورة الحياة تغطي الموارد البشرية، والصيانة الروتينية والطارئة، وتجديد البنى التحتية، والمواد الكيميائية، وقطع الغيار الحرجة، والنقل، والطاقة، ومعدات السلامة، وتدريب العاملين.",
+    "en": "Provide full life-cycle budgets covering staff, routine and emergency maintenance, infrastructure renewal, chemicals, critical spare parts, transport, energy, safety equipment and training."
+   },
+   "rii": 0.8893
+  },
+  {
+   "code": "A-21",
+   "source_row": 61,
+   "axis": 5,
+   "seq_in_axis": 2,
+   "text": {
+    "ar": "الضبط المنهجي لشراء المواد الكيميائية وإدارة مخزونها من خلال سجلات جرد منتظمة، ومستويات احتياط محددة، وإعادة تجهيز في الوقت المناسب، وتقييم المجهزين، والمراجعة الدورية لمخاطر انقطاع التجهيز.",
+    "en": "Systematically control chemical purchasing and stock through regular inventory records, set reserve levels, timely resupply, supplier evaluation and periodic review of supply-disruption risks."
+   },
+   "rii": 0.8821
+  },
+  {
+   "code": "A-22",
+   "source_row": 62,
+   "axis": 5,
+   "seq_in_axis": 3,
+   "text": {
+    "ar": "إدماج قطع الغيار الحرجة والمعدات الاحتياطية وأجهزة القياس ومضخات الجرعات وأدوات الصيانة ضمن التخطيط المالي وإدارة الأصول وخطط المشتريات.",
+    "en": "Include critical spare parts, standby equipment, measuring instruments, dosing pumps and maintenance tools in financial planning, asset management and procurement plans."
+   },
+   "rii": 0.875
+  },
+  {
+   "code": "A-23",
+   "source_row": 63,
+   "axis": 5,
+   "seq_in_axis": 4,
+   "text": {
+    "ar": "اعتماد تقارير مالية شفافة واتصال منظم بشأن استهلاك المواد الكيميائية ومتطلبات الصيانة واحتياجات المعدات والتكاليف التشغيلية وتخصيصات الموازنة والإنفاق الفعلي.",
+    "en": "Adopt transparent financial reporting and structured communication on chemical consumption, maintenance needs, equipment needs, operating costs, budget allocations and actual spending."
+   },
+   "rii": 0.8357
+  },
+  {
+   "code": "A-24",
+   "source_row": 64,
+   "axis": 6,
+   "seq_in_axis": 1,
+   "text": {
+    "ar": "توفير أعداد كافية من مشغلي العمليات والمشرفين وموظفي الصيانة والمديرين المؤهلين، مع تحديد الحد الأدنى لمتطلبات الكفاءة والشهادات المهنية.",
+    "en": "Provide enough qualified operators, supervisors, maintenance staff and managers, with minimum competency and certification requirements."
+   },
+   "rii": 0.8143
+  },
+  {
+   "code": "A-25",
+   "source_row": 65,
+   "axis": 6,
+   "seq_in_axis": 2,
+   "text": {
+    "ar": "مواءمة برامج التدريب الخاصة بكل وظيفة مع الواجبات الفعلية ومسؤوليات عمليات المعالجة، بما يشمل السيطرة على العمليات والجرعات الكيميائية وقياس التدفق ومراقبة العكورة والأس الهيدروجيني والترشيح وتشغيل المعدات والسلامة والاستجابة للطوارئ.",
+    "en": "Align job-specific training with actual duties in treatment operations, including process control, chemical dosing, flow measurement, turbidity and pH monitoring, filtration, equipment operation, safety and emergency response."
+   },
+   "rii": 0.7821
+  },
+  {
+   "code": "A-26",
+   "source_row": 66,
+   "axis": 6,
+   "seq_in_axis": 3,
+   "text": {
+    "ar": "إضفاء الطابع المؤسسي على التطوير المستمر للقدرات من خلال تقييم الاحتياجات التدريبية، وتنفيذ البرامج، وتقييم فاعليتها، والدورات التنشيطية، والتدريب الميداني تحت الإشراف، والتطوير المهني المستمر.",
+    "en": "Institutionalise continuous capacity building through training-needs assessment, programme delivery, effectiveness evaluation, refresher courses, supervised field training and continuing professional development."
+   },
+   "rii": 0.7643
+  },
+  {
+   "code": "A-27",
+   "source_row": 67,
+   "axis": 6,
+   "seq_in_axis": 4,
+   "text": {
+    "ar": "تحسين تحفيز العاملين واستبقائهم وظروف عملهم من خلال الأجور والمزايا المناسبة، والحوافز، وكفاية الملاك، والإشراف الداعم، ومعدات الوقاية الشخصية، وبيئة العمل الآمنة.",
+    "en": "Improve staff motivation, retention and working conditions through fair pay and benefits, incentives, adequate staffing, supportive supervision, personal protective equipment and a safe workplace."
+   },
+   "rii": 0.7607
+  },
+  {
+   "code": "A-28",
+   "source_row": 68,
+   "axis": 6,
+   "seq_in_axis": 5,
+   "text": {
+    "ar": "إضفاء الطابع المؤسسي على تخطيط القوى العاملة والإحلال الوظيفي، مع تبادل المعرفة ونقل الخبرة الفنية بصورة منظمة لضمان استمرارية الملاك والكفاءة التشغيلية.",
+    "en": "Institutionalise workforce and succession planning, with structured knowledge sharing and transfer of technical expertise to ensure staff continuity and operational competence."
+   },
+   "rii": 0.7464
+  },
+  {
+   "code": "A-29",
+   "source_row": 69,
+   "axis": 7,
+   "seq_in_axis": 1,
+   "text": {
+    "ar": "إنشاء برنامج متكامل للمراقبة التشغيلية ومراقبة جودة المياه يحدد المعايير والمواقع والتكرارات وطرائق القياس والمسؤولين والحدود التشغيلية والإجراءات التصحيحية المرتبطة بها.",
+    "en": "Establish an integrated operational and water-quality monitoring programme that defines parameters, locations, frequencies, methods, responsibilities, operating limits and related corrective actions."
+   },
+   "rii": 0.7893
+  },
+  {
+   "code": "A-30",
+   "source_row": 70,
+   "axis": 7,
+   "seq_in_axis": 2,
+   "text": {
+    "ar": "اعتماد القياس الروتيني والقائم على المخاطر للأس الهيدروجيني والكلور الحر المتبقي والعكورة ومعدل التدفق ودرجة الحرارة والمؤشرات الفيزيائية والكيميائية والميكروبيولوجية ذات الصلة، مع تكثيف المراقبة خلال فترات التغير السريع في مياه المصدر.",
+    "en": "Adopt routine and risk-based measurement of pH, free residual chlorine, turbidity, flow rate, temperature and relevant physical, chemical and microbiological parameters, intensifying monitoring when source water changes rapidly."
+   },
+   "rii": 0.7964
+  },
+  {
+   "code": "A-31",
+   "source_row": 71,
+   "axis": 7,
+   "seq_in_axis": 3,
+   "text": {
+    "ar": "دمج نتائج المراقبة في السيطرة التكيفية على العمليات، بما يشمل تعديل جرعات مواد التخثير والكلور، وتحسين الأس الهيدروجيني، وتقييم أداء الترشيح، وتعديل ممارسات الغسل العكسي، والاستجابة للنتائج التشغيلية غير الطبيعية.",
+    "en": "Feed monitoring results into adaptive process control, including adjusting coagulant and chlorine doses, optimising pH, assessing filtration, adjusting backwashing and responding to abnormal results."
+   },
+   "rii": 0.8107
+  },
+  {
+   "code": "A-32",
+   "source_row": 72,
+   "axis": 7,
+   "seq_in_axis": 4,
+   "text": {
+    "ar": "توحيد نماذج السجلات التشغيلية والتسجيل الإلكتروني للبيانات والمراجعة اليومية وتحليل الاتجاهات والتقارير المنظمة بين مشغلي العمليات والمشرفين وإدارة المحطة والجهات المسؤولة.",
+    "en": "Standardise operating log forms, electronic data recording, daily review, trend analysis and structured reporting between operators, supervisors, plant management and responsible authorities."
+   },
+   "rii": 0.7536
+  },
+  {
+   "code": "A-33",
+   "source_row": 73,
+   "axis": 7,
+   "seq_in_axis": 5,
+   "text": {
+    "ar": "دمج إنذارات التحذير المبكر والإجراءات التصحيحية المحددة مسبقًا وإجراءات الاتصال السريع وإعادة أخذ العينات أو القياس للتحقق من استعادة السيطرة على العمليات والامتثال لمتطلبات جودة المياه.",
+    "en": "Integrate early-warning alarms, predefined corrective actions, rapid communication and re-sampling or re-measurement to confirm control is restored and water-quality requirements are met."
+   },
+   "rii": 0.7786
+  },
+  {
+   "code": "A-34",
+   "source_row": 74,
+   "axis": 1,
+   "seq_in_axis": 6,
+   "text": {
+    "ar": "اعتماد إجراءات فنية لشراء واستلام أجهزة القياس والمراقبة ومعدات الاختبار وفق المواصفات المعتمدة، مع إجراء الفحص الفني والمعايرة والتحقق من المطابقة قبل إدخالها إلى الخدمة.",
+    "en": "Adopt technical procedures for purchasing and receiving measuring, monitoring and test equipment to approved specifications, with inspection, calibration and conformity checks before entering service."
+   },
+   "rii": 0.8286
+  },
+  {
+   "code": "A-35",
+   "source_row": 75,
+   "axis": 1,
+   "seq_in_axis": 7,
+   "text": {
+    "ar": "توفير أجهزة قياس محمولة ومعايرة بوصفها وسائل احتياطية للتحقق الميداني من قراءات أجهزة المراقبة الثابتة، واستخدامها عند تعطل أنظمة القياس المتصلة أو الشك في دقة نتائجها.",
+    "en": "Provide calibrated portable instruments as backup for field checks of fixed monitoring readings, used when online systems fail or their accuracy is in doubt."
+   },
+   "rii": 0.7786
+  },
+  {
+   "code": "A-36",
+   "source_row": 76,
+   "axis": 2,
+   "seq_in_axis": 6,
+   "text": {
+    "ar": "تعديل معايير التشغيل وجرعات المواد الكيميائية وزمن الترسيب ومعدلات الغسل العكسي وفق التغيرات الموسمية والطارئة في خصائص المياه الخام، ولا سيما خلال فترات ارتفاع العكارة.",
+    "en": "Adjust operating parameters, chemical doses, settling time and backwash rates to seasonal and sudden changes in raw water, especially during high turbidity."
+   },
+   "rii": 0.8714
+  },
+  {
+   "code": "A-37",
+   "source_row": 77,
+   "axis": 2,
+   "seq_in_axis": 7,
+   "text": {
+    "ar": "إعداد وتطبيق خطة سلامة مياه متكاملة تعتمد على تحديد المخاطر من المصدر إلى نقطة الاستهلاك، وتربط بين مراقبة نوعية المياه الخام، والسيطرة على عمليات المعالجة، والإجراءات التصحيحية، والتحقق المستمر من سلامة المياه المنتجة.",
+    "en": "Prepare and apply an integrated water safety plan based on risk identification from source to tap, linking raw-water monitoring, process control, corrective actions and continuous verification of water safety."
+   },
+   "rii": 0.8143
+  },
+  {
+   "code": "A-38",
+   "source_row": 78,
+   "axis": 2,
+   "seq_in_axis": 8,
+   "text": {
+    "ar": "إنشاء آلية تنسيق وتشغيل مشتركة بين إدارة محطة المعالجة والجهات المسؤولة عن الموارد المائية لمتابعة نوعية المياه الخام، وأعمال التكرية، والتغيرات في مناسيب وتصريفات المصدر، واتخاذ التعديلات التشغيلية المناسبة في الوقت المناسب.",
+    "en": "Set up a joint coordination mechanism between plant management and water-resources authorities to follow raw-water quality, dredging works and changes in source levels and discharges, and to adjust operation in time."
+   },
+   "rii": 0.8071
+  },
+  {
+   "code": "A-39",
+   "source_row": 79,
+   "axis": 3,
+   "seq_in_axis": 5,
+   "text": {
+    "ar": "إعداد جداول تفصيلية للصيانة الوقائية والتصحيحية تتضمن المعدات، ونوع الصيانة، وتكرارها، والمسؤول عن التنفيذ، وتاريخ الاستحقاق، مع متابعة نسب الإنجاز والانحراف عن الخطة واتخاذ الإجراءات اللازمة عند التأخر.",
+    "en": "Prepare detailed preventive and corrective maintenance schedules listing equipment, maintenance type, frequency, owner and due date, tracking completion and deviation from plan and acting on delays."
+   },
+   "rii": 0.8071
+  },
+  {
+   "code": "A-40",
+   "source_row": 80,
+   "axis": 3,
+   "seq_in_axis": 6,
+   "text": {
+    "ar": "تنفيذ جرد دوري للأصول والمعدات، وتحديث سجل الحالة الفنية لكل معدة بما يشمل العمر التشغيلي، والأعطال السابقة، ونتائج الفحص، والحاجة إلى الإصلاح أو إعادة التأهيل أو الاستبدال.",
+    "en": "Carry out periodic asset and equipment inventories, updating each item’s technical condition record: operating age, past failures, inspection results and need for repair, rehabilitation or replacement."
+   },
+   "rii": 0.7607
+  },
+  {
+   "code": "A-41",
+   "source_row": 81,
+   "axis": 3,
+   "seq_in_axis": 7,
+   "text": {
+    "ar": "تنفيذ جولات تفتيش ميدانية دورية من قبل المشرفين الفنيين للتحقق من حالة المعدات، وتنفيذ مهام الصيانة المجدولة، وصحة السجلات، مع توثيق الملاحظات والإجراءات التصحيحية الناتجة عنها.",
+    "en": "Run periodic field inspection rounds by technical supervisors to check equipment condition, scheduled maintenance and record accuracy, documenting findings and resulting corrective actions."
+   },
+   "rii": 0.7929
+  },
+  {
+   "code": "A-42",
+   "source_row": 82,
+   "axis": 4,
+   "seq_in_axis": 6,
+   "text": {
+    "ar": "إعداد واعتماد وتحديث إجراءات تشغيل قياسية مكتوبة لجميع العمليات الرئيسة في المحطة، مع ضبط نسخها وتعميمها على العاملين والتحقق من الالتزام بتطبيقها وتوثيق أي انحرافات عنها.",
+    "en": "Prepare, approve and update written standard operating procedures for all main plant processes, with version control, distribution to staff, compliance checks and recording of deviations."
+   },
+   "rii": 0.8
+  },
+  {
+   "code": "A-43",
+   "source_row": 83,
+   "axis": 4,
+   "seq_in_axis": 7,
+   "text": {
+    "ar": "تطبيق نظام دوري لتقييم أداء العاملين والمشغلين والمشرفين استنادًا إلى معايير واضحة تشمل الكفاءة الفنية، والالتزام بالإجراءات، ودقة السجلات، والاستجابة للحالات التشغيلية، مع إعداد خطط تحسين فردية عند الحاجة.",
+    "en": "Apply periodic performance appraisal of workers, operators and supervisors against clear criteria (technical competence, procedure compliance, record accuracy, response to operating events), with individual improvement plans where needed."
+   },
+   "rii": 0.7643
+  },
+  {
+   "code": "A-44",
+   "source_row": 84,
+   "axis": 4,
+   "seq_in_axis": 8,
+   "text": {
+    "ar": "تنفيذ برامج تفتيش إداري وتشغيلي دورية ومفاجئة للتحقق من الالتزام بإجراءات التشغيل القياسية، وصحة السجلات، وجاهزية المعدات، وتنفيذ الإجراءات التصحيحية، مع توثيق النتائج ومتابعة إغلاق الملاحظات.",
+    "en": "Run periodic and unannounced administrative and operational inspections to check SOP compliance, record accuracy, equipment readiness and corrective actions, documenting results and following up closure of findings."
+   },
+   "rii": 0.7929
+  },
+  {
+   "code": "A-45",
+   "source_row": 85,
+   "axis": 4,
+   "seq_in_axis": 9,
+   "text": {
+    "ar": "اعتماد معايير واضحة لاختيار وتكليف القيادات الإدارية والفنية في محطات المياه، تستند إلى الخبرة والكفاءة والتخصص والقدرة على إدارة التشغيل والصيانة والطوارئ واتخاذ القرار.",
+    "en": "Adopt clear criteria for selecting and appointing administrative and technical leaders in water plants, based on experience, competence, specialisation and ability to manage operation, maintenance, emergencies and decisions."
+   },
+   "rii": 0.8179
+  },
+  {
+   "code": "A-46",
+   "source_row": 86,
+   "axis": 4,
+   "seq_in_axis": 10,
+   "text": {
+    "ar": "تفعيل نظام السلامة والصحة المهنية في محطات المعالجة، مع تحديد المخاطر، وتوفير معدات الوقاية، وتنفيذ التفتيش والتدريب، وتوثيق الحوادث والإجراءات التصحيحية.",
+    "en": "Activate an occupational health and safety system in treatment plants: risk identification, protective equipment, inspection and training, and recording of incidents and corrective actions."
+   },
+   "rii": 0.7929
+  },
+  {
+   "code": "A-47",
+   "source_row": 87,
+   "axis": 5,
+   "seq_in_axis": 5,
+   "text": {
+    "ar": "تخصيص بند مالي مستقل ومستمر لشراء المواد الكيميائية ومواد التعقيم والمواد التشغيلية الحرجة، مع تحديد مستوى احتياط للطوارئ وإعادة التمويل والتجهيز قبل بلوغ الحد الأدنى للمخزون.",
+    "en": "Allocate a separate, ongoing budget line for chemicals, disinfectants and critical operating materials, with an emergency reserve level and refunding and resupply before minimum stock is reached."
+   },
+   "rii": 0.8893
+  },
+  {
+   "code": "A-48",
+   "source_row": 88,
+   "axis": 5,
+   "seq_in_axis": 6,
+   "text": {
+    "ar": "إفراد بنود واضحة ضمن الموازنة التشغيلية لاحتياجات التشغيل والصيانة الوقائية والطارئة، بما يمنع تحويلها إلى أغراض أخرى ويضمن استمرارية الخدمة وعدم توقف الأنشطة الحرجة.",
+    "en": "Set clear operating-budget lines for operation and preventive and emergency maintenance, protected from reallocation, to keep the service running and critical activities going."
+   },
+   "rii": 0.8536
+  },
+  {
+   "code": "A-49",
+   "source_row": 89,
+   "axis": 5,
+   "seq_in_axis": 7,
+   "text": {
+    "ar": "اعتماد سياسة شراء توازن بين الكلفة والجودة، مع إعطاء الأفضلية للمنتجات المحلية أو الحكومية المطابقة للمواصفات الفنية عند ثبوت قدرتها على تقليل الكلفة وضمان استمرارية التجهيز.",
+    "en": "Adopt a procurement policy that balances cost and quality, preferring local or state products that meet technical specifications where they lower cost and secure supply."
+   },
+   "rii": 0.8036
+  },
+  {
+   "code": "A-50",
+   "source_row": 90,
+   "axis": 5,
+   "seq_in_axis": 8,
+   "text": {
+    "ar": "تطوير آليات تحصيل رسوم خدمة المياه وتحسين كفاءتها، مع توجيه جزء واضح من الإيرادات المتحققة لدعم تشغيل المحطات وصيانتها وشراء المواد الكيميائية وقطع الغيار الحرجة.",
+    "en": "Develop and improve water-fee collection, directing a clear share of revenue to plant operation and maintenance and to buying chemicals and critical spare parts."
+   },
+   "rii": 0.8643
+  },
+  {
+   "code": "A-51",
+   "source_row": 91,
+   "axis": 6,
+   "seq_in_axis": 6,
+   "text": {
+    "ar": "إعداد خطة ملاك وظيفي لكل محطة تستند إلى حجم المحطة وتقنياتها وساعات التشغيل واحتياجات الصيانة، مع تعيين أو توزيع العاملين وفق التخصصات والكفاءات المطلوبة لكل وظيفة.",
+    "en": "Prepare a staffing plan for each plant based on its size, technology, operating hours and maintenance needs, appointing or assigning staff by the specialisations and competencies each post requires."
+   },
+   "rii": 0.7964
+  },
+  {
+   "code": "A-52",
+   "source_row": 92,
+   "axis": 6,
+   "seq_in_axis": 7,
+   "text": {
+    "ar": "إعداد أوصاف وظيفية معتمدة لجميع الوظائف التشغيلية والفنية والإشرافية، تحدد الواجبات والمسؤوليات والمؤهلات والمهارات والصلاحيات ومتطلبات الأداء لكل وظيفة.",
+    "en": "Prepare approved job descriptions for all operational, technical and supervisory posts, defining duties, responsibilities, qualifications, skills, authority and performance requirements."
+   },
+   "rii": 0.7571
+  },
+  {
+   "code": "A-53",
+   "source_row": 93,
+   "axis": 6,
+   "seq_in_axis": 8,
+   "text": {
+    "ar": "تخصيص بند مالي سنوي مستقل للتدريب والتطوير المهني، يغطي التدريب النظري والميداني والدورات التنشيطية وشهادات الكفاءة وتحديث المعارف الفنية.",
+    "en": "Allocate a separate annual budget line for training and professional development, covering classroom and field training, refresher courses, competency certificates and technical updates."
+   },
+   "rii": 0.7143
+  },
+  {
+   "code": "A-54",
+   "source_row": 94,
+   "axis": 6,
+   "seq_in_axis": 9,
+   "text": {
+    "ar": "إعادة توزيع القوى العاملة بين المحطات والوحدات وفق الاحتياج الفعلي، والاستفادة من الموظفين الفائضين بعد تأهيلهم، مع استحداث درجات وظيفية جديدة عند عدم كفاية الموارد البشرية المتاحة.",
+    "en": "Redistribute staff between plants and units according to actual need, retraining surplus staff, and create new posts where available staff are insufficient."
+   },
+   "rii": 0.7821
+  },
+  {
+   "code": "A-55",
+   "source_row": 95,
+   "axis": 6,
+   "seq_in_axis": 10,
+   "text": {
+    "ar": "تطبيق نظام لتقييم فاعلية برامج التدريب من خلال الاختبارات القبلية والبعدية، والملاحظة الميدانية، ومؤشرات الأداء، وربط نتائج التقييم بخطط التدريب اللاحقة واختيار المشاركين.",
+    "en": "Apply a system to evaluate training effectiveness through pre- and post-tests, field observation and performance indicators, linking results to later training plans and participant selection."
+   },
+   "rii": 0.7214
+  },
+  {
+   "code": "A-56",
+   "source_row": 96,
+   "axis": 7,
+   "seq_in_axis": 6,
+   "text": {
+    "ar": "تشكيل لجنة فنية متعددة الاختصاصات على مستوى الجهة المسؤولة تتولى إعداد ومراجعة واعتماد بروتوكولات المراقبة والسيطرة، وتحديث الحدود التشغيلية ونماذج التسجيل والإجراءات التصحيحية وفق نتائج الأداء والمتطلبات التنظيمية.",
+    "en": "Form a multidisciplinary technical committee at the responsible authority to prepare, review and approve monitoring and control protocols, and update operating limits, record forms and corrective actions based on performance and regulations."
+   },
+   "rii": 0.725
+  },
+  {
+   "code": "A-57",
+   "source_row": 97,
+   "axis": 7,
+   "seq_in_axis": 7,
+   "text": {
+    "ar": "إجراء مراجعة دورية للممارسات والمعايير الوطنية المعتمدة في المراقبة والسيطرة، ومقارنتها بالممارسات الإقليمية والدولية الملائمة، والاستفادة منها في تحديث البروتوكولات وطرائق القياس والتوثيق والاستجابة التشغيلية.",
+    "en": "Review national monitoring and control practices and standards periodically against suitable regional and international practice, using them to update protocols, measurement methods, documentation and operational response."
+   },
+   "rii": 0.725
+  },
+  {
+   "code": "A-58",
+   "source_row": 98,
+   "axis": 7,
+   "seq_in_axis": 8,
+   "text": {
+    "ar": "إعداد تقارير دورية موحدة عن نتائج المراقبة والانحرافات التشغيلية والإجراءات التصحيحية وحالات عدم الامتثال، ورفعها إلى إدارة المحطة والجهات الإشرافية المختصة ضمن مدد زمنية محددة، مع متابعة القرارات والإجراءات الناتجة عنها.",
+    "en": "Prepare standardised periodic reports on monitoring results, operational deviations, corrective actions and non-compliance, submitting them to plant management and supervisory bodies on set deadlines and following up resulting decisions."
+   },
+   "rii": 0.7357
+  },
+  {
+   "code": "A-59",
+   "source_row": 99,
+   "axis": 1,
+   "seq_in_axis": 8,
+   "text": {
+    "ar": "تحديث منظومات السيطرة والأتمتة بصورة مرحلية، وربط وحدات المعالجة بنظام مراقبة وتحكم مركزي، مع تنفيذ برامج دورية للصيانة والتحديث والنسخ الاحتياطي.",
+    "en": "Upgrade control and automation systems in phases, connecting treatment units to a central monitoring and control system, with regular maintenance, updates and backups."
+   },
+   "rii": 0.8179
+  },
+  {
+   "code": "A-60",
+   "source_row": 100,
+   "axis": 2,
+   "seq_in_axis": 9,
+   "text": {
+    "ar": "إعداد برنامج تشغيلي موحد يحدد تسلسل تشغيل وإيقاف الوحدات والمضخات، وآلية التناوب بينها، ومتطلبات تسليم واستلام المناوبات، مع توثيق جميع التغييرات التشغيلية.",
+    "en": "Prepare a unified operating programme defining the start/stop sequence of units and pumps, their rotation and shift handover requirements, recording all operational changes."
+   },
+   "rii": 0.8
+  },
+  {
+   "code": "A-61",
+   "source_row": 101,
+   "axis": 3,
+   "seq_in_axis": 8,
+   "text": {
+    "ar": "إعداد خطة توقفات تشغيلية مجدولة ومنسقة بين وحدات المحطة، مع الاستفادة من الوحدات الاحتياطية وتوزيع الأحمال بما يسمح بتنفيذ أعمال الصيانة من دون التأثير الجوهري في استمرارية تجهيز المياه.",
+    "en": "Prepare a scheduled, coordinated downtime plan across plant units, using standby units and load sharing so maintenance can be done without materially affecting water supply."
+   },
+   "rii": 0.8214
+  },
+  {
+   "code": "A-62",
+   "source_row": 102,
+   "axis": 4,
+   "seq_in_axis": 11,
+   "text": {
+    "ar": "اعتماد آلية تنسيق رسمية بين الأقسام والجهات الساندة، تتضمن اجتماعات دورية، ومسارات اتصال واضحة، وتحديد المسؤوليات والمدد الزمنية، ومتابعة تنفيذ القرارات والإجراءات التصحيحية.",
+    "en": "Adopt a formal coordination mechanism between departments and supporting units, with regular meetings, clear communication channels, defined responsibilities and deadlines, and follow-up of decisions and corrective actions."
+   },
+   "rii": 0.7893
+  },
+  {
+   "code": "A-63",
+   "source_row": 103,
+   "axis": 5,
+   "seq_in_axis": 9,
+   "text": {
+    "ar": "إعداد خطة شراء سنوية مبكرة مرتبطة بالاحتياجات التشغيلية الفعلية، وتوفير مخزون احتياطي للمواد والمستلزمات الحرجة، مع إعطاء أولوية لإطلاق وصرف تخصيصات التشغيل والصيانة في الأوقات المحددة.",
+    "en": "Prepare an early annual procurement plan tied to actual operating needs, keep reserve stock of critical materials and supplies, and prioritise timely release of operation and maintenance allocations."
+   },
+   "rii": 0.8429
+  },
+  {
+   "code": "A-64",
+   "source_row": 104,
+   "axis": 6,
+   "seq_in_axis": 11,
+   "text": {
+    "ar": "توثيق الخبرات والإجراءات التشغيلية المتراكمة، وتنفيذ برامج تدريب داخلية وإرشاد وظيفي، واعتماد آلية منظمة لنقل المعرفة من العاملين ذوي الخبرة إلى الملاكات الجديدة.",
+    "en": "Document accumulated operating experience and procedures, run internal training and mentoring, and adopt a structured mechanism to transfer knowledge from experienced staff to new staff."
+   },
+   "rii": 0.7679
+  },
+  {
+   "code": "A-65",
+   "source_row": 105,
+   "axis": 7,
+   "seq_in_axis": 9,
+   "text": {
+    "ar": "اعتماد مجموعة واضحة من مؤشرات الأداء التشغيلية الرئيسة (KPIs)، ومراجعتها وتحليل اتجاهاتها بصورة دورية، مع تحديد القيم المستهدفة وحدود الإنذار واتخاذ الإجراءات التصحيحية عند ظهور الانحرافات.",
+    "en": "Adopt a clear set of key operational performance indicators (KPIs), review them and analyse their trends regularly, setting target values and alarm limits and taking corrective action when deviations appear."
+   },
+   "rii": 0.75
+  }
+ ]
+}
