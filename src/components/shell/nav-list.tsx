@@ -3,13 +3,14 @@
 import { useTranslations } from "next-intl";
 import { Link, usePathname } from "@/i18n/navigation";
 import { cn } from "cn";
+import { NavCountBadge } from "./nav-badge";
 import { NAV_ITEMS, NAV_SECTIONS, activeHref } from "./nav";
 
 export const navItemClass =
   "flex min-h-[38px] w-full items-center gap-2.5 rounded-[10px] px-2.5 py-2 text-start text-[14.5px] text-foreground outline-none transition-colors hover:bg-background focus-visible:ring-3 focus-visible:ring-ring/50 [&_svg]:size-[18px] [&_svg]:shrink-0";
 
 /** Sidebar / drawer navigation: sections, items, active highlight. */
-export function NavList({ onNavigate }: { onNavigate?: () => void }) {
+export function NavList({ onNavigate, openProblems = 0 }: { onNavigate?: () => void; openProblems?: number }) {
   const t = useTranslations("shell");
   const pathname = usePathname();
   const current = activeHref(pathname);
@@ -42,6 +43,7 @@ export function NavList({ onNavigate }: { onNavigate?: () => void }) {
                       className={active ? "text-primary" : "text-muted-foreground"}
                     />
                     <span>{t(`nav.items.${item.id}`)}</span>
+                    {item.id === "problems" ? <NavCountBadge count={openProblems} /> : null}
                   </Link>
                 </li>
               );

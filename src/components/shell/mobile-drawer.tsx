@@ -21,7 +21,7 @@ import type { ShellUser } from "./types";
 import { UserAvatar } from "./user-avatar";
 
 /** Hamburger + drawer (< 1024 px). Opens from the start side; holds the full nav and the account items. */
-export function MobileDrawer({ user }: { user: ShellUser }) {
+export function MobileDrawer({ user, openProblems = 0 }: { user: ShellUser; openProblems?: number }) {
   const t = useTranslations("shell");
   const locale = useLocale() as Locale;
   const [open, setOpen] = useState(false);
@@ -50,7 +50,7 @@ export function MobileDrawer({ user }: { user: ShellUser }) {
         <SheetDescription className="sr-only">{t("brand.name")}</SheetDescription>
         <div className="flex min-h-full flex-col px-3 pb-3 pt-[18px]">
           <BrandBlock />
-          <NavList onNavigate={close} />
+          <NavList onNavigate={close} openProblems={openProblems} />
           <div className="mt-auto flex flex-col gap-2 pt-4">
             <div className="flex items-center gap-2.5 rounded-xl bg-surface-2 p-2.5">
               <UserAvatar name={user.name} className="size-9" />

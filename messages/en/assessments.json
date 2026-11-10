@@ -96,7 +96,11 @@
     "flat": "level",
     "auditTitle": "Audit trail",
     "auditText": "Who entered the data and when, and decisions taken on this assessment",
-    "auditEmpty": "No events recorded."
+    "auditEmpty": "No events recorded.",
+    "handledTitle": "Handled deviations",
+    "handledText": "These deviations are no longer active alerts because their problems were treated or documented.",
+    "handledLink": "View problem",
+    "problemLink": "Problem"
   },
   "limit": {
     "targetHigher": "At least {v}",

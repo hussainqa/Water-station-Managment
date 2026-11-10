@@ -1,1 +1,70 @@
-{"_": ""}
+{
+  "stage": {
+    "awaiting_obstacles": "Awaiting obstacles",
+    "choosing_action": "Choosing an action",
+    "treated": "Treated",
+    "documented": "Obstacle recorded, no action"
+  },
+  "list": {
+    "title": "Problems & obstacles",
+    "lead": "Problems raised by indicator deviations. Identify the obstacles behind each one and choose a suitable corrective action.",
+    "openSection": "Need review ({count})",
+    "handledSection": "Treated ({count})",
+    "allHandled": "No open problems; all problems have been treated.",
+    "empty": {
+      "title": "No problems",
+      "text": "A problem opens automatically on a critical deviation, or manually for a warning from the assessment results page."
+    },
+    "emptyFiltered": {
+      "title": "No problems for the current filter",
+      "text": "Change the plant or the monitoring period in the top bar to see other problems."
+    },
+    "listLabel": "Problems list",
+    "detected": "Detected",
+    "recorded": "Recorded value",
+    "origin": {
+      "auto": "Opened automatically",
+      "manual": "Opened manually"
+    },
+    "obstacles": "{count, plural, =0 {No obstacles identified} one {# obstacle identified} other {# obstacles identified}}",
+    "chosen": "{count, plural, =0 {No actions chosen} one {# action chosen} other {# actions chosen}}",
+    "implemented": "{count, plural, =0 {No actions implemented} one {# action implemented} other {# actions implemented}}",
+    "identify": "Identify obstacles & action",
+    "view": "View details"
+  },
+  "log": {
+    "title": "Corrective actions",
+    "lead": "A log of decisions on problems: what was chosen, what was actually implemented, and what needs further study.",
+    "listLabel": "Actions log",
+    "filtersLabel": "Filter actions by state",
+    "filter": {
+      "all": "All",
+      "chosen": "Chosen, not implemented",
+      "implemented": "Implemented",
+      "needsStudy": "Needs study"
+    },
+    "state": {
+      "chosen": "Chosen",
+      "implemented": "Implemented",
+      "needsStudy": "Needs further study"
+    },
+    "implementedOn": "Implemented on {date}",
+    "caseSpecific": "Case-specific action",
+    "rank": "Rank",
+    "obstacle": "Obstacle",
+    "noObstacle": "No linked obstacle",
+    "customObstacle": "Unlisted obstacle",
+    "problem": "Problem",
+    "openProblem": "Open problem",
+    "empty": {
+      "title": "No actions chosen yet",
+      "text": "Open a problem, select its obstacles, then choose a suitable action from the suggestions.",
+      "cta": "View problems"
+    },
+    "emptyFiltered": {
+      "title": "No actions for the current filter",
+      "text": "Change the plant or the monitoring period in the top bar to see other actions."
+    },
+    "emptyTab": "There are no actions in this state."
+  }
+}

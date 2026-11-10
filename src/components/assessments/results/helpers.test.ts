@@ -175,3 +175,28 @@ describe("calculationView", () => {
     expect(calculationView({ method: "ratio", unit: "%", value: null, inputs: {} }).key).toBe("none");
   });
 });
+
+import { splitCallouts } from "./helpers";
+
+describe("splitCallouts", () => {
+  const rows = [
+    { ref: "a", status: "warning" as const },
+    { ref: "b", status: "critical" as const },
+    { ref: "c", status: "critical" as const },
+    { ref: "d", status: "ok" as const },
+  ];
+  it("moves treated and documented problems out of the active callouts", () => {
+    const r = splitCallouts(rows, {
+      b: { stage: "treated" },
+      c: { stage: "choosing_action" },
+      a: { stage: "documented" },
+    });
+    expect(r.active.map((x) => x.ref)).toEqual(["c"]);
+    expect(r.handled.map((x) => x.ref)).toEqual(["b", "a"]);
+  });
+  it("keeps everything active without stages", () => {
+    const r = splitCallouts(rows, {});
+    expect(r.active.map((x) => x.ref)).toEqual(["b", "c", "a"]);
+    expect(r.handled).toEqual([]);
+  });
+});

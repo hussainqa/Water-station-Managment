@@ -1,4 +1,5 @@
 import type { Limits, PeriodMonths, Status } from "@/lib/evaluation";
+import { isOpenStage, type ProblemStage } from "@/lib/problems/stage";
 import type { AuditEntry, HistoryPoint, ResultRow } from "@/lib/assessments/types";
 
 /**
@@ -93,6 +94,22 @@ const CALLOUT_ORDER: Status[] = ["critical", "warning"];
 /** One callout per deviation: critical first, then warning; table order is kept inside each. */
 export function calloutRows<T extends { status: Status }>(rows: readonly T[]): T[] {
   return CALLOUT_ORDER.flatMap((s) => rows.filter((r) => r.status === s));
+}
+
+/**
+ * Splits the deviations into active callouts and handled ones: a deviation whose problem is
+ * treated or documented is no longer an alert. Each part keeps the callout order.
+ */
+export function splitCallouts<T extends { status: Status; ref: string }>(
+  rows: readonly T[],
+  stages: Record<string, { stage: ProblemStage }>,
+): { active: T[]; handled: T[] } {
+  const all = calloutRows(rows);
+  const isHandled = (r: T) => {
+    const s = stages[r.ref]?.stage;
+    return s !== undefined && !isOpenStage(s);
+  };
+  return { active: all.filter((r) => !isHandled(r)), handled: all.filter(isHandled) };
 }
 
 // --- change vs previous period ----------------------------------------------------------------

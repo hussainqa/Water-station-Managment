@@ -3,10 +3,11 @@
 import { useTranslations } from "next-intl";
 import { Link, usePathname } from "@/i18n/navigation";
 import { cn } from "cn";
+import { TabDot } from "./nav-badge";
 import { NAV_ITEMS, activeHref } from "./nav";
 
 /** Fixed bottom bar with five tabs (< 1024 px). */
-export function TabBar() {
+export function TabBar({ openProblems = 0 }: { openProblems?: number }) {
   const t = useTranslations("shell");
   const current = activeHref(usePathname());
   const tabs = NAV_ITEMS.filter((i) => i.tab);
@@ -26,12 +27,13 @@ export function TabBar() {
                 href={item.href}
                 aria-current={active ? "page" : undefined}
                 className={cn(
-                  "mx-auto flex min-h-12 w-full flex-col items-center justify-center gap-0.5 rounded-lg text-[11px] font-medium text-fg-3 outline-none focus-visible:ring-3 focus-visible:ring-ring/50",
+                  "relative mx-auto flex min-h-12 w-full flex-col items-center justify-center gap-0.5 rounded-lg text-[11px] font-medium text-fg-3 outline-none focus-visible:ring-3 focus-visible:ring-ring/50",
                   active && "text-primary",
                 )}
               >
                 <Icon aria-hidden="true" className="size-[22px]" />
                 <span>{t(`tabs.${item.tab!}`)}</span>
+                {item.id === "problems" ? <TabDot count={openProblems} /> : null}
               </Link>
             </li>
           );

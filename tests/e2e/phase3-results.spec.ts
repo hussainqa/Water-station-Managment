@@ -188,7 +188,8 @@ for (const lang of ["ar", "en"] as const) {
     const targetRef = (await target.getAttribute("data-ref"))!;
     await target.getByTestId("callout-open-problem").click();
     await expect(page).toHaveURL(new RegExp(`/${lang}/problems/[0-9a-f-]{36}$`), { timeout: 30_000 });
-    await expect(page.getByTestId("problem-placeholder")).toBeVisible({ timeout: 60_000 });
+    // the problem page itself (Phase 4) replaced the placeholder: any page heading proves it rendered
+    await expect(page.getByRole("heading", { level: 1 })).toBeVisible({ timeout: 60_000 });
     await page.goto(`/${lang}/assessments/${dijlaAug}`);
     const again = page.locator(`[data-testid="callout"][data-ref="${targetRef}"]`);
     await expect(again).toBeVisible({ timeout: 60_000 });

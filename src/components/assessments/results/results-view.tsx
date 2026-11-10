@@ -4,16 +4,17 @@ import { useMemo, useState } from "react";
 import { ArrowDown, ArrowUp, ChevronLeft, Minus } from "lucide-react";
 import { useLocale, useTranslations } from "next-intl";
 import { StatusBadge } from "@/components/indicators/status-badge";
+import { StageChip } from "@/components/problems/list/stage-chip";
 import { ThresholdScale } from "@/components/indicators/threshold-scale";
 import { PageHeader } from "@/components/shell/page-header";
 import { Button, buttonVariants } from "@/components/ui/button";
 import { Link } from "@/i18n/navigation";
 import type { AssessmentResults, ResultRow } from "@/lib/assessments/types";
 import type { Status } from "@/lib/evaluation";
+import type { ProblemStageMap } from "@/lib/problems/types";
 import { cn } from "cn";
 import { CompletenessRing } from "./completeness-ring";
 import {
-  calloutRows,
   changeView,
   crossedLimit,
   describeAudit,
@@ -21,6 +22,7 @@ import {
   formatDateTime,
   formatNumber,
   periodLabel,
+  splitCallouts,
 } from "./helpers";
 import { KpiDrawer } from "./kpi-drawer";
 import { useRowText } from "./row-text";
@@ -29,7 +31,7 @@ import { useOpenProblem } from "./use-open-problem";
 
 const card = "rounded-2xl border border-border bg-card p-4 shadow-(--shadow-card) sm:p-5";
 
-export function ResultsView({ results }: { results: AssessmentResults }) {
+export function ResultsView({ results, stages = {} }: { results: AssessmentResults; stages?: ProblemStageMap }) {
   const t = useTranslations("assessments");
   const rt = useRowText();
   const locale = useLocale();
@@ -40,7 +42,7 @@ export function ResultsView({ results }: { results: AssessmentResults }) {
   const rows = useMemo(() => results.groups.flatMap((g) => g.rows), [results.groups]);
   const byRef = useMemo(() => new Map(rows.map((r) => [r.ref, r])), [rows]);
   const selectedRow = selected ? (byRef.get(selected.ref) ?? null) : null;
-  const callouts = calloutRows(rows);
+  const { active: callouts, handled } = splitCallouts(rows, stages);
   const period = periodLabel(header.periodStart, header.months, locale);
   const nameOf = (ref: string) => {
     const r = byRef.get(ref);
@@ -69,6 +71,24 @@ export function ResultsView({ results }: { results: AssessmentResults }) {
           </section>
         ) : null}
 
+        {handled.length ? (
+          <section
+            aria-labelledby="handled-h"
+            data-testid="handled-callouts"
+            className="rounded-xl border border-border bg-muted/50 px-4 py-3"
+          >
+            <h2 id="handled-h" className="text-[13.5px] font-semibold text-fg-2">
+              {t("results.handledTitle")}
+            </h2>
+            <p className="m-0 mt-0.5 text-[12.5px] text-fg-3">{t("results.handledText")}</p>
+            <ul className="m-0 mt-2 flex list-none flex-col gap-1.5 p-0">
+              {handled.map((r) => (
+                <HandledLine key={r.ref} row={r} stage={stages[r.ref]} />
+              ))}
+            </ul>
+          </section>
+        ) : null}
+
         <section className={card} aria-labelledby="results-h">
           <h2 id="results-h" className="text-[17px] font-bold">
             {t("results.table")}
@@ -76,6 +96,7 @@ export function ResultsView({ results }: { results: AssessmentResults }) {
           <p className="m-0 mt-0.5 text-[13px] text-fg-3">{t("results.tableHint")}</p>
           <ResultsTable
             results={results}
+            stages={stages}
             onSelect={(ref) => setSelected({ ref, open: true })}
           />
           <p className="m-0 mt-3 text-[12.5px] text-fg-3">{t("results.note")}</p>
@@ -248,12 +269,46 @@ function Callout({ row, onOpen, pending }: { row: ResultRow; onOpen: () => void;
   );
 }
 
+function HandledLine({ row, stage }: { row: ResultRow; stage: ProblemStageMap[string] }) {
+  const t = useTranslations("assessments");
+  const rt = useRowText();
+  return (
+    <li
+      data-testid="handled-callout"
+      data-ref={row.ref}
+      data-stage={stage.stage}
+      className="flex flex-wrap items-center gap-x-3 gap-y-1.5 text-[13.5px]"
+    >
+      <span className="min-w-0 flex-1 break-words">
+        {row.code ? <bdi dir="ltr" className="num me-1.5 inline-block font-mono text-[12px] text-fg-3">{row.code}</bdi> : null}
+        {rt.name(row)}
+      </span>
+      <StageChip stage={stage.stage} />
+      <Link
+        href={`/problems/${stage.problemId}`}
+        data-testid="handled-problem-link"
+        className="text-[13px] font-medium text-primary underline-offset-4 hover:underline"
+      >
+        {t("results.handledLink")}
+      </Link>
+    </li>
+  );
+}
+
 // --- table --------------------------------------------------------------------------------------
 
 const cell =
   "px-3 py-3 align-middle text-start max-lg:flex max-lg:items-center max-lg:justify-between max-lg:gap-4 max-lg:px-0 max-lg:py-1.5 max-lg:before:shrink-0 max-lg:before:text-[12px] max-lg:before:text-fg-3 max-lg:before:content-[attr(data-label)]";
 
-function ResultsTable({ results, onSelect }: { results: AssessmentResults; onSelect: (ref: string) => void }) {
+function ResultsTable({
+  results,
+  stages,
+  onSelect,
+}: {
+  results: AssessmentResults;
+  stages: ProblemStageMap;
+  onSelect: (ref: string) => void;
+}) {
   const t = useTranslations("assessments");
   const rt = useRowText();
   const hasPrevious = results.previous !== null;
@@ -306,6 +361,19 @@ function ResultsTable({ results, onSelect }: { results: AssessmentResults; onSel
                       <span className="block break-words font-medium">{label}</span>
                       {r.code ? <span className="num mt-0.5 block font-mono text-[12px] text-fg-3">{r.code}</span> : null}
                     </button>
+                    {stages[r.ref] ? (
+                      <span className="mt-1.5 flex flex-wrap items-center gap-1.5" data-testid="row-problem">
+                        <StageChip stage={stages[r.ref].stage} className="px-2 py-0.5 text-[12px]" />
+                        <Link
+                          href={`/problems/${stages[r.ref].problemId}`}
+                          data-testid="row-problem-link"
+                          onClick={(e) => e.stopPropagation()}
+                          className="text-[12.5px] font-medium text-primary underline-offset-4 hover:underline"
+                        >
+                          {t("results.problemLink")}
+                        </Link>
+                      </span>
+                    ) : null}
                   </td>
                   <td data-label={t("results.col.value")} className={cell}>
                     <span data-testid="row-value" className="num font-medium">

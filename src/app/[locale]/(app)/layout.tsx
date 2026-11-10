@@ -1,8 +1,10 @@
 import { setRequestLocale } from "next-intl/server";
 import { AppShell } from "@/components/shell/app-shell";
+import { withUser } from "@/db/with-user";
 import { requireUser } from "@/lib/auth/session";
 import { getFilters } from "@/lib/context/filters";
 import { getPlantOptions } from "@/lib/context/plants";
+import { countOpenProblems } from "@/lib/problems/service";
 
 export default async function AppLayout({
   children,
@@ -11,7 +13,11 @@ export default async function AppLayout({
   const { locale } = await params;
   setRequestLocale(locale);
   const user = await requireUser();
-  const [plants, filters] = await Promise.all([getPlantOptions(user.id), getFilters()]);
+  const [plants, filters, openProblems] = await Promise.all([
+    getPlantOptions(user.id),
+    getFilters(),
+    withUser(user.id, (tx) => countOpenProblems(tx, user.id)),
+  ]);
 
   return (
     <AppShell
@@ -24,6 +30,7 @@ export default async function AppLayout({
       plants={plants}
       plantId={filters.plantId}
       range={filters.range}
+      openProblems={openProblems}
     >
       {children}
     </AppShell>
