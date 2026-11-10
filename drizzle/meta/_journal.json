@@ -29,6 +29,13 @@
       "when": 1794335535716,
       "tag": "0003_plant_delete_guard",
       "breakpoints": true
+    },
+    {
+      "idx": 4,
+      "version": "7",
+      "when": 1794339332882,
+      "tag": "0004_assessment_rules",
+      "breakpoints": true
     }
   ]
 }
