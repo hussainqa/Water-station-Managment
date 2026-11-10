@@ -43,6 +43,13 @@
       "when": 1794344462555,
       "tag": "0005_action_implemented_requires_chosen",
       "breakpoints": true
+    },
+    {
+      "idx": 6,
+      "version": "7",
+      "when": 1794345523537,
+      "tag": "0006_hide_importance_order",
+      "breakpoints": true
     }
   ]
 }

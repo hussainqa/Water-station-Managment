@@ -321,6 +321,23 @@ describe("assessments service", () => {
       expect(await run(b, (tx) => svc.getWizardContext(tx, b, plant))).toEqual({ ok: false, error: "plantNotFound" });
     });
 
+    it("a new draft has every adopted indicator selected, with empty inputs, and only those", async () => {
+      const full = await newPlant(a);
+      const fullId = await mkDraft(a, full);
+      const d1 = data(await run(a, (tx) => svc.getDraft(tx, a, fullId)));
+      expect(d1.selection).toHaveLength(15);
+      expect(d1.readings.every((r) => Object.entries(r.inputs).every(([k, v]) => k === "unit" || v === null || v === ""))).toBe(true);
+
+      const partial = await newPlant(a);
+      await run(a, (tx) => setAdoption(tx, a, partial, { kind: "sys", code: "CS-02" }, false));
+      const partialId = await mkDraft(a, partial);
+      const d2 = data(await run(a, (tx) => svc.getDraft(tx, a, partialId)));
+      expect(d2.selection).toHaveLength(14);
+      expect(d2.selection).not.toContain(sys("CS-02"));
+      const adopted = data(await run(a, (tx) => svc.getWizardContext(tx, a, partial))).groups.flatMap((g) => g.indicators.map((i) => i.ref));
+      expect([...d2.selection].sort()).toEqual([...adopted].sort());
+    });
+
     it("only adopted indicators can be selected", async () => {
       const plant = await newPlant(a);
       await run(a, (tx) => setAdoption(tx, a, plant, { kind: "sys", code: "SC-02" }, false));
@@ -491,6 +508,7 @@ describe("assessments service", () => {
     it("refuses to approve without indicators", async () => {
       const plant = await newPlant(a);
       const id = await mkDraft(a, plant);
+      data(await select(a, id, []));
       expect(await approve(a, id)).toEqual({ ok: false, error: "noIndicatorsSelected" });
     });
 

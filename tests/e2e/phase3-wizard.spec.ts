@@ -115,9 +115,9 @@ async function toIndicators(page: Page, lang: Lang) {
   await expect(heading(page, M[lang].w.indicators.title)).toBeVisible();
 }
 
-async function selectGroups(page: Page) {
-  const boxes = page.getByTestId("group-checkbox");
-  for (let i = 0; i < (await boxes.count()); i++) await boxes.nth(i).check();
+async function clearSelection(page: Page, lang: Lang) {
+  await page.getByRole("button", { name: M[lang].w.indicators.clear }).click();
+  await expect(page.locator("input[data-ref]:checked")).toHaveCount(0);
 }
 
 async function toReadings(page: Page, lang: Lang) {
@@ -151,8 +151,7 @@ for (const lang of ["ar", "en"] as const) {
     await shot(page, 1, lang, project);
     await toIndicators(page, lang);
 
-    // step 2: select all indicators group by group
-    await selectGroups(page);
+    // step 2: a new draft opens with every adopted indicator ticked
     await expect(page.locator("input[data-ref]:checked")).toHaveCount(15);
     await noHorizontalScroll(page);
     await shot(page, 2, lang, project);
@@ -266,6 +265,7 @@ test("period rules: no future months, duplicates, overlap, longer periods over m
   await expect(resume).toHaveAttribute("href", new RegExp(`draft=${draftId}`));
   await resume.click();
   await expect(page).toHaveURL(new RegExp(`draft=${draftId}`));
+  // pre-selected but no readings typed yet: the draft resumes at the indicators step
   await expect(heading(page, t.indicators.title)).toBeVisible();
 });
 
@@ -280,7 +280,11 @@ test("indicator groups: select-all with a real indeterminate state", async ({ pa
   const box = group.getByTestId("group-checkbox");
   const isIndeterminate = () => box.evaluate((el) => (el as HTMLInputElement).indeterminate);
 
+  // a new draft starts with everything selected
   expect(await isIndeterminate()).toBe(false);
+  await expect(box).toBeChecked();
+  await expect(page.locator("input[data-ref]:checked")).toHaveCount(15);
+  await clearSelection(page, lang);
   await expect(box).not.toBeChecked();
   await group.locator('[data-ref="sys:SC-01"]').check();
   await expect.poll(isIndeterminate).toBe(true);
@@ -297,8 +301,7 @@ test("indicator groups: select-all with a real indeterminate state", async ({ pa
 
   await page.getByRole("button", { name: t.indicators.selectAll }).click();
   await expect(page.locator("input[data-ref]:checked")).toHaveCount(15);
-  await page.getByRole("button", { name: t.indicators.clear }).click();
-  await expect(page.locator("input[data-ref]:checked")).toHaveCount(0);
+  await clearSelection(page, lang);
   await expect(page.getByRole("button", { name: t.actions.nextReadings })).toBeDisabled();
 });
 
@@ -310,6 +313,7 @@ test("readings: live validation, Arabic digits, errors block approval", async ({
   await openWizard(page, lang);
   await fillDetails(page, lang, { plant: KARKH, months: 1, start: "2026-09" });
   await toIndicators(page, lang);
+  await clearSelection(page, lang);
   for (const code of ["SC-01", "SC-02", "SC-03", "SC-04"]) await page.locator(`[data-ref="sys:${code}"]`).check();
   await toReadings(page, lang);
 
@@ -362,6 +366,7 @@ test("drafts: save, resume with inputs restored, approved id redirects, delete",
   await openWizard(page, lang);
   await fillDetails(page, lang, { plant: KARKH, months: 1, start: "2026-09" });
   await toIndicators(page, lang);
+  await clearSelection(page, lang);
   for (const code of ["SC-01", "SC-04"]) await page.locator(`[data-ref="sys:${code}"]`).check();
   await toReadings(page, lang);
   await input(page, "sys:SC-01", "numerator").fill("676");

@@ -13,7 +13,6 @@ const run = (q: string) => () => db.execute(sql.raw(q));
 describe("reference data is read-only for the app", () => {
   it.each([
     "indicators",
-    "obstacles",
     "obstacle_axes",
     "action_axes",
     "indicator_groups",
@@ -21,6 +20,15 @@ describe("reference data is read-only for the app", () => {
   ])("can SELECT from %s", async (t) => {
     const res = await db.execute(sql.raw(`select * from ${t} limit 1`));
     expect(Array.isArray(res.rows)).toBe(true);
+  });
+
+  it("reads obstacles by explicit columns, but not their research importance order", async () => {
+    const ok = await db.execute(
+      sql.raw("select code, axis_idx, seq_in_axis, source_row, text_ar, text_en from obstacles limit 1"),
+    );
+    expect(Array.isArray(ok.rows)).toBe(true);
+    expect(await sqlState(run("select importance_order from obstacles"))).toBe(DENIED);
+    expect(await sqlState(run("select * from obstacles"))).toBe(DENIED);
   });
 
   it.each([

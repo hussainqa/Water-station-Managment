@@ -1,8 +1,10 @@
 import { useTranslations } from "next-intl";
+import { scaleSeries } from "./sparkline-scale";
 
 /**
  * Trend of the share of evaluated indicators within limits over the last approved
- * assessments. Draws only a dash until there are at least two. Never invents data.
+ * assessments, scaled to its own min-max range (not an absolute 0-100 axis), so the
+ * accessible text gives the first and last values. Draws only a dash until there are at least two. Never invents data.
  */
 export function Sparkline({ values }: { values: readonly number[] }) {
   const t = useTranslations("plants.card");
@@ -16,13 +18,15 @@ export function Sparkline({ values }: { values: readonly number[] }) {
   const w = 84;
   const h = 24;
   const step = w / (values.length - 1);
-  const pts = values.map((v, i) => `${(i * step).toFixed(1)},${(h - (Math.max(0, Math.min(100, v)) / 100) * h).toFixed(1)}`);
+  const pts = scaleSeries(values, h).map((y, i) => `${(i * step).toFixed(1)},${y.toFixed(1)}`);
+  const pct = (v: number) => `${Math.round(v)}%`;
   return (
     <svg
       width={w}
       height={h}
       viewBox={`0 0 ${w} ${h}`}
-      aria-hidden="true"
+      role="img"
+      aria-label={t("trendLabel", { first: pct(values[0]), last: pct(values[values.length - 1]), count: values.length })}
       className="text-teal rtl:-scale-x-100"
     >
       <polyline points={pts.join(" ")} fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />

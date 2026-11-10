@@ -1,6 +1,7 @@
 import { describe, expect, it } from "vitest";
 import type { WizardGroup, WizardIndicator } from "@/lib/assessments/types";
 import {
+  allIndicators,
   canApprove,
   clampStep,
   countStates,
@@ -111,6 +112,20 @@ describe("selection", () => {
   });
 });
 
+describe("default selection of a new draft", () => {
+  it("lists every indicator of the plant, so a new draft can open fully ticked", () => {
+    const groups: WizardGroup[] = [
+      { key: "sys:a", nameAr: "a", nameEn: "a", isSystem: true, indicators: [ind("sys:A", "direct", ["value"])] },
+      { key: "sys:b", nameAr: "b", nameEn: "b", isSystem: true, indicators: [ind("sys:B", "direct", ["value"]), ind("sys:C", "direct", ["value"])] },
+    ];
+    const selected = new Set(allIndicators(groups).map((i) => i.ref));
+    expect([...selected]).toEqual(["sys:A", "sys:B", "sys:C"]);
+    expect(groupCheckState(groups[1], selected)).toBe("all");
+    // "Clear selection" is an empty set: every group reads as none, "Select all" restores
+    expect(groupCheckState(groups[1], new Set())).toBe("none");
+  });
+});
+
 describe("step 4 rules", () => {
   const rows = (...specs: [WizardIndicator, Record<string, string>][]) =>
     evaluateAll(
@@ -146,7 +161,14 @@ describe("clampStep", () => {
   it("opens a new assessment at 1 and a draft at the right step", () => {
     expect(clampStep(3, null)).toBe(1);
     expect(clampStep(null, { selection: [] })).toBe(2);
-    expect(clampStep(null, { selection: ["sys:A"] })).toBe(3);
+    // Pre-selected but nothing typed yet: back to the indicators step.
+    expect(clampStep(null, { selection: ["sys:A"] })).toBe(2);
+    const reading = (inputs: Record<string, string | number | null>, note = "") =>
+      ({ ref: "sys:A", inputs, note }) as never;
+    expect(clampStep(null, { selection: ["sys:A"], readings: [reading({ value: "" })] })).toBe(2);
+    expect(clampStep(null, { selection: ["sys:A"], readings: [reading({ unit: "h" })] })).toBe(2);
+    expect(clampStep(null, { selection: ["sys:A"], readings: [reading({ value: "5" })] })).toBe(3);
+    expect(clampStep(null, { selection: ["sys:A"], readings: [reading({}, "note")] })).toBe(3);
     expect(clampStep(4, { selection: [] })).toBe(2);
     expect(clampStep(4, { selection: ["sys:A"] })).toBe(4);
     expect(clampStep(1, { selection: ["sys:A"] })).toBe(1);

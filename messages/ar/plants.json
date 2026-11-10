@@ -31,6 +31,7 @@
     "noPerformance": "لا يوجد تقييم معتمد بعد",
     "newAssessment": "تقييم جديد",
     "latest": "آخرها {period}",
+    "trendLabel": "نسبة المؤشرات ضمن الحدود عبر {count} تقييمات: الأول {first}، الأحدث {last} (الخط مقيَّس على مداه)",
     "withinLimits": "ضمن الحدود"
   },
   "state": {

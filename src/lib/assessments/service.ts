@@ -33,6 +33,7 @@ import {
 } from "@/lib/evaluation";
 import { formatRef, parseRef, refColumns, type IndicatorRef } from "@/lib/indicators/ref";
 import { ensureDefaultLimits } from "@/lib/indicators/service";
+import { openProblemSql } from "@/lib/problems/stage-sql";
 import type { InputLabels } from "@/db/schema/reference";
 import { asRawInputs, inputDefs, integerInputKeys, sanitizeInputs } from "./inputs";
 import {
@@ -467,7 +468,7 @@ async function loadDraftRow(tx: UserTx, userId: string, id: string, lock = true)
   return { ok: true, ...found };
 }
 
-/** Creates a draft (no indicators selected yet). One assessment per plant + start + length; same-length overlap is refused. */
+/** Creates a draft with every indicator adopted at the plant selected. One assessment per plant + start + length; same-length overlap is refused. */
 export async function createDraft(
   tx: UserTx,
   userId: string,
@@ -512,6 +513,9 @@ export async function createDraft(
         months: d.months,
       }, ctx.now),
     ]);
+    // New drafts start with every indicator adopted at the plant selected (empty inputs).
+    const sel = await setDraftSelection(tx, userId, id, [...(await adoptedRefs(tx, userId, d.plantId))]);
+    if (!sel.ok) throw new Error(`createDraft: default selection failed (${sel.error})`);
     return ok({ id });
   } catch (e) {
     const code = pgCode(e);
@@ -864,7 +868,10 @@ async function buildListItems(
     .from(assessmentReadings)
     .where(and(eq(assessmentReadings.ownerId, userId), inArray(assessmentReadings.assessmentId, ids)));
   const problemRows = await tx
-    .select({ assessmentId: problems.assessmentId, n: sql<number>`count(*)::int` })
+    .select({
+      assessmentId: problems.assessmentId,
+      n: sql<number>`(count(*) filter (where ${openProblemSql}))::int`,
+    })
     .from(problems)
     .where(and(eq(problems.ownerId, userId), inArray(problems.assessmentId, ids)))
     .groupBy(problems.assessmentId);
@@ -1300,7 +1307,7 @@ export async function openManualProblem(
  * Per plant: the latest approved assessment of any length (latest period end, then latest
  * approval) as the summary that feeds `plantState()`, assessment counts, and the share of
  * evaluated indicators within limits for the last <= 6 approved assessments (oldest first).
- * `summary.openProblems` counts every problem of the plant (a problem has no closed state yet).
+ * `summary.openProblems` counts the OPEN problems of the plant (awaiting obstacles or choosing an action).
  */
 export async function getPlantPerformance(tx: UserTx, userId: string): Promise<PlantPerformance[]> {
   const plantRows = await tx
@@ -1333,7 +1340,7 @@ export async function getPlantPerformance(tx: UserTx, userId: string): Promise<P
     .where(and(eq(assessmentReadings.ownerId, userId), eq(assessments.status, "approved")))
     .groupBy(assessmentReadings.assessmentId, assessmentReadings.status);
   const problemRows = await tx
-    .select({ plantId: assessments.plantId, n: sql<number>`count(*)::int` })
+    .select({ plantId: assessments.plantId, n: sql<number>`(count(*) filter (where ${openProblemSql}))::int` })
     .from(problems)
     .innerJoin(
       assessments,

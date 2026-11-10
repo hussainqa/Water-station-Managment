@@ -31,6 +31,7 @@
     "noPerformance": "No approved assessment yet",
     "newAssessment": "New assessment",
     "latest": "latest {period}",
+    "trendLabel": "Share within limits across {count} assessments: first {first}, latest {last} (line scaled to its own range)",
     "withinLimits": "within limits"
   },
   "state": {

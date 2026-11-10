@@ -194,12 +194,30 @@ export function canApprove(c: Counts, acknowledged: boolean): boolean {
 }
 
 /** Where to reopen a draft when the URL gives no step. */
-export function resumeStep(draft: Pick<DraftDto, "selection">): Step {
-  return draft.selection.length === 0 ? 2 : 3;
+type ResumeInfo = Pick<DraftDto, "selection"> & Partial<Pick<DraftDto, "readings">>;
+
+/** True once the engineer has typed at least one reading or note. */
+function hasEnteredReadings(draft: ResumeInfo): boolean {
+  return (draft.readings ?? []).some(
+    (r) =>
+      (r.note ?? "").trim() !== "" ||
+      Object.entries(r.inputs ?? {}).some(
+        ([key, v]) => key !== "unit" && v !== null && String(v).trim() !== "",
+      ),
+  );
+}
+
+/**
+ * Where a resumed draft opens. New drafts are pre-selected, so a selection alone does
+ * not mean step 2 was reviewed: open the readings step only once readings exist.
+ */
+export function resumeStep(draft: ResumeInfo): Step {
+  if (draft.selection.length === 0) return 2;
+  return hasEnteredReadings(draft) ? 3 : 2;
 }
 
 /** Furthest step a draft may be opened at from the URL. */
-export function clampStep(requested: number | null, draft: Pick<DraftDto, "selection"> | null): Step {
+export function clampStep(requested: number | null, draft: ResumeInfo | null): Step {
   if (!draft) return 1;
   const max: Step = draft.selection.length === 0 ? 2 : 4;
   if (requested === null || !Number.isInteger(requested) || requested < 1) return resumeStep(draft);

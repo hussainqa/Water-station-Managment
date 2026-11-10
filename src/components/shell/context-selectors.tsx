@@ -13,10 +13,11 @@ type Props = {
   range: Range;
 };
 
+// On phones (<= 760 px) the plant pill takes the free space and truncates; the period pill keeps its text.
 const pill =
-  "relative flex min-h-10 min-w-0 items-center gap-2 rounded-xl border border-border bg-card ps-3 pe-2 has-[select:focus-visible]:ring-3 has-[select:focus-visible]:ring-ring/50 has-[select:disabled]:opacity-70";
+  "relative flex min-h-10 min-w-0 items-center gap-2 rounded-xl border border-border bg-card ps-3 pe-2 has-[select:focus-visible]:ring-3 has-[select:focus-visible]:ring-ring/50 has-[select:disabled]:opacity-70 max-[760px]:gap-1.5 max-[760px]:ps-2.5";
 const select =
-  "min-h-10 min-w-0 max-w-[220px] cursor-pointer appearance-none bg-transparent pe-5 ps-0 text-sm font-medium text-foreground outline-none disabled:cursor-default max-[760px]:max-w-[130px]";
+  "min-h-10 min-w-0 max-w-[220px] cursor-pointer appearance-none overflow-hidden text-ellipsis whitespace-nowrap bg-transparent pe-5 ps-0 max-[760px]:pe-4 text-sm font-medium text-foreground outline-none disabled:cursor-default max-[760px]:w-full max-[760px]:max-w-none max-[760px]:text-[13px]";
 
 /** Plant and monitoring-period selectors. The choice is saved in cookies and the page refreshes. */
 export function ContextSelectors({ plants, plantId, range }: Props) {
@@ -36,13 +37,16 @@ export function ContextSelectors({ plants, plantId, range }: Props) {
     });
   }
 
+  const plantTitle = plant === "all" ? t("filters.allPlants") : (plants.find((p) => p.id === plant)?.name ?? undefined);
+
   return (
     <>
-      <label className={pill}>
-        <Factory aria-hidden="true" className="size-[18px] shrink-0 text-muted-foreground" />
+      <label className={`${pill} max-[760px]:flex-1`}>
+        <Factory aria-hidden="true" className="size-[18px] shrink-0 text-muted-foreground max-[760px]:hidden" />
         <span className="text-[12.5px] text-fg-3 max-[760px]:hidden">{t("filters.plant")}</span>
         <select
           aria-label={t("filters.plant")}
+          title={plantTitle}
           className={select}
           value={plant}
           disabled={plants.length === 0}
@@ -58,11 +62,11 @@ export function ContextSelectors({ plants, plantId, range }: Props) {
             </option>
           ))}
         </select>
-        <ChevronDown aria-hidden="true" className="pointer-events-none absolute end-2.5 size-4 text-foreground" />
+        <ChevronDown aria-hidden="true" className="pointer-events-none absolute end-2.5 size-4 text-foreground max-[760px]:end-2 max-[760px]:size-3.5" />
       </label>
 
-      <label className={pill}>
-        <Calendar aria-hidden="true" className="size-[18px] shrink-0 text-muted-foreground" />
+      <label className={`${pill} max-[760px]:shrink-0`}>
+        <Calendar aria-hidden="true" className="size-[18px] shrink-0 text-muted-foreground max-[760px]:hidden" />
         <span className="text-[12.5px] text-fg-3 max-[760px]:hidden">{t("filters.period")}</span>
         <select
           aria-label={t("filters.period")}
@@ -80,7 +84,7 @@ export function ContextSelectors({ plants, plantId, range }: Props) {
             </option>
           ))}
         </select>
-        <ChevronDown aria-hidden="true" className="pointer-events-none absolute end-2.5 size-4 text-foreground" />
+        <ChevronDown aria-hidden="true" className="pointer-events-none absolute end-2.5 size-4 text-foreground max-[760px]:end-2 max-[760px]:size-3.5" />
       </label>
     </>
   );

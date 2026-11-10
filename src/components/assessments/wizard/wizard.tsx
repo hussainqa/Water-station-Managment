@@ -226,8 +226,13 @@ export function Wizard({ plants, defaultPlantId, userName, nowIso, initial, init
       if (!res.ok) return fail(res), null;
       ctx = res.data;
       setContext(ctx);
-      setSelected(new Set());
-      setReadings({});
+      if (draft) {
+        syncFromDraft(draft, ctx);
+      } else {
+        // a draft just created: the server selected every adopted indicator (empty inputs)
+        setSelected(new Set(allIndicators(ctx.groups).map((i) => i.ref)));
+        setReadings({});
+      }
     } else if (draft) {
       syncFromDraft(draft, ctx);
     }
