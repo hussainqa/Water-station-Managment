@@ -3,6 +3,8 @@ import { IBM_Plex_Mono, IBM_Plex_Sans_Arabic } from "next/font/google";
 import { notFound } from "next/navigation";
 import { hasLocale, NextIntlClientProvider } from "next-intl";
 import { getTranslations, setRequestLocale } from "next-intl/server";
+import { ThemeProvider } from "@/components/theme-provider";
+import { Toaster } from "@/components/ui/sonner";
 import { localeDirection, routing } from "@/i18n/routing";
 import "../globals.css";
 
@@ -27,7 +29,7 @@ export async function generateMetadata({
 }: LayoutProps<"/[locale]">): Promise<Metadata> {
   const { locale } = await params;
   if (!hasLocale(routing.locales, locale)) return {};
-  const t = await getTranslations({ locale, namespace: "app" });
+  const t = await getTranslations({ locale, namespace: "common.app" });
   return { title: t("name") };
 }
 
@@ -44,9 +46,13 @@ export default async function LocaleLayout({
       lang={locale}
       dir={localeDirection[locale]}
       className={`${plexArabic.variable} ${plexMono.variable} h-full antialiased`}
+      suppressHydrationWarning
     >
       <body className="flex min-h-full flex-col">
-        <NextIntlClientProvider>{children}</NextIntlClientProvider>
+        <ThemeProvider>
+          <NextIntlClientProvider>{children}</NextIntlClientProvider>
+          <Toaster position="top-center" dir={localeDirection[locale]} />
+        </ThemeProvider>
       </body>
     </html>
   );

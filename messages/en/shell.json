@@ -1,0 +1,103 @@
+{
+  "brand": {
+    "name": "Service Quality Monitoring",
+    "sub": "Water Treatment Plants"
+  },
+  "skipToContent": "Skip to content",
+  "nav": {
+    "label": "Main navigation",
+    "sections": {
+      "monitoring": "Monitoring",
+      "assessment": "Assessment",
+      "reports": "Reports"
+    },
+    "items": {
+      "dashboard": "Dashboard",
+      "plants": "Water plants",
+      "indicators": "Performance indicators",
+      "newAssessment": "New assessment",
+      "assessments": "Assessment results",
+      "problems": "Problems & obstacles",
+      "actions": "Corrective actions",
+      "reports": "Reports & history"
+    }
+  },
+  "tabs": {
+    "label": "Quick navigation",
+    "dashboard": "Home",
+    "plants": "Plants",
+    "assessments": "Results",
+    "problems": "Problems",
+    "reports": "Reports"
+  },
+  "menu": {
+    "open": "Open menu",
+    "title": "Menu"
+  },
+  "filters": {
+    "plant": "Plant",
+    "allPlants": "All plants",
+    "period": "Monitoring period",
+    "range": {
+      "1": "Last month",
+      "3": "Last 3 months",
+      "6": "Last 6 months",
+      "9": "Last 9 months",
+      "12": "Last 12 months",
+      "all": "Full history"
+    },
+    "saveFailed": "Could not save your selection. Try again."
+  },
+  "lang": {
+    "ar": "عربي",
+    "en": "EN",
+    "saveFailed": "Could not save the language to your profile."
+  },
+  "user": {
+    "menu": "My account",
+    "profile": "Profile",
+    "theme": "Theme",
+    "light": "Light",
+    "dark": "Dark",
+    "system": "System",
+    "signOut": "Sign out",
+    "themeSaveFailed": "Could not save the theme to your profile."
+  },
+  "pages": {
+    "dashboard": "Dashboard",
+    "plants": "Water plants",
+    "indicators": "Performance indicators",
+    "newAssessment": "New assessment",
+    "assessments": "Assessment results",
+    "problems": "Problems & obstacles",
+    "actions": "Corrective actions",
+    "reports": "Reports & historical analysis"
+  },
+  "dashboard": {
+    "empty": {
+      "title": "Start by adding your first plant",
+      "text": "Plants you add are private to your account. After adding a plant you can create its first assessment.",
+      "cta": "Add a plant"
+    },
+    "placeholder": {
+      "title": "The dashboard is being prepared",
+      "text": "Plant and assessment summaries will appear here in a later release."
+    }
+  },
+  "unavailable": {
+    "title": "This section is not available yet",
+    "text": "It will be available in a later release."
+  },
+  "error": {
+    "title": "Something went wrong",
+    "text": "We could not load this page. Please try again.",
+    "retry": "Try again"
+  },
+  "notFound": {
+    "title": "Page not found",
+    "text": "The page you are looking for does not exist or has moved.",
+    "back": "Back to dashboard"
+  },
+  "loading": "Loading"
+}
+

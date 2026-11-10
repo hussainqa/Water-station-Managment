@@ -2,14 +2,25 @@ import { hasLocale } from "next-intl";
 import { getRequestConfig } from "next-intl/server";
 import { routing } from "./routing";
 
+/**
+ * Messages are split by namespace: messages/<locale>/<namespace>.json.
+ * The file name is the top-level key, so t("auth.login.title") lives in auth.json.
+ * Add a namespace here when you add a file.
+ */
+const namespaces = ["common", "auth", "shell"] as const;
+
 export default getRequestConfig(async ({ requestLocale }) => {
   const requested = await requestLocale;
   const locale = hasLocale(routing.locales, requested)
     ? requested
     : routing.defaultLocale;
 
-  return {
-    locale,
-    messages: (await import(`../../messages/${locale}.json`)).default,
-  };
+  const entries = await Promise.all(
+    namespaces.map(
+      async (ns) =>
+        [ns, (await import(`../../messages/${locale}/${ns}.json`)).default] as const,
+    ),
+  );
+
+  return { locale, messages: Object.fromEntries(entries) };
 });

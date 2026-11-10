@@ -32,7 +32,7 @@ A bilingual (Arabic RTL default, English LTR) decision-support web app for an MS
 | Theme | next-themes: Light / Dark / System, saved per user |
 | Email | Nodemailer over SMTP; Mailpit locally |
 | Validation | Zod 4, shared by client and server |
-| Tests | Vitest: `unit` project (pure logic) and `db` project (real database) |
+| Tests | Vitest: `unit` project (pure logic) and `db` project (real database); Playwright for end-to-end |
 
 This Next.js version differs from older ones (for example `src/proxy.ts` replaces `middleware.ts`, and `params` is a promise). Check `node_modules/next/dist/docs/` before using an API from memory.
 
@@ -54,6 +54,7 @@ npm run typecheck
 npm test                 # unit tests, no database needed
 npm run test:db          # database tests: needs db:up, db:migrate, db:seed
 npm run test:all
+npm run test:e2e         # Playwright journey (starts the dev server if needed); rewrites docs/screenshots/
 ```
 
 Ports are non-default on purpose (3100, 54329, 54325, 54326) so they do not collide with other local projects.
@@ -66,17 +67,26 @@ docker/initdb/         creates the two database roles on first start
 drizzle/               SQL migrations. 0001_security.sql: grants, RLS policies, ranked view. 0002: auth role, my_profile
 messages/<locale>/     UI strings, one file per namespace (common, auth, shell, ...)
 scripts/               owner-role scripts: seed.ts, db-drop.ts, lib/owner-db.ts
-src/app/[locale]/      pages and layouts (all UI lives under the locale segment)
+src/app/[locale]/      root layout (fonts, theme, i18n providers)
+src/app/[locale]/(auth)/   login, signup, forgot-password, reset-password (signed-out only)
+src/app/[locale]/(app)/    everything behind sign-in; layout.tsx calls requireUser() and renders the shell
 src/app/api/auth/      Better Auth route handler
 src/components/ui/     shadcn/ui components
+src/components/shell/  sidebar, top bar, tab bar, drawer, user menu, PageHeader, EmptyState, nav config (nav.ts)
+src/components/auth/   auth forms; src/components/brand/ system logo
 src/db/schema/         Drizzle schema: enums, auth, reference, app (user-owned)
 src/db/client.ts       the app-role pool and `db`
 src/db/with-user.ts    `withUser()`: the only door to user-owned tables
 src/i18n/              next-intl routing, navigation wrappers, request config
 src/lib/auth/          Better Auth instance, its own DB connection, session helpers, mailer
 src/lib/evaluation/    pure evaluation rules (HANDOFF section 4) and their unit tests
+src/lib/account/       server actions: locale, theme, sign out
+src/lib/context/       top-bar filters (plant, monitoring period) stored in cookies: getFilters(), setFilters
 src/proxy.ts           locale routing
-tests/db/              database tests: RLS isolation, RLS coverage, reference access, seed
+tests/db/              database tests: RLS isolation, RLS coverage, auth isolation, reference access, seed
+tests/e2e/             Playwright journeys
+docs/reference-screenshots/prototype/   prototype screenshots + LAYOUT.md (the layout to match)
+docs/screenshots/      screenshots of this app, written by the e2e tests
 ```
 
 ## Data access rule
@@ -118,6 +128,8 @@ Never edit a migration that has been committed; add a new one.
 - **Writes are server actions** (or route handlers), validated with a Zod schema that the client form reuses. Authorise first, then `withUser`.
 - **Evaluation logic lives in `src/lib/evaluation`** and stays pure (no I/O, no dates from the clock). Comparisons with limits are strict: a value exactly on a limit gets the better status. Results always use the limits snapshot stored on the assessment, never current limits.
 - **References to an indicator or obstacle** are two nullable columns (system code, user-defined id) with a check that exactly one is set. Keep that shape.
+- **Pages behind sign-in** live in `(app)/`, call `requireUser()` themselves, and start with `PageHeader`. Read the selected plant and period with `getFilters()`. Add new destinations to `src/components/shell/nav.ts`.
+- **Obstacles are numbered per axis** in source order (`seq_in_axis`), restarting at 1 in each axis (owner decision).
 - **IDs in URLs are UUIDs.** System reference rows use their codes (`SC-01`, `O-12`, `A-40`).
 - **Strings:** no hard-coded UI text. Add keys to both locales under `messages/<locale>/<namespace>.json` (the file name is the top-level key; register new namespaces in `src/i18n/request.ts`). Arabic wording from the handoff is used exactly as given. Reference content (indicator, obstacle, action, axis names) comes from the database columns `*_ar` / `*_en`. User-entered text is shown as typed.
 - **Navigation:** import `Link`, `redirect`, `useRouter`, `usePathname` from `@/i18n/navigation`, not from `next/*`. Server components call `setRequestLocale(locale)`.

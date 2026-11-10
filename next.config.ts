@@ -2,8 +2,8 @@ import type { NextConfig } from "next";
 import createNextIntlPlugin from "next-intl/plugin";
 
 const nextConfig: NextConfig = {
-  cacheComponents: true,
-  partialPrefetching: true,
+  devIndicators: false,
+  // Cache Components is off: every screen is per-user and rendered on demand.
   turbopack: {
     rules: {
       "*.css": {

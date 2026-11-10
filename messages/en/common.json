@@ -1,0 +1,17 @@
+{
+  "app": {
+    "name": "Service Quality Monitoring System for Water Treatment Plants",
+    "shortName": "Service Quality Monitoring"
+  },
+  "locale": {
+    "switchTo": "عربي",
+    "label": "Language"
+  },
+  "status": {
+    "ok": "Within limits",
+    "warning": "Warning",
+    "critical": "Critical",
+    "insufficient_data": "Insufficient data",
+    "no_limits": "No approved limits"
+  }
+}
