@@ -1,9 +1,8 @@
 import { useTranslations } from "next-intl";
 
 /**
- * Trend of the share of readings within limits over the last assessments.
- * Draws nothing but a dash until a plant has at least two approved assessments
- * (Phase 3 passes the values). Never invents data.
+ * Trend of the share of evaluated indicators within limits over the last approved
+ * assessments. Draws only a dash until there are at least two. Never invents data.
  */
 export function Sparkline({ values }: { values: readonly number[] }) {
   const t = useTranslations("plants.card");

@@ -26,7 +26,12 @@
     "noHistory": "No history yet",
     "edit": "Edit {name}",
     "delete": "Delete {name}",
-    "none": "—"
+    "none": "—",
+    "viewPerformance": "View performance",
+    "noPerformance": "No approved assessment yet",
+    "newAssessment": "New assessment",
+    "latest": "latest {period}",
+    "withinLimits": "within limits"
   },
   "state": {
     "stable": "Stable",

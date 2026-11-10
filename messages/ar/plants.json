@@ -26,7 +26,12 @@
     "noHistory": "لا يوجد سجل بعد",
     "edit": "تعديل {name}",
     "delete": "حذف {name}",
-    "none": "—"
+    "none": "—",
+    "viewPerformance": "عرض الأداء",
+    "noPerformance": "لا يوجد تقييم معتمد بعد",
+    "newAssessment": "تقييم جديد",
+    "latest": "آخرها {period}",
+    "withinLimits": "ضمن الحدود"
   },
   "state": {
     "stable": "مستقرة",

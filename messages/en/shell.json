@@ -79,9 +79,15 @@
       "text": "Plants you add are private to your account. After adding a plant you can create its first assessment.",
       "cta": "Add a plant"
     },
-    "placeholder": {
-      "title": "The dashboard is being prepared",
-      "text": "Plant and assessment summaries will appear here in a later release."
+    "latest": {
+      "title": "Latest assessments",
+      "text": "The latest approved assessments and drafts in progress.",
+      "all": "View all assessments",
+      "empty": {
+        "title": "No assessments yet",
+        "text": "Create the first assessment for one of your plants.",
+        "cta": "New assessment"
+      }
     }
   },
   "unavailable": {
@@ -100,4 +106,3 @@
   },
   "loading": "Loading"
 }
-

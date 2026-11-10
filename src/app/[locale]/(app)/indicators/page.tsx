@@ -24,5 +24,5 @@ export default async function Page({
   const plantId = plants.some((p) => p.id === asked) ? (asked as string) : filters.plantId;
 
   const data = await withUser(user.id, (tx) => listIndicatorsForUser(tx, user.id, plantId));
-  return <IndicatorsView data={data} plants={plants} plantId={plantId} />;
+  return <IndicatorsView data={data} plants={plants} plantId={plantId} topBarPlantId={filters.plantId} />;
 }

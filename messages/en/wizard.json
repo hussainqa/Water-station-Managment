@@ -1,1 +1,168 @@
-{"_": ""}
+{
+  "title": "New assessment",
+  "eyebrow": "Stage 1 · Performance measurement",
+  "draftBadge": "Draft",
+  "stepper": {
+    "label": "Assessment steps",
+    "step": "Step {n}: {name}",
+    "done": "completed"
+  },
+  "steps": {
+    "details": "Assessment details",
+    "indicators": "Indicators",
+    "readings": "Readings",
+    "review": "Review & approve"
+  },
+  "empty": {
+    "title": "Add a plant first",
+    "text": "An assessment belongs to one of your plants. Add a plant, then come back here.",
+    "cta": "Add a plant"
+  },
+  "details": {
+    "title": "Assessment details",
+    "desc": "Choose the plant and the monitoring period you are entering readings for.",
+    "plant": "Plant",
+    "period": "Monitoring period",
+    "month": "Month",
+    "startMonth": "Starting month",
+    "periodRange": "Period: {range}",
+    "enteredBy": "Entered by",
+    "startDate": "Start date",
+    "endDate": "End date",
+    "datesHint": "Filled from the period; you may change them within the period.",
+    "periods": {
+      "1": "Monthly",
+      "3": "3 months (quarterly)",
+      "6": "6 months (semi-annual)",
+      "9": "9 months",
+      "12": "Annual"
+    }
+  },
+  "conflict": {
+    "duplicate": "An assessment already exists for this plant, starting month and length ({period}).",
+    "overlap": "This period overlaps an existing assessment of the same length ({period}). Periods of different lengths may overlap, same-length periods may not.",
+    "resume": "Resume the draft",
+    "open": "Open the assessment",
+    "draft": "Draft",
+    "approved": "Approved"
+  },
+  "indicators": {
+    "title": "Choose indicators by group",
+    "desc": "Select a whole group or individual indicators adopted at {plant}.",
+    "selectAll": "Select all",
+    "clear": "Clear selection",
+    "groupCount": "{selected} of {total} selected",
+    "selectedCount": "{count, plural, one {# indicator selected} other {# indicators selected}}",
+    "noneAdopted": {
+      "title": "No indicators are adopted at this plant",
+      "text": "Adopt the indicators you want to monitor from “Performance indicators”, then come back to start the assessment.",
+      "cta": "Go to Performance indicators"
+    },
+    "userAdded": "User-added"
+  },
+  "readings": {
+    "title": "Enter readings",
+    "desc": "Derived values are calculated automatically and inputs are checked as you type.",
+    "progress": "{done} of {total} indicators complete",
+    "errorCount": "{count, plural, one {# error to fix} other {# errors to fix}}",
+    "progressLabel": "Readings completed",
+    "optional": "optional",
+    "unitLabel": "Duration unit",
+    "units": { "h": "hours", "min": "minutes" },
+    "unitShort": { "h": "h", "min": "min" },
+    "recorded": "Recorded value",
+    "calculated": "Calculated value",
+    "valueWaiting": "The value appears once the required fields are filled.",
+    "valueFix": "Fix the error to see the value.",
+    "note": "Note",
+    "addNote": "Add a note (optional)",
+    "notePlaceholder": "Anything the reviewer should know about this reading",
+    "state": {
+      "complete": "Complete",
+      "partial": "Partial",
+      "missing": "No data",
+      "error": "Input error"
+    }
+  },
+  "review": {
+    "title": "Review data",
+    "desc": "Check the readings before approving. No result is shown for an indicator with incomplete data.",
+    "plant": "Plant",
+    "period": "Monitoring period",
+    "range": "From — to",
+    "enteredBy": "Entered by",
+    "indicator": "Indicator",
+    "inputs": "Inputs",
+    "value": "Value",
+    "entryStatus": "Entry status",
+    "statusPreview": "Status preview",
+    "previewNote": "Status preview uses your current limits. The approved status is decided on the server when you approve.",
+    "edit": "Edit",
+    "insufficient": "Insufficient data",
+    "errorsTitle": "You cannot approve while there are input errors.",
+    "errorsFix": "Fix {count, plural, one {# indicator} other {# indicators}} in the readings step:",
+    "missingTitle": "Missing data in {count, plural, one {# indicator} other {# indicators}}:",
+    "missingText": "They will be marked “Insufficient data” with no result.",
+    "ack": "I confirm approving with missing data, and that this will be recorded in the audit trail.",
+    "summary": "{complete} complete · {missing} missing · {errors} error",
+    "none": "—"
+  },
+  "actions": {
+    "back": "Back",
+    "nextIndicators": "Next: indicators",
+    "nextReadings": "Next: readings",
+    "nextReview": "Next: review",
+    "approve": "Approve and evaluate",
+    "saveDraft": "Save as draft",
+    "deleteDraft": "Delete draft",
+    "saving": "Saving…"
+  },
+  "bar": {
+    "context": "{plant} · {period}",
+    "incomplete": "{count, plural, one {# indicator without complete data} other {# indicators without complete data}}",
+    "allComplete": "All indicators are complete"
+  },
+  "delete": {
+    "title": "Delete this draft?",
+    "text": "The draft and the readings entered so far will be deleted. This cannot be undone.",
+    "confirm": "Delete draft",
+    "cancel": "Cancel",
+    "close": "Close"
+  },
+  "processing": {
+    "title": "Approving the assessment",
+    "text": "Calculating values and comparing them with the limits…"
+  },
+  "toast": {
+    "draftSaved": "Draft saved — you can finish it later",
+    "draftDeleted": "Draft deleted"
+  },
+  "errors": {
+    "required": "This field is required.",
+    "invalidPlant": "Choose a plant.",
+    "invalidMonth": "Choose a valid month.",
+    "futurePeriod": "The period must end in the current month or earlier.",
+    "invalidDate": "Enter a valid date.",
+    "outsidePeriod": "The date must be inside the monitoring period.",
+    "beforeStart": "The end date is before the start date.",
+    "tooLong": "This text is too long.",
+    "invalid_number": "Enter a valid number.",
+    "negative": "The value cannot be negative.",
+    "not_integer": "Enter a whole number, without decimals.",
+    "out_of_range": "A percentage must be between 0 and 100.",
+    "exceeds_denominator": "This cannot be larger than the total.",
+    "zero_denominator": "The total must be greater than zero.",
+    "zero_count": "The count must be greater than zero.",
+    "summary": "Check the highlighted fields and try again.",
+    "validation": "Check the highlighted fields and try again.",
+    "plantNotFound": "We could not find this plant in your account.",
+    "notFound": "This draft no longer exists.",
+    "alreadyApproved": "This assessment is already approved.",
+    "indicatorNotAdopted": "One of the selected indicators is not adopted at this plant.",
+    "readingNotSelected": "A reading does not belong to the selected indicators.",
+    "noIndicatorsSelected": "Select at least one indicator.",
+    "inputErrors": "Some readings have input errors. Fix them and try again.",
+    "missingData": "Some indicators have incomplete data. Tick the acknowledgement to approve.",
+    "generic": "Something went wrong. Please try again."
+  }
+}

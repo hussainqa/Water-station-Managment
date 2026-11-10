@@ -1,12 +1,13 @@
 "use client";
 
-import { useMemo, useOptimistic, useState, useTransition } from "react";
+import { useEffect, useMemo, useOptimistic, useRef, useState, useTransition } from "react";
 import { Factory, Pencil, Plus, Trash2 } from "lucide-react";
 import { useLocale, useTranslations } from "next-intl";
 import { toast } from "sonner";
 import { PageHeader } from "@/components/shell/page-header";
 import { Button } from "@/components/ui/button";
 import { Link, usePathname, useRouter } from "@/i18n/navigation";
+import { setFilters } from "@/lib/context/actions";
 import { setAdoptionAction } from "@/lib/indicators/actions";
 import type { IndicatorsData } from "@/lib/indicators/types";
 import { cn } from "cn";
@@ -22,11 +23,13 @@ type Props = {
   plants: { id: string; name: string }[];
   /** Plant the adoption switches refer to (?plant=, else the top-bar plant), or null. */
   plantId: string | null;
+  /** The plant chosen in the top bar: the picker follows it, and picking here sets it. */
+  topBarPlantId?: string | null;
 };
 
 const ALL = "all";
 
-export function IndicatorsView({ data, plants, plantId }: Props) {
+export function IndicatorsView({ data, plants, plantId, topBarPlantId = null }: Props) {
   const t = useTranslations("indicators");
   const locale = useLocale();
   const router = useRouter();
@@ -62,9 +65,21 @@ export function IndicatorsView({ data, plants, plantId }: Props) {
     });
   }
 
+  // The picker is the top-bar selection, not a second one: choosing here sets the top bar,
+  // and a change in the top bar drops an explicit ?plant= so the page follows it.
   function pickPlant(id: string) {
-    router.replace(id ? `${pathname}?plant=${id}` : pathname);
+    startTransition(async () => {
+      const r = await setFilters({ plantId: id || null });
+      if (!r.ok) toast.error(t("errors.generic"));
+      router.replace(pathname);
+    });
   }
+  const lastTopBar = useRef(topBarPlantId);
+  useEffect(() => {
+    if (lastTopBar.current === topBarPlantId) return;
+    lastTopBar.current = topBarPlantId;
+    if (plantId !== topBarPlantId) router.replace(pathname);
+  }, [topBarPlantId, plantId, pathname, router]);
 
   const find = (ref: string | null) => (ref ? (data.indicators.find((i) => i.ref === ref) ?? null) : null);
   const group = (key: string | null) => (key ? (data.groups.find((g) => g.key === key) ?? null) : null);

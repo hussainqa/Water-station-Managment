@@ -1,8 +1,10 @@
 import { setRequestLocale } from "next-intl/server";
 import { PlantsView } from "@/components/plants/plants-view";
 import type { PlantCardData } from "@/components/plants/plant-card";
+import { periodLabel } from "@/components/assessments/results/helpers";
 import { withUser } from "@/db/with-user";
 import { requireUser } from "@/lib/auth/session";
+import { getPlantPerformance } from "@/lib/assessments/service";
 import { listPlants } from "@/lib/plants/service";
 import { plantState } from "@/lib/plants/state";
 
@@ -14,7 +16,11 @@ export default async function Page({
   setRequestLocale(locale);
   const user = await requireUser();
   const sp = await searchParams;
-  const rows = await withUser(user.id, (tx) => listPlants(tx));
+  const [rows, perf] = await withUser(user.id, async (tx) => [
+    await listPlants(tx),
+    await getPlantPerformance(tx, user.id),
+  ] as const);
+  const perfBy = new Map(perf.map((p) => [p.plantId, p]));
 
   const plants: PlantCardData[] = rows.map((p) => ({
     id: p.id,
@@ -27,9 +33,15 @@ export default async function Page({
     engineer: p.engineer,
     notes: p.notes,
     assessmentCount: p.assessmentCount,
-    // Phase 3 passes the latest approved assessment's summary here
-    state: plantState(null),
-    trend: [],
+    approvedCount: perfBy.get(p.id)?.approvedCount ?? 0,
+    state: plantState(perfBy.get(p.id)?.summary ?? null),
+    trend: perfBy.get(p.id)?.series ?? [],
+    latest: perfBy.get(p.id)?.latest
+      ? {
+          id: perfBy.get(p.id)!.latest!.assessmentId,
+          label: periodLabel(perfBy.get(p.id)!.latest!.periodStart, perfBy.get(p.id)!.latest!.months, locale),
+        }
+      : null,
   }));
 
   return <PlantsView plants={plants} openNew={sp.new === "1"} />;

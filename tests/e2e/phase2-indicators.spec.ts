@@ -135,8 +135,10 @@ test("indicators: filters, adoption, limits, user-defined indicators", async ({ 
 
   // choose the plant in the picker on the page
   await page.getByTestId("plant-picker").selectOption({ value: plantId });
-  await expect(page).toHaveURL(new RegExp(`plant=${plantId}`));
+  // the picker now sets the top-bar plant (no ?plant= in the URL) and the prompt goes away
   await expect(page.getByRole("switch")).toHaveCount(15);
+  await expect(page.getByTestId("plant-prompt")).toHaveCount(0);
+  await expect(page.getByTestId("plant-picker")).toHaveValue(plantId);
 
   // --- structure and content rules (client notes 5, 6, 8, 9)
   await expect(page.getByText(ar.subtitle, { exact: true })).toBeVisible();

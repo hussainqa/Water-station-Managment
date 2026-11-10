@@ -1,8 +1,10 @@
 "use client";
 
-import { Factory, MapPin, Pencil, Trash2 } from "lucide-react";
+import { Factory, MapPin, Pencil, Plus, Trash2 } from "lucide-react";
 import { useLocale, useTranslations } from "next-intl";
-import { Button } from "@/components/ui/button";
+import { Button, buttonVariants } from "@/components/ui/button";
+import { Link } from "@/i18n/navigation";
+import { cn } from "cn";
 import type { PlantStateKey } from "@/lib/plants/state";
 import { utilisation } from "@/lib/plants/state";
 import { numberFormat } from "./format";
@@ -20,10 +22,15 @@ export type PlantCardData = {
   actualCapacity: number | null;
   engineer: string;
   notes: string;
+  /** assessments of any status (a plant with any cannot be deleted) */
   assessmentCount: number;
+  /** approved assessments */
+  approvedCount: number;
   state: PlantStateKey;
-  /** share of readings within limits per past assessment, oldest first; empty until Phase 3 */
+  /** share of evaluated indicators within limits per approved assessment, oldest first */
   trend: number[];
+  /** the latest approved assessment, with its period label already formatted; null when none */
+  latest: { id: string; label: string } | null;
 };
 
 type Props = {
@@ -92,39 +99,73 @@ export function PlantCard({ plant, onEdit, onDelete }: Props) {
         </div>
       </div>
 
-      <div className="mt-auto flex items-center gap-2 border-t border-border pt-3">
+      <div className="mt-auto flex flex-col gap-3 border-t border-border pt-3">
+        <div className="flex items-center gap-2">
         <div className="flex min-w-0 flex-1 flex-col gap-1">
-          <span className="text-[12.5px] text-fg-3">
-            {t("card.past", { count: plant.assessmentCount })}
+          <span data-testid="plant-past" className="text-[12.5px] text-fg-3">
+            {t("card.past", { count: plant.approvedCount })}
+            {plant.latest ? ` · ${t("card.latest", { period: plant.latest.label })}` : ""}
           </span>
-          <Sparkline values={plant.trend} />
+          <span className="flex items-center gap-2 text-[12px] text-fg-3" data-testid="plant-sparkline">
+            <Sparkline values={plant.trend} />
+            {plant.trend.length >= 2 ? <span>{t("card.withinLimits")}</span> : null}
+          </span>
         </div>
-        <Button
-          type="button"
-          variant="ghost"
-          size="icon"
-          onClick={() => onEdit(plant)}
-          aria-label={t("card.edit", { name: plant.name })}
-          className="size-9"
-        >
-          <Pencil aria-hidden="true" />
-        </Button>
-        <Button
-          type="button"
-          variant="ghost"
-          size="icon"
-          onClick={() => onDelete(plant)}
-          aria-label={t("card.delete", { name: plant.name })}
-          aria-disabled={blocked ? true : undefined}
-          title={blocked ? t("delete.blocked") : undefined}
-          className={
-            blocked
-              ? "size-9 cursor-not-allowed opacity-50 hover:bg-transparent"
-              : "size-9 text-critical hover:bg-critical-soft hover:text-critical"
-          }
-        >
-          <Trash2 aria-hidden="true" />
-        </Button>
+          <Button
+            type="button"
+            variant="ghost"
+            size="icon"
+            onClick={() => onEdit(plant)}
+            aria-label={t("card.edit", { name: plant.name })}
+            className="size-9"
+          >
+            <Pencil aria-hidden="true" />
+          </Button>
+          <Button
+            type="button"
+            variant="ghost"
+            size="icon"
+            onClick={() => onDelete(plant)}
+            aria-label={t("card.delete", { name: plant.name })}
+            aria-disabled={blocked ? true : undefined}
+            title={blocked ? t("delete.blocked") : undefined}
+            className={
+              blocked
+                ? "size-9 cursor-not-allowed opacity-50 hover:bg-transparent"
+                : "size-9 text-critical hover:bg-critical-soft hover:text-critical"
+            }
+          >
+            <Trash2 aria-hidden="true" />
+          </Button>
+        </div>
+        <div className="flex flex-wrap items-center gap-2">
+          {plant.latest ? (
+            <Link
+              href={`/assessments/${plant.latest.id}`}
+              data-testid="plant-view-performance"
+              className={cn(buttonVariants({ variant: "secondary" }), "h-9 min-w-0 flex-1 rounded-[10px] px-3 text-[13.5px]")}
+            >
+              {t("card.viewPerformance")}
+            </Link>
+          ) : (
+            <span
+              data-testid="plant-view-performance"
+              aria-disabled="true"
+              title={t("card.noPerformance")}
+              className={cn(buttonVariants({ variant: "secondary" }), "h-9 min-w-0 flex-1 cursor-not-allowed rounded-[10px] px-3 text-[13.5px] opacity-50")}
+            >
+              {t("card.viewPerformance")}
+            </span>
+          )}
+          <Link
+            href={`/assessments/new?plant=${plant.id}`}
+            data-testid="plant-new-assessment"
+            className={cn(buttonVariants({ variant: "default" }), "h-9 min-w-0 flex-1 gap-1 rounded-[10px] px-3 text-[13.5px]")}
+          >
+            <Plus aria-hidden="true" className="size-3.5" />
+            {t("card.newAssessment")}
+          </Link>
+        </div>
       </div>
     </article>
   );
