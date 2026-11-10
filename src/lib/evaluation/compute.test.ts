@@ -137,7 +137,7 @@ describe("value safety", () => {
     expect(ev("direct", { value: "1e999" }).state).toBe("error");
   });
   it("does not round", () => {
-    expect(ev("ratio", { numerator: 1, denominator: 3 }).value).toBe((1 / 3) * 100);
+    expect(ev("ratio", { numerator: 1, denominator: 3 }).value).toBe((1 * 100) / 3);
   });
 });
 
