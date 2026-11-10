@@ -435,6 +435,11 @@ export const problemActions = pgTable(
       atMostOne("linked_obstacle_code", "linked_custom_obstacle_id"),
     ),
     unique("problem_actions_problem_action_uq").on(t.problemId, t.actionCode),
+    // Recording implementation requires the action to be chosen.
+    check(
+      "problem_actions_implemented_ck",
+      sql`${t.implementedOn} is null or ${t.chosen}`,
+    ),
   ],
 );
 
@@ -470,6 +475,10 @@ export const customActions = pgTable(
     check(
       "custom_actions_linked_obstacle_ck",
       atMostOne("linked_obstacle_code", "linked_custom_obstacle_id"),
+    ),
+    check(
+      "custom_actions_implemented_ck",
+      sql`${t.implementedOn} is null or ${t.chosen}`,
     ),
   ],
 );

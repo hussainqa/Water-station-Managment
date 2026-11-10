@@ -1,0 +1,2 @@
+ALTER TABLE "custom_actions" ADD CONSTRAINT "custom_actions_implemented_ck" CHECK ("custom_actions"."implemented_on" is null or "custom_actions"."chosen");--> statement-breakpoint
+ALTER TABLE "problem_actions" ADD CONSTRAINT "problem_actions_implemented_ck" CHECK ("problem_actions"."implemented_on" is null or "problem_actions"."chosen");
