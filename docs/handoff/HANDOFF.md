@@ -188,6 +188,18 @@ These override the prototype wherever they conflict. Original Arabic is kept so 
 
 Fable should confirm or adjust these choices with the owner before Phase 0.
 
+> **Update, 2026-11-10 (owner decision): Supabase was replaced.** Everything runs on a database we host ourselves.
+>
+> | Concern | Now |
+> | --- | --- |
+> | Database | PostgreSQL 16 in Docker (`docker-compose.yml`), with Mailpit for local email |
+> | ORM and migrations | Drizzle ORM + drizzle-kit, SQL migrations committed in `drizzle/` |
+> | Auth | Better Auth: email + password, sessions in Postgres, password reset by email (SMTP via env) |
+> | Per-user isolation | Still enforced in the database. The app connects as a restricted role (`wtp_app`, no BYPASSRLS, owns no tables). Every user-owned table has RLS on `owner_id = current_setting('app.user_id')`, set per transaction by one server-side helper (`withUser`). |
+> | RII | Column-level grants: the app role cannot select `rii`, `correlation_r` or `priority_pct`. A view exposes a sort position only. |
+>
+> Wherever this document says "Supabase", `auth.uid()` or `auth.users`, read it as the above. Hosting (section 11, question 1) is correspondingly open: the app needs a Node host plus a PostgreSQL 16 server. The current conventions are in the repository's `CLAUDE.md`.
+
 ---
 
 ## 7. Seed data

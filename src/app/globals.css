@@ -1,0 +1,202 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+@import "shadcn/tailwind.css";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  /* Status colours (always pair with an icon and text, never colour alone) */
+  --color-ok: var(--ok);
+  --color-ok-soft: var(--ok-soft);
+  --color-warning: var(--warn);
+  --color-warning-soft: var(--warn-soft);
+  --color-critical: var(--crit);
+  --color-critical-soft: var(--crit-soft);
+  --color-insufficient: var(--na);
+  --color-insufficient-soft: var(--na-soft);
+  --color-nolimits: var(--nl);
+  --color-nolimits-soft: var(--nl-soft);
+  --color-teal: var(--teal);
+  --color-teal-soft: var(--teal-soft);
+  --color-surface-2: var(--surface-2);
+  --color-fg-3: var(--fg-3);
+  --color-line-2: var(--line-2);
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-plex-arabic), "Noto Sans Arabic", "Segoe UI", Tahoma, sans-serif;
+  --font-mono: var(--font-plex-mono), ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  --font-heading: var(--font-sans);
+  --color-sidebar-ring: var(--sidebar-ring);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar: var(--sidebar);
+  --color-chart-5: var(--chart-5);
+  --color-chart-4: var(--chart-4);
+  --color-chart-3: var(--chart-3);
+  --color-chart-2: var(--chart-2);
+  --color-chart-1: var(--chart-1);
+  --color-ring: var(--ring);
+  --color-input: var(--input);
+  --color-border: var(--border);
+  --color-destructive: var(--destructive);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-accent: var(--accent);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-muted: var(--muted);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-secondary: var(--secondary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-primary: var(--primary);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-popover: var(--popover);
+  --color-card-foreground: var(--card-foreground);
+  --color-card: var(--card);
+  --radius-sm: calc(var(--radius) * 0.6);
+  --radius-md: calc(var(--radius) * 0.8);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) * 1.4);
+  --radius-2xl: calc(var(--radius) * 1.8);
+  --radius-3xl: calc(var(--radius) * 2.2);
+  --radius-4xl: calc(var(--radius) * 2.6);
+}
+
+/* Design tokens carried over from docs/handoff/reference/prototype-v4.html (HANDOFF section 8). */
+:root {
+  --bg: #f2f5f7;
+  --bg-2: #e9eef1;
+  --surface: #ffffff;
+  --surface-2: #f7f9fa;
+  --glass: rgba(242, 245, 247, 0.78);
+  --fg: #14212a;
+  --fg-2: #4e5c66;
+  --fg-3: #68757f;
+  --line: #e0e6ea;
+  --line-2: #cfd8de;
+  --brand: #1b6ca8;
+  --brand-fg: #ffffff;
+  --brand-soft: #e5eff7;
+  --brand-ink: #155585;
+  --teal: #1a7f7a;
+  --teal-soft: #e1f2f0;
+  --ok: #2b7a4b;
+  --ok-soft: #e6f3eb;
+  --warn: #a35607;
+  --warn-soft: #fbefdf;
+  --crit: #b8322b;
+  --crit-soft: #fbe8e6;
+  --na: #5f6b75;
+  --na-soft: #eceff2;
+  --nl: #4558ac;
+  --nl-soft: #eaedf9;
+  --s1: #1b6ca8;
+  --s2: #1a8f88;
+  --s3: #7a5bb5;
+  --shadow-card: 0 1px 2px rgba(16, 34, 46, 0.05), 0 6px 20px rgba(16, 34, 46, 0.05);
+  --shadow-pop: 0 10px 40px rgba(16, 34, 46, 0.16);
+
+  /* shadcn/ui semantic variables mapped onto the tokens above */
+  --background: var(--bg);
+  --foreground: var(--fg);
+  --card: var(--surface);
+  --card-foreground: var(--fg);
+  --popover: var(--surface);
+  --popover-foreground: var(--fg);
+  --primary: var(--brand);
+  --primary-foreground: var(--brand-fg);
+  --secondary: var(--bg-2);
+  --secondary-foreground: var(--fg);
+  --muted: var(--surface-2);
+  --muted-foreground: var(--fg-2);
+  --accent: var(--brand-soft);
+  --accent-foreground: var(--brand-ink);
+  --destructive: var(--crit);
+  --border: var(--line);
+  --input: var(--line-2);
+  --ring: var(--brand);
+  --chart-1: var(--s1);
+  --chart-2: var(--s2);
+  --chart-3: var(--s3);
+  --chart-4: var(--brand);
+  --chart-5: var(--teal);
+  --radius: 0.75rem;
+  --sidebar: var(--surface);
+  --sidebar-foreground: var(--fg);
+  --sidebar-primary: var(--brand);
+  --sidebar-primary-foreground: var(--brand-fg);
+  --sidebar-accent: var(--brand-soft);
+  --sidebar-accent-foreground: var(--brand-ink);
+  --sidebar-border: var(--line);
+  --sidebar-ring: var(--brand);
+}
+
+.dark {
+  --bg: #0d1317;
+  --bg-2: #121a1f;
+  --surface: #161f25;
+  --surface-2: #1b252c;
+  --glass: rgba(13, 19, 23, 0.78);
+  --fg: #e5ecf0;
+  --fg-2: #a7b4bd;
+  --fg-3: #8c99a3;
+  --line: #25313a;
+  --line-2: #33414b;
+  --brand: #5eaae4;
+  --brand-fg: #06131c;
+  --brand-soft: #14303f;
+  --brand-ink: #8cc3ee;
+  --teal: #4fc1b9;
+  --teal-soft: #123331;
+  --ok: #62c690;
+  --ok-soft: #132e20;
+  --warn: #f0a650;
+  --warn-soft: #382611;
+  --crit: #f27e75;
+  --crit-soft: #3b1916;
+  --na: #9da9b2;
+  --na-soft: #222c33;
+  --nl: #94a5f2;
+  --nl-soft: #1c2343;
+  --s1: #5eaae4;
+  --s2: #4fc1b9;
+  --s3: #b79fea;
+  --shadow-card: 0 1px 2px rgba(0, 0, 0, 0.3), 0 6px 20px rgba(0, 0, 0, 0.25);
+  --shadow-pop: 0 10px 40px rgba(0, 0, 0, 0.5);
+  color-scheme: dark;
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  html {
+    @apply font-sans;
+  }
+  body {
+    @apply bg-background text-foreground;
+    font-size: 15px;
+    line-height: 1.6;
+  }
+  :focus-visible {
+    outline: 2.5px solid var(--brand);
+    outline-offset: 2px;
+  }
+  /* Numbers and codes always read left-to-right, even inside Arabic text. */
+  .num {
+    direction: ltr;
+    unicode-bidi: isolate;
+    font-variant-numeric: tabular-nums;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
