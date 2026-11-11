@@ -27,5 +27,20 @@ services:
       - "${SMTP_PORT:-54325}:1025"
       - "${MAILPIT_UI_PORT:-54326}:8025"
 
+  # Headless Chromium that turns the report HTML into a PDF. The app posts HTML to it
+  # (GOTENBERG_URL) and streams the PDF back; nothing else talks to it. It makes no
+  # outbound requests for our reports: the HTML is self-contained (fonts inlined).
+  pdf:
+    image: gotenberg/gotenberg:8
+    restart: unless-stopped
+    command:
+      - "gotenberg"
+      - "--chromium-disable-javascript=true"
+      # No network, and no local files outside Gotenberg's own working folder.
+      - "--chromium-deny-list=^(https?|ftp)://.*|^file:(?!//\\/tmp/).*"
+      - "--api-timeout=60s"
+    ports:
+      - "127.0.0.1:${PDF_PORT:-54327}:3000"
+
 volumes:
   pgdata:

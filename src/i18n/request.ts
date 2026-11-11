@@ -17,6 +17,8 @@ const namespaces = [
   "wizard",
   "problems",
   "problemsList",
+  "dashboard",
+  "reports",
 ] as const;
 
 export default getRequestConfig(async ({ requestLocale }) => {
