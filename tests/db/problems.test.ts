@@ -336,12 +336,14 @@ describe("problems, obstacles and corrective actions", () => {
       data(await select(sc04, "O-36"));
       data(await runA((tx) => svc.setObstacleOnly(tx, A, { problemId: sc04, value: true }, ctx())));
       expect((await get(sc04)).stage).toBe("documented");
-      // choosing an action afterwards: treated, the flag may stay
+      // choosing an action afterwards: treated, and the flag is cleared (prototype behaviour)
       const code = (await refLinks("O-36"))[0].action_code;
       expect(data(await choose(sc04, code, true, sysT("O-36"))).stage).toBe("treated");
-      expect((await get(sc04)).obstacleOnly).toBe(true);
-      // un-choose: back to documented (flag still set)
-      expect(data(await choose(sc04, code, false)).stage).toBe("documented");
+      expect((await get(sc04)).obstacleOnly).toBe(false);
+      // un-choose: back to choosing_action, NOT documented
+      expect(data(await choose(sc04, code, false)).stage).toBe("choosing_action");
+      // keep the obstacle only again; removing the last obstacle clears the flag
+      data(await runA((tx) => svc.setObstacleOnly(tx, A, { problemId: sc04, value: true }, ctx())));
       // removing the last obstacle clears the flag
       const r = data(await unselect(sc04, "O-36"));
       expect(r.stage).toBe("awaiting_obstacles");
@@ -350,6 +352,44 @@ describe("problems, obstacles and corrective actions", () => {
       expect(acts).toContain("obstacle_only_cleared");
       const cleared = (await get(sc04)).audit.find((e) => e.action === "obstacle_only_cleared");
       expect(cleared?.payload).toEqual({ reason: "lastObstacleRemoved" });
+    });
+
+    it("choosing an action clears the obstacle-only flag; un-choosing returns to choosing_action", async () => {
+      const readFlag = async () =>
+        (await owner.query<{ obstacle_only: boolean }>("select obstacle_only from problems where id = $1", [sc04])).rows[0].obstacle_only;
+      const clearedEvents = async () =>
+        (await get(sc04)).audit.filter((e) => e.action === "obstacle_only_cleared").map((e) => e.payload);
+      await reset(sc04);
+      data(await select(sc04, "O-36"));
+      const open0 = await openCount();
+      // system action
+      data(await runA((tx) => svc.setObstacleOnly(tx, A, { problemId: sc04, value: true }, ctx())));
+      expect((await get(sc04)).stage).toBe("documented");
+      expect(await openCount()).toBe(open0 - 1);
+      const code = (await refLinks("O-36"))[0].action_code;
+      expect(data(await choose(sc04, code, true, sysT("O-36")))).toMatchObject({ stage: "treated", open: false });
+      expect(await readFlag()).toBe(false);
+      expect(await clearedEvents()).toEqual([{ reason: "actionChosen" }]);
+      const order = (await get(sc04)).audit.map((e) => e.action).reverse();
+      expect(order.slice(-3)).toEqual(["action_chosen", "obstacle_only_cleared", "stage_changed"]);
+      expect(data(await choose(sc04, code, false))).toMatchObject({ stage: "choosing_action", open: true });
+      expect(await openCount()).toBe(open0);
+      // case-specific action added with choose-now
+      data(await runA((tx) => svc.setObstacleOnly(tx, A, { problemId: sc04, value: true }, ctx())));
+      expect((await get(sc04)).stage).toBe("documented");
+      const cust = await addAction(sc04, { name: "إجراء خاص", chooseNow: true });
+      expect((await get(sc04)).stage).toBe("treated");
+      expect(await readFlag()).toBe(false);
+      expect(await clearedEvents()).toEqual([{ reason: "actionChosen" }, { reason: "actionChosen" }]);
+      data(await runA((tx) => svc.setCustomActionChosen(tx, A, { problemId: sc04, customActionId: cust, chosen: false }, ctx())));
+      expect((await get(sc04)).stage).toBe("choosing_action");
+      // choosing the existing case-specific action later clears the flag too
+      data(await runA((tx) => svc.setObstacleOnly(tx, A, { problemId: sc04, value: true }, ctx())));
+      data(await runA((tx) => svc.setCustomActionChosen(tx, A, { problemId: sc04, customActionId: cust, chosen: true }, ctx())));
+      expect(await readFlag()).toBe(false);
+      expect((await clearedEvents()).filter((p) => (p as { reason: string }).reason === "actionChosen")).toHaveLength(3);
+      expect((await get(sc04)).stage).toBe("treated");
+      expect(await openCount()).toBe(open0 - 1);
     });
   });
 

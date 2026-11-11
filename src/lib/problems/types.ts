@@ -322,7 +322,7 @@ export type ProblemAuditPayloads = {
   };
   custom_action_deleted: { customActionId: string; name: string };
   obstacle_only_set: Record<string, never>;
-  obstacle_only_cleared: { reason: "manual" | "lastObstacleRemoved" };
+  obstacle_only_cleared: { reason: "manual" | "lastObstacleRemoved" | "actionChosen" };
   stage_changed: { from: ProblemStage; to: ProblemStage };
 };
 export type ProblemAuditAction = keyof ProblemAuditPayloads;

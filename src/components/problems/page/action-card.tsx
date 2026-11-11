@@ -117,7 +117,7 @@ export function ActionCardView({ title, rank, extra, state, ops, testId, code, c
                 {tag}
               </span>
             ) : null}
-            <h4 data-testid="action-text" className="m-0 text-[14.5px] font-semibold leading-relaxed">
+            <h4 data-testid="action-text" dir="auto" className="m-0 text-[14.5px] font-semibold leading-relaxed">
               {title}
             </h4>
           </div>

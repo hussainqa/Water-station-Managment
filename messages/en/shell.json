@@ -73,23 +73,6 @@
     "actions": "Corrective actions",
     "reports": "Reports & historical analysis"
   },
-  "dashboard": {
-    "empty": {
-      "title": "Start by adding your first plant",
-      "text": "Plants you add are private to your account. After adding a plant you can create its first assessment.",
-      "cta": "Add a plant"
-    },
-    "latest": {
-      "title": "Latest assessments",
-      "text": "The latest approved assessments and drafts in progress.",
-      "all": "View all assessments",
-      "empty": {
-        "title": "No assessments yet",
-        "text": "Create the first assessment for one of your plants.",
-        "cta": "New assessment"
-      }
-    }
-  },
   "unavailable": {
     "title": "This section is not available yet",
     "text": "It will be available in a later release."
@@ -107,5 +90,12 @@
   "loading": "Loading",
   "badge": {
     "openProblems": "{count, plural, =0 {No problems awaiting review} one {# problem awaiting review} other {# problems awaiting review}}"
+  },
+  "dashboard": {
+    "empty": {
+      "title": "Start by adding your first plant",
+      "text": "Plants you add are private to your account. After adding a plant you can create its first assessment.",
+      "cta": "Add a plant"
+    }
   }
 }

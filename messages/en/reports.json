@@ -1,1 +1,245 @@
-{"_": ""}
+{
+  "title": "Reports & history",
+  "lead": "A work report that brings together the measurement results, obstacles and corrective actions of each assessment period.",
+  "selectors": {
+    "plant": "Plant",
+    "type": "Report type",
+    "typePeriod": "Period assessment report",
+    "typeHistory": "Plant history",
+    "assessment": "Assessment period",
+    "length": "Period length",
+    "lengthOption": {
+      "1": "Monthly",
+      "3": "3 months (quarterly)",
+      "6": "6 months (semi-annual)",
+      "9": "9 months",
+      "12": "Annual"
+    }
+  },
+  "actions": {
+    "export": "Export PDF",
+    "print": "Print",
+    "printHint": "Printing from the browser is a fallback when the PDF cannot be created."
+  },
+  "preview": {
+    "title": "Report preview",
+    "loading": "Loading the preview…",
+    "failed": "The preview could not be loaded."
+  },
+  "dialog": {
+    "title": "Export the report as PDF",
+    "description": "Choose the language of the report. The file contains exactly what the preview shows.",
+    "language": "Report language",
+    "ar": "العربية",
+    "en": "English",
+    "download": "Download PDF",
+    "busy": "Preparing the file…",
+    "cancel": "Close",
+    "close": "Close",
+    "done": "The file was downloaded.",
+    "errors": {
+      "unavailable": "The PDF could not be created because the conversion service is unavailable. Use the Print button and save the report as PDF from your browser.",
+      "failed": "The PDF could not be created. Try again or use the Print button.",
+      "notFound": "The requested report was not found."
+    }
+  },
+  "empty": {
+    "noPlants": {
+      "title": "No plants",
+      "text": "Add a plant, then create and approve an assessment to see a report.",
+      "cta": "Add a plant"
+    },
+    "noAssessments": {
+      "title": "No approved assessments for this plant",
+      "text": "Create and approve an assessment to see its report.",
+      "cta": "New assessment"
+    }
+  },
+  "links": {
+    "period": "Report for this period",
+    "problemPeriod": "Report for the assessment period",
+    "log": "Period reports",
+    "logRow": "Period report"
+  },
+  "doc": {
+    "systemName": "Service Quality Monitoring System for Water Treatment Plants",
+    "titlePeriod": "Service quality assessment report",
+    "titleHistory": "Service quality history report",
+    "pageWord": "Page",
+    "ofWord": "of",
+    "meta": {
+      "plant": "Plant",
+      "period": "Assessment period",
+      "periods": "Periods included",
+      "issuedOn": "Issue date"
+    },
+    "sections": {
+      "plant": "Plant information",
+      "period": "Assessment period",
+      "results": "Indicators and results",
+      "limits": "Comparison with limits",
+      "trends": "Indicator trends across periods",
+      "problems": "Problems found",
+      "obstacles": "Obstacles identified",
+      "actions": "Corrective actions chosen",
+      "missing": "Missing data",
+      "notes": "Notes and conclusions"
+    },
+    "plant": {
+      "name": "Plant",
+      "location": "Location",
+      "source": "Water source",
+      "engineer": "Engineer in charge",
+      "design": "Design capacity",
+      "actual": "Actual capacity",
+      "unit": "m³/day"
+    },
+    "period": {
+      "type": "Period type",
+      "dates": "Period dates",
+      "dateRange": "{from} to {to}",
+      "enteredBy": "Data entered by",
+      "approvedAt": "Approved at",
+      "completeness": "Data completeness",
+      "completenessText": "{withValue} of {total} indicators have a recorded value ({percent}%)",
+      "latestNote": "Sections 2 to 4 summarise the latest period in the record: {period}.",
+      "included": "{count, plural, one {1 period} other {# periods}}, {first} to {last}",
+      "length": {
+        "1": "Monthly",
+        "3": "3 months (quarterly)",
+        "6": "6 months (semi-annual)",
+        "9": "9 months",
+        "12": "Annual"
+      }
+    },
+    "table": {
+      "code": "Code",
+      "indicator": "Indicator",
+      "value": "Recorded value",
+      "limits": "Target and approved limits",
+      "status": "Performance level",
+      "change": "Change vs previous period",
+      "limitCrossed": "Limit crossed",
+      "deviation": "Beyond the limit by",
+      "period": "Period",
+      "share": "Share of indicators within limits",
+      "evaluated": "Evaluated",
+      "within": "Within limits"
+    },
+    "limit": {
+      "target": "Target: {v}",
+      "warning": "Warning: {v}",
+      "critical": "Critical: {v}",
+      "higherT": "At least {v}",
+      "lowerT": "At most {v}",
+      "rangeT": "{min} to {max}",
+      "below": "Below {v}",
+      "above": "Above {v}",
+      "outside": "Outside {min} – {max}",
+      "none": "No approved limits"
+    },
+    "status": {
+      "ok": "Within limits",
+      "warning": "Warning",
+      "critical": "Critical",
+      "insufficient_data": "Insufficient data",
+      "no_limits": "No approved limits"
+    },
+    "change": {
+      "improved": "Improved ({delta})",
+      "worsened": "Worsened ({delta})",
+      "unchanged": "No change",
+      "none": "—"
+    },
+    "units": {
+      "%": "%",
+      "h": "h",
+      "events": "events",
+      "tests": "tests",
+      "complaints": "complaints"
+    },
+    "counts": "Number of indicators by level",
+    "countsTotal": "Total",
+    "limitsSection": {
+      "intro": "Comparison with the limits approved at the time of the assessment.",
+      "none": "No indicator crossed its limits in this period.",
+      "crossedText": "{limit} ({kind})",
+      "kindWarning": "warning limit",
+      "kindCritical": "critical limit"
+    },
+    "trends": {
+      "intro": "Indicator values in the plant's approved assessments of the same length ({length}), oldest to newest in reading direction. ▲ marks a warning and ■ marks a critical value.",
+      "noValue": "—",
+      "chartTitle": "Share of indicators within limits, per period",
+      "chartDesc": "Share of the indicators evaluated against limits that were within limits, for each period.",
+      "singlePeriod": "Only one approved assessment of this length exists, so no trend is shown."
+    },
+    "problems": {
+      "none": "No problems were opened for this period.",
+      "intro": "{count, plural, one {1 problem} other {# problems}}.",
+      "indicator": "Indicator",
+      "value": "Value",
+      "detected": "Detected on",
+      "origin": "How opened",
+      "stage": "Problem status",
+      "auto": "Automatically (critical limit exceeded)",
+      "manual": "Manually",
+      "noValue": "No value"
+    },
+    "stage": {
+      "awaiting_obstacles": "Awaiting obstacles",
+      "choosing_action": "Choosing an action",
+      "treated": "Treated",
+      "documented": "Obstacle recorded, no action"
+    },
+    "obstacles": {
+      "none": "No obstacles were identified for this period.",
+      "obstacle": "Obstacle",
+      "classification": "Classification",
+      "notes": "Evidence and notes",
+      "confirmed": "Confirmed",
+      "possible": "Possible",
+      "unlisted": "Unlisted obstacle, added by the user",
+      "noNote": "—",
+      "forProblem": "Problem: {indicator}"
+    },
+    "actions": {
+      "none": "No corrective action was chosen for this period.",
+      "rank": "Rank",
+      "action": "Action",
+      "obstacle": "Linked obstacle",
+      "status": "Status",
+      "chosen": "Chosen, not yet implemented",
+      "implemented": "Implemented on {date}",
+      "needsStudy": "Needs further study",
+      "caseSpecific": "Case-specific action",
+      "noObstacle": "—",
+      "docOnly": "Obstacle recorded without a corrective action in: {list}.",
+      "separator": ", "
+    },
+    "missing": {
+      "none": "No missing data.",
+      "intro": "Indicators without a result in {period}.",
+      "insufficient": "Not enough data was entered to calculate a value for this indicator.",
+      "noLimits": "There are no approved limits to evaluate this indicator."
+    },
+    "notes": {
+      "summary": "Of {total} indicators in {period}, {evaluated} were evaluated against the approved limits: {ok} within limits, {warning} in warning and {critical} critical.",
+      "deviations": "Deviations were recorded in: {list}.",
+      "problems": "Problems opened: {count}. Obstacles identified: {obstacles} ({confirmed} confirmed). Corrective actions chosen: {actions} ({implemented} implemented).",
+      "problemsAll": "Problems opened across the periods included: {count}. Obstacles identified: {obstacles} ({confirmed} confirmed). Corrective actions chosen: {actions} ({implemented} implemented).",
+      "engineerNotes": "Engineer's notes",
+      "problemDescriptions": "Problem descriptions",
+      "disclaimer": "These results support decision-making and do not replace engineering judgement.",
+      "separator": ", "
+    },
+    "signature": {
+      "preparedBy": "Prepared by",
+      "approval": "Approval",
+      "date": "Date",
+      "jobTitle": "Job title"
+    },
+    "governorates": {},
+    "sources": {}
+  }
+}

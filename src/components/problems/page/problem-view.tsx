@@ -18,6 +18,7 @@ import { ProblemProvider, useProblem } from "./problem-context";
 
 function Banner() {
   const t = useTranslations("problems.banner");
+  const tReports = useTranslations("reports.links");
   const { problem, mutate } = useProblem();
   if (problem.open) return null;
   const treated = problem.stage === "treated";
@@ -46,13 +47,22 @@ function Banner() {
           {t("undo")}
         </Button>
       ) : null}
-      {!treated ? <span className="basis-full text-[12.5px] font-normal text-fg-2">{t("report")}</span> : null}
+      {!treated ? (
+        <Link
+          href={`/reports?assessment=${problem.header.assessmentId}`}
+          data-testid="problem-report-link"
+          className="basis-full text-[13px] font-medium text-primary underline-offset-4 hover:underline"
+        >
+          {tReports("problemPeriod")}
+        </Link>
+      ) : null}
     </div>
   );
 }
 
 function Inner() {
   const t = useTranslations("problems");
+  const tReports = useTranslations("reports.links");
   const rt = useRowText();
   const { problem, locale } = useProblem();
   const h = problem.header;
@@ -64,9 +74,27 @@ function Inner() {
         className="mb-2 inline-flex items-center gap-1 text-[13.5px] font-medium text-primary underline-offset-4 hover:underline"
       >
         <ChevronLeft aria-hidden="true" className="size-4 rtl:rotate-180" />
-        {t("back")} · {h.plantName} · {periodLabel(h.periodStart, h.months, locale)}
+        {t("back")} · <bdi>{h.plantName}</bdi> · {periodLabel(h.periodStart, h.months, locale)}
       </Link>
-      <PageHeader title={t("title")} description={`${name} · ${h.plantName}`} actions={<StageChip stage={problem.stage} />} />
+      <PageHeader title={t("title")} description={
+          <>
+            <bdi>{name}</bdi> · <bdi>{h.plantName}</bdi>
+          </>
+        } actions={
+          <>
+            <StageChip stage={problem.stage} />
+            {problem.stage !== "documented" ? (
+              <Link
+                href={`/reports?assessment=${h.assessmentId}`}
+                data-testid="problem-report-link"
+                className="text-[13px] font-medium text-primary underline-offset-4 hover:underline"
+              >
+                {tReports("problemPeriod")}
+              </Link>
+            ) : null}
+          </>
+        }
+      />
       <Banner />
       <div className="mt-5 flex flex-col gap-5">
         <ProblemFacts />

@@ -86,6 +86,7 @@ export function ActionsLog({ entries, hasAny }: Props) {
 
 function LogRow({ entry: e }: { entry: ActionLogEntry }) {
   const t = useTranslations("problemsList.log");
+  const tReports = useTranslations("reports.links");
   const locale = useLocale();
   const en = locale === "en";
   const text = e.kind === "custom" ? e.name : en && e.textEn ? e.textEn : e.textAr;
@@ -172,8 +173,8 @@ function LogRow({ entry: e }: { entry: ActionLogEntry }) {
         <div className="flex flex-wrap items-center justify-between gap-x-3 gap-y-2">
           <p className="m-0 min-w-0 flex-1 text-fg-3">
             <span className="font-medium text-fg-2">{t("problem")}: </span>
-            {ind.code ? <bdi dir="ltr" className="num me-1 inline-block font-mono text-[12px]">{ind.code}</bdi> : null}
-            {indName} · {e.plantName} · {periodLabel(e.periodStart, e.months, locale)}
+            {ind.code ? <bdi dir="ltr" className="num me-2 inline-block font-mono text-[12px]">{ind.code}</bdi> : null}
+            <bdi>{indName}</bdi> · <bdi>{e.plantName}</bdi> · {periodLabel(e.periodStart, e.months, locale)}
           </p>
           <StageChip stage={e.problemStage} />
           <Link
@@ -182,6 +183,13 @@ function LogRow({ entry: e }: { entry: ActionLogEntry }) {
             className={cn(buttonVariants({ variant: "secondary" }), "h-8 rounded-[10px] px-3 text-[13px] max-sm:w-full")}
           >
             {t("openProblem")}
+          </Link>
+          <Link
+            href={`/reports?problem=${e.problemId}`}
+            data-testid="log-report-link"
+            className={cn(buttonVariants({ variant: "secondary" }), "h-8 rounded-[10px] px-3 text-[13px] max-sm:w-full")}
+          >
+            {tReports("logRow")}
           </Link>
         </div>
       </div>

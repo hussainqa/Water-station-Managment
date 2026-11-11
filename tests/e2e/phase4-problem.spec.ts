@@ -515,6 +515,22 @@ for (const lang of ["ar", "en"] as const) {
     await expect(page.getByTestId("done-banner")).toContainText(m.banner.documented);
     await expect(page.getByTestId("obstacle-only")).toHaveCount(0);
     await expect.poll(() => openCount(seed.userId), { timeout: 60_000, intervals: [500, 1_000] }).toBe(before - 2); // SC-04 treated again, SC-03 documented
+    // choosing an action clears the flag: documented -> treated -> un-choose -> choosing_action (not documented)
+    const card44 = cardOf(group(page, "O-37"), "A-44");
+    await card44.getByTestId("choose").click();
+    await expect(chip(page)).toHaveAttribute("data-stage", "treated", { timeout: 30_000 });
+    await expect(chip(page)).toHaveText(m.stage.treated);
+    await expect(page.getByTestId("obstacle-only-undo")).toHaveCount(0);
+    await expect.poll(() => openCount(seed.userId), { timeout: 60_000, intervals: [500, 1_000] }).toBe(before - 2);
+    await card44.getByTestId("choose").click();
+    await expect(chip(page)).toHaveAttribute("data-stage", "choosing_action", { timeout: 30_000 });
+    await expect(chip(page)).toHaveText(m.stage.choosing_action);
+    await expect(page.getByTestId("done-banner")).toHaveCount(0);
+    await expect(page.getByTestId("obstacle-only")).toBeVisible();
+    await expect.poll(() => openCount(seed.userId), { timeout: 60_000, intervals: [500, 1_000] }).toBe(before - 1);
+    // keep the obstacle only once more, then undo it by hand
+    await page.getByTestId("obstacle-only").click();
+    await expect(chip(page)).toHaveAttribute("data-stage", "documented", { timeout: 30_000 });
     await page.getByTestId("obstacle-only-undo").click();
     await expect(chip(page)).toHaveAttribute("data-stage", "choosing_action", { timeout: 30_000 });
     await expect(page.getByTestId("done-banner")).toHaveCount(0);

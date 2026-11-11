@@ -259,7 +259,7 @@ function CustomObstacleRow({ sel, onEdit }: { sel: CustomSel; onEdit: (o: Custom
           <span className="mb-1 inline-block rounded-full bg-secondary px-2 py-0.5 text-[11.5px] font-semibold text-fg-2">
             {t("unlistedTag")}
           </span>
-          <p data-testid="obstacle-text" className="m-0 text-[14.5px] font-medium leading-relaxed">
+          <p data-testid="obstacle-text" dir="auto" className="m-0 text-[14.5px] font-medium leading-relaxed">
             {sel.name}
           </p>
           {sel.description ? <p className="m-0 mt-1 text-[13.5px] text-fg-2">{sel.description}</p> : null}

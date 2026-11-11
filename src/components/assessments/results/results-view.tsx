@@ -33,6 +33,7 @@ const card = "rounded-2xl border border-border bg-card p-4 shadow-(--shadow-card
 
 export function ResultsView({ results, stages = {} }: { results: AssessmentResults; stages?: ProblemStageMap }) {
   const t = useTranslations("assessments");
+  const tReports = useTranslations("reports.links");
   const rt = useRowText();
   const locale = useLocale();
   const { header } = results;
@@ -58,7 +59,19 @@ export function ResultsView({ results, stages = {} }: { results: AssessmentResul
         <ChevronLeft aria-hidden="true" className="size-4 rtl:rotate-180" />
         {t("results.back")}
       </Link>
-      <PageHeader title={t("results.title")} description={`${header.plantName} · ${period}`} />
+      <PageHeader
+        title={t("results.title")}
+        description={`${header.plantName} · ${period}`}
+        actions={
+          <Link
+            href={`/reports?assessment=${header.id}`}
+            data-testid="results-report-link"
+            className={buttonVariants({ variant: "outline" })}
+          >
+            {tReports("period")}
+          </Link>
+        }
+      />
 
       <div className="mt-5 flex flex-col gap-4">
         <SummaryCard results={results} period={period} />

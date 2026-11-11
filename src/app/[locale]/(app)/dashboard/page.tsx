@@ -1,14 +1,18 @@
-import { ClipboardList, Factory, Plus } from "lucide-react";
+import { Factory, Plus } from "lucide-react";
 import { getTranslations, setRequestLocale } from "next-intl/server";
-import { AssessmentRow } from "@/components/assessments/list/assessment-row";
+import { Alerts } from "@/components/dashboard/alerts";
+import { Breakdown } from "@/components/dashboard/breakdown";
+import { LatestAssessments } from "@/components/dashboard/latest";
+import { Tiles } from "@/components/dashboard/tiles";
 import { EmptyState } from "@/components/shell/empty-state";
 import { PageHeader } from "@/components/shell/page-header";
 import { buttonVariants } from "@/components/ui/button";
 import { withUser } from "@/db/with-user";
 import { Link } from "@/i18n/navigation";
-import { listLatestAssessments } from "@/lib/assessments/service";
 import { requireUser } from "@/lib/auth/session";
+import { getFilters } from "@/lib/context/filters";
 import { getPlantOptions } from "@/lib/context/plants";
+import { getDashboard } from "@/lib/dashboard/service";
 import { cn } from "cn";
 
 export default async function DashboardPage({
@@ -17,68 +21,68 @@ export default async function DashboardPage({
   const { locale } = await params;
   setRequestLocale(locale);
   const user = await requireUser();
-  const [t, plants] = await Promise.all([
+  const [t, tShell, plants, filters] = await Promise.all([
+    getTranslations("dashboard"),
     getTranslations("shell"),
     getPlantOptions(user.id),
+    getFilters(),
   ]);
 
-  const latest = plants.length
-    ? await withUser(user.id, (tx) => listLatestAssessments(tx, user.id, 5))
-    : [];
-
-  return (
-    <>
-      <PageHeader title={t("pages.dashboard")} />
-      <section className="rounded-2xl border border-border bg-card shadow-(--shadow-card)">
-        {plants.length === 0 ? (
+  if (plants.length === 0) {
+    return (
+      <>
+        <PageHeader title={tShell("pages.dashboard")} />
+        <section className="rounded-2xl border border-border bg-card shadow-(--shadow-card)">
           <EmptyState
             icon={Factory}
-            title={t("dashboard.empty.title")}
-            text={t("dashboard.empty.text")}
+            title={tShell("dashboard.empty.title")}
+            text={tShell("dashboard.empty.text")}
             action={
               <Link
                 href="/plants?new=1"
                 className={cn(buttonVariants({ size: "lg" }), "h-11 gap-2 rounded-[13px] px-5 text-[15px]")}
               >
                 <Plus aria-hidden="true" className="size-[18px]" />
-                {t("dashboard.empty.cta")}
+                {tShell("dashboard.empty.cta")}
               </Link>
             }
           />
-        ) : latest.length === 0 ? (
-          <EmptyState
-            icon={ClipboardList}
-            title={t("dashboard.latest.empty.title")}
-            text={t("dashboard.latest.empty.text")}
-            action={
-              <Link
-                href="/assessments/new"
-                className={cn(buttonVariants({ size: "lg" }), "h-11 gap-2 rounded-[13px] px-5 text-[15px]")}
-              >
-                <Plus aria-hidden="true" className="size-[18px]" />
-                {t("dashboard.latest.empty.cta")}
-              </Link>
-            }
-          />
-        ) : (
-          <div data-testid="latest-assessments" className="p-4 sm:p-5">
-            <div className="flex flex-wrap items-end justify-between gap-2">
-              <div>
-                <h2 className="text-[17px] font-bold">{t("dashboard.latest.title")}</h2>
-                <p className="m-0 mt-0.5 text-[13px] text-fg-3">{t("dashboard.latest.text")}</p>
-              </div>
-              <Link href="/assessments" className="text-[13.5px] font-semibold text-primary underline-offset-4 hover:underline">
-                {t("dashboard.latest.all")}
-              </Link>
-            </div>
-            <ul className="m-0 mt-3 flex list-none flex-col gap-2.5 p-0">
-              {latest.map((i) => (
-                <AssessmentRow key={i.id} item={i} compact />
-              ))}
-            </ul>
-          </div>
-        )}
-      </section>
+        </section>
+      </>
+    );
+  }
+
+  const data = await withUser(user.id, (tx) =>
+    getDashboard(tx, user.id, { plantId: filters.plantId, range: filters.range, now: new Date() }),
+  );
+  const range = tShell(`filters.range.${filters.range}`);
+  const selected = filters.plantId ? plants.find((p) => p.id === filters.plantId) : null;
+  const eyebrow = selected
+    ? t("eyebrowOne", { plant: selected.name, range })
+    : t("eyebrow", { plants: plants.length, range });
+
+  return (
+    <>
+      <PageHeader
+        title={tShell("pages.dashboard")}
+        description={eyebrow}
+        actions={
+          <Link
+            href="/assessments/new"
+            data-testid="dashboard-new"
+            className={cn(buttonVariants({ size: "lg" }), "h-11 gap-2 rounded-[13px] px-5 text-[15px]")}
+          >
+            <Plus aria-hidden="true" className="size-[18px]" />
+            {t("newAssessment")}
+          </Link>
+        }
+      />
+      <div className="mt-5 flex flex-col gap-5">
+        <Tiles tiles={data.tiles} />
+        <Breakdown items={data.breakdown} />
+        <Alerts alerts={data.alerts} />
+        <LatestAssessments items={data.latest} />
+      </div>
     </>
   );
 }

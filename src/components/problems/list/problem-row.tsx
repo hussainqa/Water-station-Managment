@@ -28,10 +28,10 @@ export function ProblemRow({ item }: { item: ProblemListItem }) {
       className="flex flex-col gap-3 rounded-xl border border-border bg-card p-3.5 sm:px-4"
     >
       <div className="flex flex-wrap items-start justify-between gap-x-3 gap-y-2">
-        <div className="min-w-0 flex-1">
+        <div className="min-w-0 flex-[1_1_16rem]">
           <p className="m-0 text-[12.5px] text-fg-3">
             {ind.code ? <span className="num rounded-md bg-muted px-1.5 py-0.5 font-mono text-[12px]">{ind.code}</span> : null}
-            <span className={ind.code ? "ms-1.5" : ""}>{item.plantName}</span> ·{" "}
+            <bdi className={ind.code ? "ms-1.5" : ""}>{item.plantName}</bdi> ·{" "}
             <span>{periodLabel(item.periodStart, item.months, locale)}</span>
           </p>
           <h3 className="mt-1 break-words text-[16px] font-semibold">{name}</h3>

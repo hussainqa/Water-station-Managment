@@ -69,7 +69,7 @@ export function ProblemFacts() {
       </StepHeading>
       <dl className="m-0 mt-4 grid grid-cols-2 gap-2.5 lg:grid-cols-4">
         <Fact label={t("facts.plant")} testId="fact-plant">
-          {h.plantName}
+          <bdi>{h.plantName}</bdi>
         </Fact>
         <Fact label={t("facts.indicator")} testId="fact-indicator">
           {indicatorName}

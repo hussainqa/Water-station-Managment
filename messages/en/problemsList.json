@@ -41,7 +41,7 @@
       "all": "All",
       "chosen": "Chosen, not implemented",
       "implemented": "Implemented",
-      "needsStudy": "Needs study"
+      "needsStudy": "Needs further study"
     },
     "state": {
       "chosen": "Chosen",

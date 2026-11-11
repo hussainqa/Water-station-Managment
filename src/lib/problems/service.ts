@@ -766,6 +766,16 @@ async function clearFlagIfNoObstacles(
   events.push({ action: "obstacle_only_cleared", payload: { reason: "lastObstacleRemoved" } });
 }
 
+/** Choosing an action ends "obstacle only": the flag is cleared in the same transaction (prototype behaviour). */
+async function clearFlagOnChoose(tx: UserTx, userId: string, p: ProblemRow): Promise<Ev[]> {
+  if (!p.obstacleOnly) return [];
+  await tx
+    .update(problems)
+    .set({ obstacleOnly: false })
+    .where(and(eq(problems.id, p.id), eq(problems.ownerId, userId)));
+  return [{ action: "obstacle_only_cleared", payload: { reason: "actionChosen" } }];
+}
+
 // --- writes: description and obstacles -------------------------------------------------------
 
 export async function updateDescription(
@@ -1171,12 +1181,14 @@ export async function setActionChosen(
           ...linkCols(link),
         });
       }
+      const cleared = await clearFlagOnChoose(tx, userId, p);
       return {
         events: [
           {
             action: "action_chosen",
             payload: { ...actionWho(input.actionCode), ...linkCols(link) },
           },
+          ...cleared,
         ],
       };
     }
@@ -1346,6 +1358,7 @@ export async function addCustomAction(
     ];
     if (input.chooseNow) {
       events.push({ action: "action_chosen", payload: { ...customWho(c.id), ...linkCols(link) } });
+      events.push(...(await clearFlagOnChoose(tx, userId, p)));
     }
     return { events, extra: { customActionId: c.id } };
   });
@@ -1409,6 +1422,7 @@ export async function setCustomActionChosen(
     if (c.chosen === input.chosen) return nothing();
     if (input.chosen) {
       await tx.update(customActions).set({ chosen: true }).where(eq(customActions.id, c.id));
+      const cleared = await clearFlagOnChoose(tx, userId, p);
       return {
         events: [
           {
@@ -1419,6 +1433,7 @@ export async function setCustomActionChosen(
               linkedCustomObstacleId: c.linkedCustomObstacleId,
             },
           },
+          ...cleared,
         ],
       };
     }

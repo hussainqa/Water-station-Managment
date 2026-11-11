@@ -81,7 +81,7 @@ for (const lang of ["ar", "en"] as const) {
     await page.goto(`/${lang}/dashboard`);
     await expect(page.getByTestId("latest-assessments")).toBeVisible({ timeout: 60_000 });
     await expect(page.getByTestId("assessment-row").first()).toBeVisible();
-    expect(await page.getByTestId("assessment-row").count()).toBeLessThanOrEqual(5);
+    expect(await page.getByTestId("assessment-row").count()).toBeLessThanOrEqual(6);
     expect(await page.locator("body").innerText()).not.toMatch(FORBIDDEN);
     await noHorizontalScroll(page);
 

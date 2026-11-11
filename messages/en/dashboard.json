@@ -1,1 +1,81 @@
-{"_": ""}
+{
+  "eyebrow": "{plants, plural, one {# plant} other {# plants}} · {range}",
+  "eyebrowOne": "{plant} · {range}",
+  "newAssessment": "New assessment",
+  "tiles": {
+    "label": "Summary figures",
+    "plants": {
+      "label": "Registered plants",
+      "foot": "{count, plural, =0 {None assessed in this period} one {# assessed in this period} other {# assessed in this period}}"
+    },
+    "assessments": {
+      "label": "Assessments completed",
+      "foot": "Within the monitoring period",
+      "drafts": "{count, plural, one {# draft awaiting approval} other {# drafts awaiting approval}}"
+    },
+    "within": {
+      "label": "Within acceptable limits",
+      "foot": "Of indicators evaluated in the latest assessments"
+    },
+    "followUp": {
+      "label": "Need follow-up",
+      "critical": "{count, plural, one {# critical} other {# critical}}",
+      "none": "No critical deviation",
+      "handled": "{count, plural, one {# deviation handled} other {# deviations handled}}"
+    },
+    "problems": {
+      "label": "Problems to review",
+      "foot": "Awaiting obstacles or an action"
+    }
+  },
+  "breakdown": {
+    "title": "Indicator status breakdown",
+    "text": "From each plant’s latest approved assessment in the monitoring period",
+    "listLabel": "Plants and their indicator status",
+    "summary": "{ok} of {total} within limits",
+    "barLabel": "{plant}, {period}: {parts}",
+    "notAssessed": "Not assessed in this period",
+    "open": "View results",
+    "openLabel": "View the results of {plant} · {period}",
+    "legend": "Legend",
+    "empty": {
+      "title": "No approved assessments yet",
+      "text": "The breakdown appears once a plant has an approved assessment in the selected period."
+    }
+  },
+  "alerts": {
+    "title": "Alerts",
+    "text": "Indicators past the warning or critical limit that are not yet treated",
+    "critical": "{count} critical",
+    "warning": "{count} warning",
+    "tableLabel": "Alerts",
+    "cols": {
+      "plant": "Plant",
+      "indicator": "Indicator",
+      "value": "Recorded value",
+      "limit": "Approved limit",
+      "status": "Status",
+      "date": "Assessed on",
+      "action": "Action"
+    },
+    "openProblem": "Open the problem",
+    "openProblemLabel": "Open the problem of {indicator} ({plant})",
+    "openResults": "Open the results",
+    "openResultsLabel": "Open the results of {plant} · {period} to follow up {indicator}",
+    "noProblemHint": "No problem opened yet",
+    "empty": {
+      "title": "No alerts",
+      "text": "All followed indicators are within limits, or their deviations have been handled."
+    }
+  },
+  "latest": {
+    "title": "Latest assessments",
+    "text": "Open an assessment for detailed results and its audit trail",
+    "all": "View all assessments",
+    "empty": {
+      "title": "No assessments yet",
+      "text": "Create the first assessment for one of your plants.",
+      "cta": "New assessment"
+    }
+  }
+}

@@ -58,5 +58,19 @@ describe("applyPatch", () => {
     expect(p.stage).toBe("documented");
     p = applyPatch(p, { t: "action", texts, state: { chosen: true } });
     expect(p.stage).toBe("treated");
+    // choosing cleared the flag, so un-choosing returns to choosing_action
+    expect(p.obstacleOnly).toBe(false);
+    p = applyPatch(p, { t: "action", texts, state: { chosen: false } });
+    expect(p.stage).toBe("choosing_action");
+  });
+  it("choosing a case-specific action also clears the flag", () => {
+    let p = applyPatch(base(), { t: "obstacleSet", obstacle: o("O-36", 5, 1, "confirmed") });
+    p = applyPatch(p, { t: "obstacleOnly", value: true });
+    p = { ...p, customActions: [{ id: "c1", name: "x", description: "", rationale: "", chosen: false, needsStudy: false, implementedOn: null, linkedObstacle: null } as never] };
+    p = applyPatch(p, { t: "customAction", id: "c1", state: { chosen: true } });
+    expect(p.stage).toBe("treated");
+    expect(p.obstacleOnly).toBe(false);
+    p = applyPatch(p, { t: "customAction", id: "c1", state: { chosen: false } });
+    expect(p.stage).toBe("choosing_action");
   });
 });

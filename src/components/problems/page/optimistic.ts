@@ -103,7 +103,8 @@ export function applyPatch(p: ProblemDto, patch: Patch): ProblemDto {
           },
         ];
       }
-      return withStage({ ...p, suggestions, chosenActions });
+      // choosing an action ends "obstacle only" (the server clears the flag too)
+      return withStage({ ...p, suggestions, chosenActions, obstacleOnly: state.chosen === true ? false : p.obstacleOnly });
     }
 
     case "customAction": {
@@ -130,7 +131,12 @@ export function applyPatch(p: ProblemDto, patch: Patch): ProblemDto {
           },
         ];
       }
-      return withStage({ ...p, customActions, chosenActions });
+      return withStage({
+        ...p,
+        customActions,
+        chosenActions,
+        obstacleOnly: state.chosen === true ? false : p.obstacleOnly,
+      });
     }
 
     case "obstacleOnly":

@@ -84,7 +84,12 @@ export function describeProblemAudit(
       return { key: "obstacle_only_set", values: {} };
     case "obstacle_only_cleared":
       return {
-        key: p.reason === "lastObstacleRemoved" ? "obstacle_only_cleared_auto" : "obstacle_only_cleared",
+        key:
+          p.reason === "lastObstacleRemoved"
+            ? "obstacle_only_cleared_auto"
+            : p.reason === "actionChosen"
+              ? "obstacle_only_cleared_chosen"
+              : "obstacle_only_cleared",
         values: {},
       };
     case "stage_changed":

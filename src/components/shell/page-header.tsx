@@ -2,7 +2,7 @@ import { cn } from "cn";
 
 type Props = {
   title: string;
-  description?: string;
+  description?: React.ReactNode;
   /** Buttons for the end side of the header. */
   actions?: React.ReactNode;
   className?: string;

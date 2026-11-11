@@ -41,12 +41,12 @@
       "all": "الكل",
       "chosen": "مختارة دون تنفيذ",
       "implemented": "منفذة",
-      "needsStudy": "تحتاج دراسة"
+      "needsStudy": "يتطلب مزيداً من الدراسة"
     },
     "state": {
       "chosen": "تم الاختيار",
       "implemented": "نُفّذ",
-      "needsStudy": "يحتاج دراسة إضافية"
+      "needsStudy": "يتطلب مزيداً من الدراسة"
     },
     "implementedOn": "نُفّذ في {date}",
     "caseSpecific": "إجراء خاص بالحالة",

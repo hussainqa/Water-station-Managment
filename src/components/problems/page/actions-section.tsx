@@ -103,7 +103,7 @@ function ObstacleGroup({ group }: { group: SuggestionGroup }) {
       className="flex flex-col gap-3 rounded-2xl bg-muted/60 p-3 sm:p-4"
     >
       <div className="flex flex-wrap items-start gap-2">
-        <h3 id={`ag-${o.key}`} data-testid="group-title" className="m-0 min-w-0 flex-1 basis-60 text-[14.5px] font-bold leading-relaxed">
+        <h3 id={`ag-${o.key}`} data-testid="group-title" dir="auto" className="m-0 min-w-0 flex-1 basis-60 text-[14.5px] font-bold leading-relaxed">
           {obstacleLabel(o, locale)}
         </h3>
         <ClassificationPill value={o.classification} />
@@ -166,12 +166,12 @@ function Summary() {
   }, [problem.suggestions, problem.chosenActions, problem.customActions]);
 
   const tile = (testId: string, label: string, n: number, tone: string, Icon: typeof Check) => (
-    <div className={`rounded-xl p-2.5 text-center ${tone}`} data-testid={testId}>
-      <Icon aria-hidden="true" className="mx-auto size-4" />
-      <b className="num mt-1 block text-[20px] leading-none" data-testid={`${testId}-n`}>
+    <div className={`flex items-center gap-2 rounded-xl px-2.5 py-2 ${tone}`} data-testid={testId}>
+      <Icon aria-hidden="true" className="size-4 shrink-0" />
+      <span className="min-w-0 flex-1 text-[12.5px] font-medium leading-tight">{label}</span>
+      <b className="num text-[18px] leading-none" data-testid={`${testId}-n`}>
         {n}
       </b>
-      <span className="mt-1 block text-[12px] font-medium">{label}</span>
     </div>
   );
 
@@ -184,7 +184,7 @@ function Summary() {
       <h3 id="summary-h" className="m-0 text-[14.5px] font-bold">
         {t("title")}
       </h3>
-      <div className="mt-3 grid grid-cols-3 gap-2">
+      <div className="mt-3 grid gap-2 sm:grid-cols-3 lg:grid-cols-1">
         {tile("sum-chosen", t("chosen"), chosen.length, "bg-primary/10 text-primary", ListChecks)}
         {tile("sum-implemented", t("implemented"), implemented, "bg-ok-soft text-ok", Check)}
         {tile("sum-study", t("study"), study, "bg-nolimits-soft text-nolimits", BookOpen)}

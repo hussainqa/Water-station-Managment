@@ -44,6 +44,7 @@ describe("describeProblemAudit", () => {
     });
     expect(d("obstacle_only_cleared", { reason: "manual" }).key).toBe("obstacle_only_cleared");
     expect(d("obstacle_only_cleared", { reason: "lastObstacleRemoved" }).key).toBe("obstacle_only_cleared_auto");
+    expect(d("obstacle_only_cleared", { reason: "actionChosen" }).key).toBe("obstacle_only_cleared_chosen");
   });
   it("never leaks a raw code for unknown actions", () => {
     expect(d("something_new").key).toBe("unknown");
@@ -58,7 +59,7 @@ describe("describeProblemAudit", () => {
       expect(ar[key], `ar.audit.${key}`).toBeTruthy();
       expect(en[key], `en.audit.${key}`).toBeTruthy();
     }
-    for (const key of ["obstacle_only_cleared_auto", "opened_manual", "unknown"]) {
+    for (const key of ["obstacle_only_cleared_auto", "obstacle_only_cleared_chosen", "opened_manual", "unknown"]) {
       expect((arMessages as { audit: Record<string, string> }).audit[key]).toBeTruthy();
       expect((enMessages as { audit: Record<string, string> }).audit[key]).toBeTruthy();
     }

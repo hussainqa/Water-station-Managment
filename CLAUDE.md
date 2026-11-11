@@ -31,6 +31,7 @@ A bilingual (Arabic RTL default, English LTR) decision-support web app for an MS
 | Auth | Better Auth: email + password, sessions in Postgres, reset by email, on its own database role |
 | Theme | next-themes: Light / Dark / System, saved per user |
 | Email | Nodemailer over SMTP; Mailpit locally |
+| PDF | Gotenberg container (headless Chromium, `GOTENBERG_URL`); the app posts self-contained report HTML and streams the PDF back |
 | Validation | Zod 4, shared by client and server |
 | Tests | Vitest: `unit` project (pure logic) and `db` project (real database); Playwright for end-to-end |
 
@@ -40,7 +41,7 @@ This Next.js version differs from older ones (for example `src/proxy.ts` replace
 
 ```bash
 cp .env.example .env     # first time only
-npm run db:up            # start Postgres (localhost:54329) and Mailpit (UI http://localhost:54326)
+npm run db:up            # start Postgres (localhost:54329), Mailpit (UI http://localhost:54326) and the PDF service (localhost:54327)
 npm run db:migrate       # create/repair the database and roles (db:roles), then apply drizzle/*.sql
 npm run db:seed          # load docs/handoff/data into the reference tables (idempotent)
 npm run db:seed:demo     # create or fully reset the demo account engineer@wtp.iq / demo1234 (3 plants, Mar-Aug 2026)
@@ -60,7 +61,7 @@ npm run test:e2e         # Playwright journeys (starts the dev server if needed)
                          # E2E_KEEP_USERS=1 skips test-user cleanup when two runs share the database
 ```
 
-Ports are non-default on purpose (3100, 54329, 54325, 54326) so they do not collide with other local projects.
+Ports are non-default on purpose (3100, 54329, 54325, 54326, 54327) so they do not collide with other local projects.
 
 ## Folder structure
 
@@ -89,6 +90,9 @@ src/lib/assessments/   drafts, approval (server recompute, limits snapshot, audi
 src/components/assessments/  wizard/ (4 steps), results/ (results page, drawer, chart), list/
 src/lib/problems/      obstacles, ranked suggestions, show-all, custom obstacles/actions, action lifecycle, derived stage (stage.ts), audit
 src/components/problems/  page/ (single problem), list/; src/components/actions-log/
+src/lib/dashboard/     tiles, per-plant breakdown, alerts, latest assessments (getDashboard)
+src/lib/reports/       report data (service.ts), pure HTML renderer (render/), Gotenberg client (pdf.ts)
+src/app/api/reports/   pdf and html endpoints (session-authenticated)
 src/components/shared/ ResponsiveDialog (dialog on desktop, bottom sheet on phones)
 src/components/plants/, src/components/indicators/   feature UI; ThresholdScale lives in indicators/
 src/lib/context/       top-bar filters (plant, monitoring period) stored in cookies: getFilters(), setFilters
@@ -141,8 +145,10 @@ Never edit a migration that has been committed; add a new one.
 - **Limits are per user per indicator**, not per plant. `ensureDefaultLimits` copies the seeded defaults once and never overwrites; user-defined indicators start with no approved limits. **Adoption is per plant**; a missing `plant_indicators` row means not adopted. New plants adopt all system indicators plus the user's adopt-all indicators.
 - **A plant with assessments (drafts included) cannot be deleted**; the database refuses too.
 - **Assessments.** A period is a start month + 1/3/6/9/12 months and must have ended or be the current month (Baghdad time). Same-length periods of one plant may not overlap (DB exclusion constraint, SQLSTATE 23P01); different lengths may. One draft per plant + start + length; approving updates that row. **Approved assessments are final** (DB triggers, WA001/WA002): only the per-indicator note may change, and that is audited. Approval recomputes every value from stored raw inputs, evaluates against the user's current limits, stores them as `limits_snapshot`, and opens one auto problem per critical reading. Results, drawers, charts and reports read the snapshot, never current limits. Time-dependent service functions take `now` as an argument.
-- **Problems.** Status is derived, never stored (`deriveStage` in `src/lib/problems/stage.ts`): any chosen action → treated; else the obstacle-only flag → documented; else any obstacle → choosing an action; else awaiting obstacles. Open = the last two; only those count in the badge, alerts and `openProblems`. Chosen and implemented are different states; an implemented date needs a chosen action (DB check), must not be in the future or before detection, and is cleared on un-choosing.
+- **Problems.** Status is derived, never stored (`deriveStage` in `src/lib/problems/stage.ts`): any chosen action → treated; else the obstacle-only flag → documented (choosing an action clears the flag, so un-choosing returns to choosing an action, not documented); else any obstacle → choosing an action; else awaiting obstacles. Open = the last two; only those count in the badge, alerts and `openProblems`. Chosen and implemented are different states; an implemented date needs a chosen action (DB check), must not be in the future or before detection, and is cleared on un-choosing.
 - **Obstacles and actions are shown by text only.** Obstacles are numbered per axis from `seq_in_axis`; action cards show the rank and the text. Never render obstacle or action codes (`O-36`, `A-41`), RII, correlation, priority % or importance order, and never label the view's `sortPosition` as a rank. The app role cannot read `rii`, `correlation_r`, `priority_pct` or `importance_order`.
+- **Dashboard.** A plant's "latest assessment" is its most recent approved assessment whose period ends inside the top-bar period. Tiles and alerts come from those. Alerts list every warning or critical reading, including warnings with no problem, and exclude readings whose problem is treated or documented.
+- **Reports** are work reports (client note 15): no logos, institution lines, researcher or supervisor names, demo wording, RII or codes of obstacles/actions. `renderReportHtml` is a pure template-string renderer (never import react-dom/server); every interpolated value goes through the escape helper; the document is fully self-contained (inline CSS, base64 fonts, inline SVG, no scripts, no URLs) because the PDF container has JavaScript and all network access disabled. The on-screen preview is the same HTML the PDF is made from. Labels inside the document live under `reports.doc` so a report can be produced in either language regardless of the UI language.
 - **Audit events** store action codes and a payload; the UI turns them into sentences.
 - **Demo data** is created only by `scripts/seed-demo.ts`, through the real service code, never by migrations. Tests seed their own copy under an `e2e-…@test.local` address and must not touch `engineer@wtp.iq`.
 - **Threshold scale:** use `ThresholdScale` wherever an indicator value appears.
