@@ -81,7 +81,7 @@ describe("formulaText", () => {
     expect(formulaText("ratio", { numerator: "٢٢٩", denominator: "٢٤٠" }, 95.4166, "%")).toBe("229 ÷ 240 × 100 = 95.4 %");
   });
   it("writes averages, durations and recorded values", () => {
-    expect(formulaText("average", { total: "30", count: "7" }, 30 / 7, "h")).toBe("30 ÷ 7 = 4.3 h");
+    expect(formulaText("average", { value: "4.29" }, 4.29, "h")).toBe("4.29 = 4.3 h");
     expect(formulaText("duration", { value: "390", unit: "min" }, 6.5, "h", "min")).toBe("390 min ÷ 60 = 6.5 h");
     expect(formulaText("duration", { value: "6.5", unit: "h" }, 6.5, "h")).toBe("6.5 h = 6.5 h");
     expect(formulaText("direct", { value: "7" }, 7, "events")).toBe("7 = 7 events");

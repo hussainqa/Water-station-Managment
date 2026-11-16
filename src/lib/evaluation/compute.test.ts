@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { computeValue, evaluateInputs } from "./compute";
+import { computeValue, evaluateInputs, upgradeLegacyInputs } from "./compute";
 import type { EvaluationSpec, Method } from "./types";
 
 const ev = (method: Method, inputs: Record<string, string | number | null | undefined>, extra?: Partial<EvaluationSpec>) =>
@@ -103,31 +103,32 @@ describe("ratio", () => {
 });
 
 describe("average", () => {
-  it("12/4 -> 3", () => {
-    expect(ev("average", { total: 12, count: 4 })).toEqual({ state: "complete", errors: {}, value: 3 });
-  });
-  it("total 0 allowed", () => expect(ev("average", { total: 0, count: 3 }).value).toBe(0));
-  it("non-integer total ok", () => expect(ev("average", { total: 10, count: 4 }).value).toBe(2.5));
-  it("partial / missing", () => {
-    expect(ev("average", { total: 12 }).state).toBe("partial");
-    expect(ev("average", { count: 4 }).state).toBe("partial");
+  it("is entered directly as one value", () => {
+    expect(ev("average", { value: "4.29" })).toEqual({ state: "complete", errors: {}, value: 4.29 });
+    expect(ev("average", { value: 0 }).value).toBe(0);
     expect(ev("average", {}).state).toBe("missing");
   });
-  it("count must be integer without being configured", () => {
-    expect(ev("average", { total: 12, count: 2.5 }).errors).toEqual({ count: "not_integer" });
-  });
-  it("zero_count", () => {
-    expect(ev("average", { total: 12, count: 0 })).toEqual({
-      state: "error",
-      errors: { count: "zero_count" },
-      value: null,
-    });
-    expect(ev("average", { count: 0 }).errors).toEqual({ count: "zero_count" });
-  });
   it("negative and invalid", () => {
-    expect(ev("average", { total: -1, count: 2 }).errors).toEqual({ total: "negative" });
-    expect(ev("average", { total: 1, count: "x" }).errors).toEqual({ count: "invalid_number" });
-    expect(ev("average", { total: 1, count: -2 }).errors).toEqual({ count: "negative" });
+    expect(ev("average", { value: -1 }).errors).toEqual({ value: "negative" });
+    expect(ev("average", { value: "x" }).errors).toEqual({ value: "invalid_number" });
+  });
+  it("derives the value of a reading saved as total and count", () => {
+    expect(ev("average", { total: 12, count: 4 })).toEqual({ state: "complete", errors: {}, value: 3 });
+    expect(ev("average", { total: "30", count: "7" }).value).toBeCloseTo(30 / 7, 10);
+    // an entered value wins over old inputs
+    expect(ev("average", { value: "5", total: 12, count: 4 }).value).toBe(5);
+    // unusable old inputs leave the reading missing
+    expect(ev("average", { total: 12, count: 0 }).state).toBe("missing");
+    expect(ev("average", { total: 12 }).state).toBe("missing");
+  });
+});
+
+describe("upgradeLegacyInputs", () => {
+  it("only touches averages without a value", () => {
+    expect(upgradeLegacyInputs("average", { total: "10", count: "4" })).toEqual({ total: "10", count: "4", value: "2.5" });
+    expect(upgradeLegacyInputs("average", { value: "1", total: "10", count: "4" })).toEqual({ value: "1", total: "10", count: "4" });
+    expect(upgradeLegacyInputs("average", { total: "10", count: "2.5" })).toEqual({ total: "10", count: "2.5" });
+    expect(upgradeLegacyInputs("ratio", { total: "10", count: "4" })).toEqual({ total: "10", count: "4" });
   });
 });
 
@@ -148,6 +149,7 @@ describe("computeValue", () => {
   });
   it("returns null otherwise", () => {
     expect(computeValue("average", { total: 1, count: 0 })).toBeNull();
+    expect(computeValue("average", { value: "" })).toBeNull();
     expect(computeValue("direct", {})).toBeNull();
     expect(computeValue("ratio", { numerator: 1 })).toBeNull();
   });

@@ -9,7 +9,7 @@ describe("sanitizeInputs", () => {
   });
 
   it("fills missing keys with null", () => {
-    expect(sanitizeInputs("average", {})).toEqual({ total: null, count: null });
+    expect(sanitizeInputs("average", {})).toEqual({ value: null });
     expect(sanitizeInputs("direct", undefined)).toEqual({ value: null });
   });
 
@@ -18,6 +18,11 @@ describe("sanitizeInputs", () => {
     expect(sanitizeInputs("duration", { value: "2", unit: "days" })).toEqual({ value: "2", unit: "h" });
     expect(sanitizeInputs("duration", { value: "2" })).toEqual({ value: "2", unit: "h" });
     expect(storedInputKeys("duration")).toEqual(["value", "unit"]);
+  });
+
+  it("upgrades an average saved as total and count to its value", () => {
+    expect(sanitizeInputs("average", { total: "10", count: "4" })).toEqual({ value: "2.5" });
+    expect(sanitizeInputs("average", { value: "3", total: "10", count: "4" })).toEqual({ value: "3" });
   });
 
   it("drops non-finite numbers", () => {
@@ -34,14 +39,8 @@ describe("integer inputs and definitions", () => {
   });
 
   it("builds input definitions with labels, integer flags and duration units", () => {
-    const defs = inputDefs("average", "RT-01", {
-      count: { ar: "عدد", en: "Count" },
-      total: { ar: "مجموع", en: "Total" },
-    });
-    expect(defs.map((d) => [d.key, d.integer])).toEqual([
-      ["total", false],
-      ["count", true],
-    ]);
+    const defs = inputDefs("average", "RT-01", { value: { ar: "متوسط زمن الاستجابة", en: "Average response time" } });
+    expect(defs.map((d) => [d.key, d.integer, d.labelAr])).toEqual([["value", false, "متوسط زمن الاستجابة"]]);
     const dur = inputDefs("duration", "SC-04", { value: { ar: "زمن", en: "Time" } });
     expect(dur).toHaveLength(1);
     expect(dur[0].unitChoices).toEqual(["h", "min"]);

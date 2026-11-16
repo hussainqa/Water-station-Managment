@@ -50,6 +50,13 @@
       "when": 1794345523537,
       "tag": "0006_hide_importance_order",
       "breakpoints": true
+    },
+    {
+      "idx": 7,
+      "version": "7",
+      "when": 1794859318501,
+      "tag": "0007_supplementary_links_direct_average",
+      "breakpoints": true
     }
   ]
 }

@@ -38,15 +38,14 @@ describe("indicatorFormSchema", () => {
       nameAr: "  ",
       unit: "",
       method: "average",
-      labels: { total: { ar: "", en: "" } },
+      labels: { value: { ar: "", en: "" } },
     });
     expect(r.success).toBe(false);
     if (!r.success) {
       const e = fieldErrorsFromZod(r.error);
       expect(e.nameAr).toBe("nameRequired");
       expect(e.unit).toBe("unitRequired");
-      expect(e["labels.total"]).toBe("labelRequired");
-      expect(e["labels.count"]).toBe("labelRequired");
+      expect(e["labels.value"]).toBe("labelRequired");
     }
   });
 

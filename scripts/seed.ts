@@ -145,6 +145,49 @@ async function deleteMissing(
   }
 }
 
+// ------------------------------------------------- client changes on top of the files
+
+/**
+ * An average is entered directly as one value (client request, Nov 2026), so the system
+ * average indicators get one `value` label instead of the file's total/count labels.
+ */
+const AVERAGE_VALUE_LABELS: Record<string, { ar: string; en: string }> = {
+  "RT-01": { ar: "متوسط زمن الاستجابة", en: "Average response time" },
+  "RT-02": { ar: "متوسط زمن المعالجة", en: "Average resolution time" },
+  "RT-03": { ar: "متوسط زمن بدء التعامل مع الشكوى", en: "Average time to start handling" },
+  "RT-04": { ar: "متوسط المدة من الاستلام حتى المعالجة", en: "Average time from receipt to resolution" },
+};
+
+function inputLabelsOf(x: z.output<typeof indicatorsFile>["indicators"][number]) {
+  if (x.method !== "average") return x.inputs;
+  return { value: AVERAGE_VALUE_LABELS[x.code] ?? { ar: "المتوسط", en: "Average" } };
+}
+
+/**
+ * Corrective actions the researcher supplied for obstacles that have no significant link in
+ * the source (table "جدول العوائق والإجراءات للمبرمج", Nov 2026). They carry a rank only:
+ * there is no correlation or priority for them, so those columns stay null.
+ */
+const SUPPLEMENTARY_LINKS: { obstacle: string; action: string; rank: number }[] = [
+  { obstacle: "O-02", action: "A-02", rank: 1 }, // T.F.2
+  { obstacle: "O-10", action: "A-10", rank: 1 }, // O.F.5
+  { obstacle: "O-12", action: "A-12", rank: 1 }, // M.F.2
+];
+
+function checkSupplementaryLinks(oa: z.output<typeof obstaclesActionsFile>) {
+  const problems: string[] = [];
+  for (const l of SUPPLEMENTARY_LINKS) {
+    const o = oa.obstacles.find((x) => x.code === l.obstacle);
+    const a = oa.actions.find((x) => x.code === l.action);
+    if (!o) problems.push(`supplementary link: unknown obstacle ${l.obstacle}`);
+    else if (o.linked_actions?.length)
+      problems.push(`supplementary link: ${l.obstacle} already has links in the file`);
+    if (!a) problems.push(`supplementary link: unknown action ${l.action}`);
+    else if (o && a.axis !== o.axis) problems.push(`supplementary link: ${l.obstacle} and ${l.action} differ in axis`);
+  }
+  if (problems.length) throw new Error(`Bad supplementary links:\n  ${problems.join("\n  ")}`);
+}
+
 async function seed(
   db: Client,
   ind: z.output<typeof indicatorsFile>,
@@ -170,7 +213,7 @@ async function seed(
          name_ar = EXCLUDED.name_ar, name_en = EXCLUDED.name_en, method = EXCLUDED.method,
          unit = EXCLUDED.unit, better = EXCLUDED.better, input_labels = EXCLUDED.input_labels,
          sort = EXCLUDED.sort, is_system = true`,
-      [x.code, x.group, x.name.ar, x.name.en, x.method, x.unit, x.better, JSON.stringify(x.inputs), i + 1],
+      [x.code, x.group, x.name.ar, x.name.en, x.method, x.unit, x.better, JSON.stringify(inputLabelsOf(x)), i + 1],
     );
     const l = x.default_limits_illustrative;
     await db.query(
@@ -234,6 +277,12 @@ async function seed(
       );
     }
   }
+  for (const l of SUPPLEMENTARY_LINKS) {
+    await db.query(
+      `INSERT INTO obstacle_action_links (obstacle_code, action_code, rank) VALUES ($1,$2,$3)`,
+      [l.obstacle, l.action, l.rank],
+    );
+  }
 
   // --- remove reference rows that are no longer in the files (children before parents)
   await deleteMissing(db, "indicator_default_limits", "indicator_code", ind.indicators.map((x) => x.code));
@@ -260,6 +309,7 @@ async function main() {
   const ind = readJson("indicators.json", indicatorsFile);
   const oa = readJson("obstacles_actions.json", obstaclesActionsFile);
   checkReferences(ind, oa);
+  checkSupplementaryLinks(oa);
 
   const db = await connectAsOwner();
   try {
@@ -277,7 +327,10 @@ async function main() {
       const { rows } = await db.query<{ n: string }>(`SELECT count(*) AS n FROM ${table}`);
       console.log(`  ${table.padEnd(26)} ${rows[0].n}`);
     }
-    const unlinked = oa.obstacles.filter((o) => !o.linked_actions?.length).map((o) => o.code);
+    const supplemented = new Set(SUPPLEMENTARY_LINKS.map((l) => l.obstacle));
+    const unlinked = oa.obstacles
+      .filter((o) => !o.linked_actions?.length && !supplemented.has(o.code))
+      .map((o) => o.code);
     console.log(`Obstacles seeded without linked actions: ${unlinked.join(", ")}`);
   } finally {
     await db.end();

@@ -40,14 +40,13 @@ export type InputErrorCode =
   | "not_integer"
   | "out_of_range"
   | "exceeds_denominator"
-  | "zero_denominator"
-  | "zero_count";
+  | "zero_denominator";
 
 export type InputErrors = Record<string, InputErrorCode>;
 
 export interface EvaluationSpec {
   method: Method;
-  /** Input keys that must be integers (`count` of `average` always is). */
+  /** Input keys that must be integers. */
   integerInputs?: readonly string[];
 }
 

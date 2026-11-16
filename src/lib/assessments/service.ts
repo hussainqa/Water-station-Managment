@@ -431,7 +431,8 @@ async function buildDraft(
     const ev = evaluateEntry(entry, r.inputs);
     readings.push({
       ref,
-      inputs: r.inputs,
+      // an average saved as total/count resumes as its single value
+      inputs: sanitizeInputs(entry.method, r.inputs as Record<string, unknown> | null),
       note: r.note,
       order: entry.order,
       evaluation: {

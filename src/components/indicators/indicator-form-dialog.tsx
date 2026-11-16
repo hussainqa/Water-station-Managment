@@ -54,8 +54,6 @@ const LABEL_KEY: Record<string, string> = {
   value: "labelValue",
   numerator: "labelNumerator",
   denominator: "labelDenominator",
-  total: "labelTotal",
-  count: "labelCount",
 };
 
 export function IndicatorFormDialog(props: Props) {

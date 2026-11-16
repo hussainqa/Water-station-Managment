@@ -93,8 +93,6 @@
     "labelValue": "Input field label",
     "labelNumerator": "Numerator (e.g. compliant samples)",
     "labelDenominator": "Denominator (e.g. samples tested)",
-    "labelTotal": "Total (e.g. total response time)",
-    "labelCount": "Count (e.g. number of incidents)",
     "labelEn": "In English (optional)",
     "unit": "Unit",
     "unitFixedPercent": "% (fixed)",
@@ -110,7 +108,7 @@
     "direct_percent": "Direct percentage (0–100)",
     "duration": "Duration (hours or minutes)",
     "ratio": "Percentage: numerator ÷ denominator × 100",
-    "average": "Average: total ÷ count"
+    "average": "Average: the average is entered directly"
   },
   "better": {
     "higher": "Higher is better",

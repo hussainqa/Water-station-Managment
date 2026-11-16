@@ -152,6 +152,9 @@ Never edit a migration that has been committed; add a new one.
 - **Audit events** store action codes and a payload; the UI turns them into sentences.
 - **Demo data** is created only by `scripts/seed-demo.ts`, through the real service code, never by migrations. Tests seed their own copy under an `e2e-…@test.local` address and must not touch `engineer@wtp.iq`.
 - **Threshold scale:** use `ThresholdScale` wherever an indicator value appears.
+- **Averages are entered directly** (client request, Nov 2026, overrides HANDOFF section 4): the `average` method has one input, `value`. Readings saved earlier as `total`/`count` are read through `upgradeLegacyInputs`; keep it.
+- **Supplementary obstacle→action links** for obstacles the research left unlinked (O-02, O-10, O-12) live in `SUPPLEMENTARY_LINKS` in `scripts/seed.ts`, with rank only (`correlation_r`/`priority_pct` null).
+- **Dates** are shown with `formatDate` / `formatDateTime` (day, month name, year: "6 أيلول 2026"), never as raw `YYYY-MM-DD`.
 - **Evaluation logic lives in `src/lib/evaluation`** and stays pure (no I/O, no dates from the clock). Comparisons with limits are strict: a value exactly on a limit gets the better status. Results always use the limits snapshot stored on the assessment, never current limits.
 - **References to an indicator or obstacle** are two nullable columns (system code, user-defined id) with a check that exactly one is set. Keep that shape.
 - **Pages behind sign-in** live in `(app)/`, call `requireUser()` themselves, and start with `PageHeader`. Read the selected plant and period with `getFilters()`. Add new destinations to `src/components/shell/nav.ts`.

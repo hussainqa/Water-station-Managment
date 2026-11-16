@@ -152,7 +152,6 @@
     "out_of_range": "A percentage must be between 0 and 100.",
     "exceeds_denominator": "This cannot be larger than the total.",
     "zero_denominator": "The total must be greater than zero.",
-    "zero_count": "The count must be greater than zero.",
     "summary": "Check the highlighted fields and try again.",
     "validation": "Check the highlighted fields and try again.",
     "plantNotFound": "We could not find this plant in your account.",

@@ -135,14 +135,13 @@ export type RawInputs = Record<string, string | number | null>;
 
 /** Planned supply hours of a 30-day month (SC-01); other ratios use 1000 samples/cases. */
 const RATIO_DENOMINATOR = { "SC-01": 720 } as const;
-const AVERAGE_COUNT = 20;
 
 const round = (n: number, d: number) => Number(n.toFixed(d));
 
 /**
  * Raw inputs whose computed value equals the series value (to float precision):
- * ratio -> a sensible denominator and the derived numerator; average -> 20 cases and
- * total = value x 20; duration in hours; direct as is. null -> blank inputs (no data).
+ * ratio -> a sensible denominator and the derived numerator; duration in hours; direct and
+ * average as is. null -> blank inputs (no data).
  */
 export function rawInputsFor(code: string, method: Method, value: number | null): RawInputs {
   switch (method) {
@@ -157,8 +156,7 @@ export function rawInputsFor(code: string, method: Method, value: number | null)
       return { numerator: String(round((value * den) / 100, 4)), denominator: String(den) };
     }
     case "average":
-      if (value === null) return { total: null, count: null };
-      return { total: String(round(value * AVERAGE_COUNT, 4)), count: String(AVERAGE_COUNT) };
+      return { value: value === null ? null : String(value) };
   }
 }
 
@@ -196,7 +194,8 @@ export const DIJLA_PROBLEM = {
 /**
  * The prototype's September default for Al-Karkh (`sampleInputs()` for st-3, lines 1401-1404),
  * which the wizard prefills. One change: SC-02 was "4800" customers; it is now a percentage,
- * so 4800 / 1000 = 4.8 %. CS-02 is blank in the prototype (insufficient data), which makes
+ * so 4800 / 1000 = 4.8 %. The averages (RT-xx) are entered directly: 30 / 7 h is 4.29 and so
+ * on. CS-02 is blank in the prototype (insufficient data), which makes
  * approval need the acknowledgement flag (1 indicator).
  *
  * With the current limits (WQ-02 warning 95, SC-02 5/10/20) the result is: critical SC-03
@@ -215,10 +214,10 @@ export const KARKH_SEPTEMBER: Record<string, RawInputs> = {
   "sys:CS-01": { value: "43" },
   "sys:CS-02": { numerator: "", denominator: "" },
   "sys:CS-03": { numerator: "37", denominator: "43" },
-  "sys:RT-01": { count: "7", total: "30" },
-  "sys:RT-02": { count: "7", total: "92" },
-  "sys:RT-03": { count: "43", total: "559" },
-  "sys:RT-04": { count: "43", total: "1720" },
+  "sys:RT-01": { value: "4.29" },
+  "sys:RT-02": { value: "13.14" },
+  "sys:RT-03": { value: "13" },
+  "sys:RT-04": { value: "40" },
 };
 
 export const KARKH_SEPTEMBER_PERIOD = "2026-09";

@@ -396,7 +396,13 @@ describe("problems, obstacles and corrective actions", () => {
   // ------------------------------------------------------ obstacles without linked actions
 
   describe("system obstacles without links", () => {
-    it.each(["O-02", "O-10", "O-12", "O-39"])("%s yields no linked actions and the axis actions in source order", async (code) => {
+    it("O-02, O-10 and O-12 suggest the researcher's action at rank 1", async () => {
+      expect(await refLinks("O-02")).toEqual([{ action_code: "A-02", rank: 1 }]);
+      expect(await refLinks("O-10")).toEqual([{ action_code: "A-10", rank: 1 }]);
+      expect(await refLinks("O-12")).toEqual([{ action_code: "A-12", rank: 1 }]);
+    });
+
+    it.each(["O-39"])("%s yields no linked actions and the axis actions in source order", async (code) => {
       await reset(sc03);
       expect(await refLinks(code)).toEqual([]);
       data(await select(sc03, code, "possible"));

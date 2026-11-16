@@ -61,8 +61,8 @@ function ReadingCard({ row, onChange }: { row: Evaluated; onChange: (r: ReadingS
   const unit = displayUnit(ind, tUnits as never);
   const setInput = (key: string, v: string) =>
     onChange({ ...reading, inputs: { ...reading.inputs, [key]: v } });
-  const direct = ind.method === "direct" || ind.method === "direct_percent";
-  const calc = ind.method === "ratio" || ind.method === "average" || ind.method === "duration";
+  const direct = ind.method === "direct" || ind.method === "direct_percent" || ind.method === "average";
+  const calc = ind.method === "ratio" || ind.method === "duration";
   const formulaFinal =
     result.value !== null
       ? formulaText(ind.method, reading.inputs, result.value, unit, t("readings.unitShort.min"))

@@ -115,7 +115,8 @@ export const correctiveActions = pgTable(
 
 /**
  * `correlation_r` and `priority_pct` are hidden from the app role by column-level
- * grants. App code selects obstacle_code, action_code and rank only.
+ * grants. App code selects obstacle_code, action_code and rank only. Both are null for
+ * the links the researcher supplied without statistics (see SUPPLEMENTARY_LINKS in seed.ts).
  */
 export const obstacleActionLinks = pgTable(
   "obstacle_action_links",
@@ -127,8 +128,8 @@ export const obstacleActionLinks = pgTable(
       .notNull()
       .references(() => correctiveActions.code, { onDelete: "cascade" }),
     rank: integer("rank").notNull(),
-    correlationR: doublePrecision("correlation_r").notNull(),
-    priorityPct: doublePrecision("priority_pct").notNull(),
+    correlationR: doublePrecision("correlation_r"),
+    priorityPct: doublePrecision("priority_pct"),
   },
   (t) => [
     primaryKey({ columns: [t.obstacleCode, t.actionCode] }),

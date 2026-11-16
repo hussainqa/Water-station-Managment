@@ -156,6 +156,7 @@ export function formulaText(
   switch (method) {
     case "direct":
     case "direct_percent":
+    case "average":
       return `${operand(inputs.value ?? "")} = ${v}${u}`;
     case "duration":
       return inputs.unit === "min"
@@ -163,8 +164,6 @@ export function formulaText(
         : `${operand(inputs.value ?? "")}${u} = ${v}${u}`;
     case "ratio":
       return `${operand(inputs.numerator ?? "")} ÷ ${operand(inputs.denominator ?? "")} × 100 = ${v}${u}`;
-    case "average":
-      return `${operand(inputs.total ?? "")} ÷ ${operand(inputs.count ?? "")} = ${v}${u}`;
   }
 }
 

@@ -1,4 +1,4 @@
-import { REQUIRED_INPUTS, type Method, type RawInputs } from "@/lib/evaluation";
+import { REQUIRED_INPUTS, upgradeLegacyInputs, type Method, type RawInputs } from "@/lib/evaluation";
 import type { InputLabels } from "@/db/schema/reference";
 
 /**
@@ -21,10 +21,7 @@ const SYSTEM_INTEGER_INPUTS: Record<string, readonly string[]> = {
   "CS-03": ["numerator", "denominator"],
 };
 
-/**
- * Input keys that must be integers. `count` of an average is always one (evaluateInputs
- * adds it). User-defined indicators have no integer inputs besides that.
- */
+/** Input keys that must be integers. User-defined indicators have none. */
 export function integerInputKeys(code: string | null, method: Method): string[] {
   void method;
   return code ? [...(SYSTEM_INTEGER_INPUTS[code] ?? [])] : [];
@@ -50,7 +47,6 @@ export function inputDefs(
   labels: InputLabels,
 ): InputDef[] {
   const ints = new Set(integerInputKeys(code, method));
-  if (method === "average") ints.add("count");
   return REQUIRED_INPUTS[method].map((key) => ({
     key,
     labelAr: labels[key]?.ar ?? key,
@@ -62,16 +58,17 @@ export function inputDefs(
 
 /**
  * Reduces whatever the client sent to the stored shape: only known keys, every key
- * present (null when absent), a duration unit of 'h' or 'min' (default 'h').
- * Never keeps a `value` or `status`.
+ * present (null when absent), a duration unit of 'h' or 'min' (default 'h'). An average
+ * saved in the old total/count shape is upgraded to its value. Never keeps a computed value or a status.
  */
 export function sanitizeInputs(
   method: Method,
   raw: Record<string, unknown> | null | undefined,
 ): Record<string, string | number | null> {
   const out: Record<string, string | number | null> = {};
+  const src = upgradeLegacyInputs(method, (raw ?? {}) as RawInputs) as Record<string, unknown>;
   for (const key of storedInputKeys(method)) {
-    const v = raw?.[key];
+    const v = src[key];
     if (key === "unit") {
       out.unit = typeof v === "string" && v.trim() === "min" ? "min" : "h";
     } else if (typeof v === "string" || (typeof v === "number" && Number.isFinite(v))) {

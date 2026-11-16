@@ -26,7 +26,8 @@ describe("seeded reference data", () => {
     expect(await count("action_axes")).toBe(7);
     expect(await count("obstacles")).toBe(40);
     expect(await count("corrective_actions")).toBe(65);
-    expect(await count("obstacle_action_links")).toBe(229);
+    // 229 from the research file + 3 supplied by the researcher (O-02, O-10, O-12)
+    expect(await count("obstacle_action_links")).toBe(232);
   });
 
   it("seeds O-39 with no links and no importance order", async () => {
@@ -39,6 +40,26 @@ describe("seeded reference data", () => {
       "SELECT 1 FROM obstacle_action_links WHERE obstacle_code = 'O-39'",
     );
     expect(links.rowCount).toBe(0);
+  });
+
+  it("adds the researcher's actions for O-02, O-10 and O-12 at rank 1, without statistics", async () => {
+    const { rows } = await db.query(
+      `SELECT obstacle_code, action_code, rank, correlation_r, priority_pct FROM obstacle_action_links
+       WHERE obstacle_code IN ('O-02', 'O-10', 'O-12') ORDER BY obstacle_code`,
+    );
+    expect(rows).toEqual([
+      { obstacle_code: "O-02", action_code: "A-02", rank: 1, correlation_r: null, priority_pct: null },
+      { obstacle_code: "O-10", action_code: "A-10", rank: 1, correlation_r: null, priority_pct: null },
+      { obstacle_code: "O-12", action_code: "A-12", rank: 1, correlation_r: null, priority_pct: null },
+    ]);
+  });
+
+  it("gives the average indicators one directly entered value", async () => {
+    const { rows } = await db.query(
+      "SELECT code, input_labels FROM indicators WHERE method = 'average' ORDER BY code",
+    );
+    expect(rows.map((r) => r.code)).toEqual(["RT-01", "RT-02", "RT-03", "RT-04"]);
+    for (const r of rows) expect(Object.keys(r.input_labels)).toEqual(["value"]);
   });
 
   it("seeds SC-02 correctly", async () => {
