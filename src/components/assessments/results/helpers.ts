@@ -57,9 +57,33 @@ export function periodShortLabel(periodStart: string, months: number, locale: st
   return `${monthName(periodStart, locale, "short")}–${monthName(end, locale, "short")}`;
 }
 
-/** 'YYYY-MM-DD HH:mm' in the app's time zone, Western digits, both languages. */
-export function formatDateTime(iso: string, _locale?: string): string {
-  void _locale;
+const dayFormats = new Map<string, Intl.DateTimeFormat>();
+function dayFormat(locale: string) {
+  let f = dayFormats.get(locale);
+  if (!f) {
+    // Day, month name, year: "6 أيلول 2026" / "6 September 2026". A month name cannot be read as
+    // a day, and the Arabic reads naturally right to left (Western digits, like the rest).
+    f = new Intl.DateTimeFormat(locale === "ar" ? "ar-IQ-u-nu-latn" : "en-GB", {
+      day: "numeric",
+      month: "long",
+      year: "numeric",
+      timeZone: "UTC",
+    });
+    dayFormats.set(locale, f);
+  }
+  return f;
+}
+
+/** A calendar day ('YYYY-MM-DD') as "6 أيلول 2026" / "6 September 2026"; empty gives an em dash. */
+export function formatDate(day: string | null | undefined, locale: string): string {
+  if (!day) return "—";
+  const [y, m, d] = day.slice(0, 10).split("-").map(Number);
+  if (!y || !m || !d) return day;
+  return dayFormat(locale).format(new Date(Date.UTC(y, m - 1, d)));
+}
+
+/** A timestamp in the app's time zone: "6 أيلول 2026 · 10:20" / "6 September 2026 · 10:20". */
+export function formatDateTime(iso: string, locale: string): string {
   const parts = new Intl.DateTimeFormat("en-GB", {
     timeZone: TIME_ZONE,
     year: "numeric",
@@ -70,7 +94,7 @@ export function formatDateTime(iso: string, _locale?: string): string {
     hourCycle: "h23",
   }).formatToParts(new Date(iso));
   const p = (t: string) => parts.find((x) => x.type === t)?.value ?? "";
-  return `${p("year")}-${p("month")}-${p("day")} ${p("hour")}:${p("minute")}`;
+  return `${formatDate(`${p("year")}-${p("month")}-${p("day")}`, locale)} · ${p("hour")}:${p("minute")}`;
 }
 
 const nf = new Intl.NumberFormat("en-US", { maximumFractionDigits: 2, useGrouping: false });
@@ -333,6 +357,8 @@ export function calculationView(row: Pick<ResultRow, "method" | "inputs" | "valu
       return { key: "ratio", values: { numerator: formatNumber(a), denominator: formatNumber(b), value } };
     }
     case "average": {
+      // entered directly; readings approved before that keep their total ÷ count
+      if (n("value") !== null) return { key: "direct", values: { value } };
       const a = n("total");
       const b = n("count");
       if (a === null || b === null) return { key: "none", values: {} };

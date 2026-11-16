@@ -4,7 +4,7 @@ import { useId, useState } from "react";
 import { ChevronRight } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { toast } from "sonner";
-import { periodLabel, crossedLimit } from "@/components/assessments/results/helpers";
+import { periodLabel, crossedLimit, formatDate } from "@/components/assessments/results/helpers";
 import { useRowText } from "@/components/assessments/results/row-text";
 import { StatusBadge } from "@/components/indicators/status-badge";
 import { ThresholdScale } from "@/components/indicators/threshold-scale";
@@ -85,7 +85,7 @@ export function ProblemFacts() {
           </Link>
         </Fact>
         <Fact label={t("facts.detected")} testId="fact-detected">
-          <span className="num">{h.detectedOn}</span>
+          <span className="whitespace-nowrap">{formatDate(h.detectedOn, locale)}</span>
         </Fact>
         <Fact label={t("facts.value")} testId="fact-value">
           <span className="num">{rt.value(h.value, unit)}</span>

@@ -8,6 +8,7 @@ import {
   crossedLimit,
   describeAudit,
   describeLimits,
+  formatDate,
   formatDateTime,
   formatNumber,
   monthName,
@@ -37,7 +38,13 @@ describe("formatting", () => {
     expect(formatNumber(null)).toBe("—");
   });
   it("formats a timestamp in Baghdad time", () => {
-    expect(formatDateTime("2026-09-04T08:35:00.000Z")).toBe("2026-09-04 11:35");
+    expect(formatDateTime("2026-09-04T08:35:00.000Z", "en")).toBe("4 September 2026 · 11:35");
+    expect(formatDateTime("2026-09-04T08:35:00.000Z", "ar")).toBe("4 أيلول 2026 · 11:35");
+  });
+  it("writes a day with the month name so day and month cannot be confused", () => {
+    expect(formatDate("2026-10-20", "ar")).toBe("20 تشرين الأول 2026");
+    expect(formatDate("2026-10-20", "en")).toBe("20 October 2026");
+    expect(formatDate(null, "en")).toBe("—");
   });
 });
 
@@ -167,6 +174,10 @@ describe("calculationView", () => {
     expect(
       calculationView({ method: "average", unit: "h", value: 2.5, inputs: { total: "10", count: "4" } }).key,
     ).toBe("average");
+    expect(calculationView({ method: "average", unit: "h", value: 4.29, inputs: { value: "4.29" } })).toEqual({
+      key: "direct",
+      values: { value: "4.29" },
+    });
     expect(
       calculationView({ method: "duration", unit: "h", value: 1.5, inputs: { value: 90, unit: "min" } }),
     ).toEqual({ key: "duration", values: { raw: "90", unit: "min", value: "1.5" } });

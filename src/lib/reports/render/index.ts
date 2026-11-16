@@ -5,6 +5,7 @@ import {
   addMonthsToKey,
   changeView,
   describeLimits,
+  formatDate,
   formatDateTime,
   formatNumber,
   monthName,
@@ -147,7 +148,7 @@ export function renderReportHtml(data: ReportData, opts: RenderOptions): string 
 <dl class="meta">
 <div><dt>${esc(t("meta.plant"))}</dt><dd>${userText(plantLabel)}</dd></div>
 <div><dt>${esc(t(isHistory ? "meta.periods" : "meta.period"))}</dt><dd>${headerPeriod}</dd></div>
-<div><dt>${esc(t("meta.issuedOn"))}</dt><dd>${num(issued)}</dd></div>
+<div><dt>${esc(t("meta.issuedOn"))}</dt><dd>${esc(formatDate(issued, locale))}</dd></div>
 </dl></header>`;
 
   const section = (n: number, key: string, body: string) =>
@@ -176,9 +177,9 @@ ${kv(t("plant.actual"), cap(p.actualCapacity))}
   const periodRows = [
     kv(t("period.type"), esc(t(`period.length.${L.months}`))),
     kv(t("meta.period"), esc(latestLabel)),
-    kv(t("period.dates"), esc(t("period.dateRange", { from: "@@P1@@", to: "@@P2@@" })).replace("@@P1@@", num(L.startDate)).replace("@@P2@@", num(L.endDate))),
+    kv(t("period.dates"), esc(t("period.dateRange", { from: "@@P1@@", to: "@@P2@@" })).replace("@@P1@@", esc(formatDate(L.startDate, locale))).replace("@@P2@@", esc(formatDate(L.endDate, locale)))),
     kv(t("period.enteredBy"), userText(L.enteredBy)),
-    kv(t("period.approvedAt"), L.approvedAt ? num(formatDateTime(L.approvedAt)) : "—"),
+    kv(t("period.approvedAt"), L.approvedAt ? esc(formatDateTime(L.approvedAt, locale)) : "—"),
     kv(
       t("period.completeness"),
       html(t("period.completenessText", { withValue: w(L.completeness.withValue), total: w(L.completeness.total), percent: w(formatNumber(Math.round(L.completeness.percent))) })),
@@ -288,7 +289,7 @@ ${g.rows
 <table><thead><tr><th>${esc(t("problems.indicator"))}</th><th>${esc(t("problems.value"))}</th><th>${esc(t("problems.detected"))}</th><th>${esc(t("problems.origin"))}</th><th>${esc(t("problems.stage"))}</th></tr></thead><tbody>${data.problems
           .map(
             (pr) =>
-              `<tr><td>${problemTitle(pr)}</td><td>${pr.value === null ? esc(t("problems.noValue")) : valueText(pr.value, pr.indicator.unit)}</td><td>${num(pr.detectedOn)}</td><td>${esc(t(`problems.${pr.origin}`))}</td><td>${stageText(pr.stage)}</td></tr>`,
+              `<tr><td>${problemTitle(pr)}</td><td>${pr.value === null ? esc(t("problems.noValue")) : valueText(pr.value, pr.indicator.unit)}</td><td>${esc(formatDate(pr.detectedOn, locale))}</td><td>${esc(t(`problems.${pr.origin}`))}</td><td>${stageText(pr.stage)}</td></tr>`,
           )
           .join("")}</tbody></table>`
       : `<p>${esc(t("problems.none"))}</p>`,
@@ -321,7 +322,7 @@ ${g.rows
   // ---- 8 actions ------------------------------------------------------------------------------
   const actionStatus = (a: ReportAction): string => {
     const parts: string[] = [];
-    if (a.chosen) parts.push(esc(a.implementedOn ? t("actions.implemented", { date: "@@P1@@" }) : t("actions.chosen")).replace("@@P1@@", num(a.implementedOn ?? "")));
+    if (a.chosen) parts.push(esc(a.implementedOn ? t("actions.implemented", { date: "@@P1@@" }) : t("actions.chosen")).replace("@@P1@@", esc(formatDate(a.implementedOn, locale))));
     if (a.needsStudy) parts.push(esc(t("actions.needsStudy")));
     return parts.map((x) => `<div>${x}</div>`).join("");
   };
@@ -401,7 +402,7 @@ ${g.rows
         : ""
     }<p class="muted small">${esc(t("notes.disclaimer"))}</p>
 <div class="sign">
-<div class="box"><div class="label">${esc(t("signature.preparedBy"))}</div><div class="who">${userText(opts.preparedBy.name)}</div>${opts.preparedBy.jobTitle ? `<div>${userText(opts.preparedBy.jobTitle)}</div>` : ""}<div class="small muted">${esc(t("signature.date"))}: ${num(issued)}</div></div>
+<div class="box"><div class="label">${esc(t("signature.preparedBy"))}</div><div class="who">${userText(opts.preparedBy.name)}</div>${opts.preparedBy.jobTitle ? `<div>${userText(opts.preparedBy.jobTitle)}</div>` : ""}<div class="small muted">${esc(t("signature.date"))}: ${esc(formatDate(issued, locale))}</div></div>
 <div class="box"><div class="label">${esc(t("signature.approval"))}</div><div class="gap"></div><div class="small muted">${esc(t("signature.date"))}: <span class="line"></span></div></div>
 </div>`,
   );

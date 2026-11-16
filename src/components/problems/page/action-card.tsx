@@ -2,7 +2,8 @@
 
 import { memo, useId, useState, type ReactNode } from "react";
 import { BookOpen, Check, CircleCheck, Pencil, Trash2 } from "lucide-react";
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
+import { formatDate } from "@/components/assessments/results/helpers";
 import { Button } from "@/components/ui/button";
 import { cn } from "cn";
 import type { ObstacleTarget, ProblemFailure } from "@/lib/problems/schemas";
@@ -66,6 +67,7 @@ function Lifecycle({ state }: { state: CardProps["state"] }) {
 
 export function ActionCardView({ title, rank, extra, state, ops, testId, code, children, tools, tag }: CardProps) {
   const t = useTranslations("problems");
+  const locale = useLocale();
   const dateId = useId();
   const errId = useId();
   const [editing, setEditing] = useState(false);
@@ -157,7 +159,7 @@ export function ActionCardView({ title, rank, extra, state, ops, testId, code, c
                   className="inline-flex items-center gap-1.5 rounded-full bg-ok-soft px-2.5 py-1 text-[12.5px] font-semibold text-ok"
                 >
                   <Check aria-hidden="true" className="size-3.5" />
-                  {t("actions.implementedOn")} <span className="num">{state.implementedOn}</span>
+                  {t("actions.implementedOn")} <span className="whitespace-nowrap">{formatDate(state.implementedOn, locale)}</span>
                 </span>
                 <Button type="button" data-testid="impl-clear" variant="ghost" onClick={() => saveDate(null)} className={btn}>
                   {t("actions.implClear")}

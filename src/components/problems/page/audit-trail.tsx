@@ -1,8 +1,8 @@
 "use client";
 
 import { useMemo } from "react";
-import { useTranslations } from "next-intl";
-import { formatDateTime } from "@/components/assessments/results/helpers";
+import { useLocale, useTranslations } from "next-intl";
+import { formatDate, formatDateTime } from "@/components/assessments/results/helpers";
 import { describeProblemAudit, type AuditResolvers } from "./audit";
 import { sectionCard } from "./bits";
 import { useProblem } from "./problem-context";
@@ -10,6 +10,7 @@ import { useProblem } from "./problem-context";
 /** The change log of the problem, newest first, in sentences. */
 export function AuditTrail() {
   const t = useTranslations("problems");
+  const locale = useLocale();
   const { problem, pick, obstacleByCode, actionByCode } = useProblem();
 
   const resolvers = useMemo<AuditResolvers>(() => {
@@ -36,8 +37,9 @@ export function AuditTrail() {
       customAction: (id) => (id && customActions.get(id)) || t("audit.unlistedAction"),
       classification: (c) => (c === "confirmed" || c === "possible" ? t(`obstacles.${c}`) : c),
       stage: (s) => (t.has(`stage.${s}`) ? t(`stage.${s}`) : s),
+      date: (day) => formatDate(day, locale),
     };
-  }, [problem.obstacles, problem.customActions, obstacleByCode, actionByCode, pick, t]);
+  }, [problem.obstacles, problem.customActions, obstacleByCode, actionByCode, pick, t, locale]);
 
   return (
     <section className={sectionCard} aria-labelledby="audit-h" data-testid="audit">
@@ -59,7 +61,7 @@ export function AuditTrail() {
                 <div className="min-w-0">
                   <p className="m-0 text-[14px] font-medium">{t(`audit.${d.key}`, d.values)}</p>
                   <p className="m-0 mt-0.5 text-[12.5px] text-fg-3">
-                    {e.actor} · <span className="num">{formatDateTime(e.at)}</span>
+                    {e.actor} · <span className="whitespace-nowrap">{formatDateTime(e.at, locale)}</span>
                   </p>
                 </div>
               </li>

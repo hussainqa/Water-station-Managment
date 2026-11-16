@@ -42,7 +42,7 @@ describe.each(["ar", "en"] as const)("renderReportHtml (%s)", (locale) => {
   it("has the signature block with the prepared-by name and an empty approval line", () => {
     const sign = html.slice(html.indexOf('<div class="sign">'));
     expect(sign).toContain("سارة الجبوري");
-    expect(sign).toContain("2026-11-11");
+    expect(sign).toMatch(/11 (تشرين الثاني|November) 2026/);
     expect(sign).toMatch(/<span class="line"><\/span>/);
     expect(sign.indexOf("class=\"gap\"")).toBeGreaterThan(sign.indexOf(">" + (locale === "ar" ? "المصادقة" : "Approval")));
   });
@@ -94,7 +94,7 @@ describe("report content", () => {
     expect(t).toContain("Treated");
     expect(t).toContain("Critical: Above 6");
     expect(t).toContain("Needs further study");
-    expect(t).toContain("Implemented on 2026-10-20");
+    expect(t).toContain("Implemented on 20 October 2026");
   });
   it("Arabic document uses the owner's stage wording", () => {
     expect(text(render("ar"))).toContain("تمت المعالجة");

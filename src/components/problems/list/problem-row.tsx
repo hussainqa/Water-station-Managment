@@ -2,7 +2,7 @@
 
 import { Hand, Zap } from "lucide-react";
 import { useLocale, useTranslations } from "next-intl";
-import { periodLabel } from "@/components/assessments/results/helpers";
+import { formatDate, periodLabel } from "@/components/assessments/results/helpers";
 import { useRowText } from "@/components/assessments/results/row-text";
 import { StatusBadge } from "@/components/indicators/status-badge";
 import { buttonVariants } from "@/components/ui/button";
@@ -48,7 +48,7 @@ export function ProblemRow({ item }: { item: ProblemListItem }) {
           {item.readingStatus ? <StatusBadge status={item.readingStatus} /> : null}
         </span>
         <span>
-          {t("detected")} <span className="num">{item.detectedOn}</span>
+          {t("detected")} <span className="whitespace-nowrap">{formatDate(item.detectedOn, locale)}</span>
         </span>
         <span className="inline-flex items-center gap-1">
           <OriginIcon aria-hidden="true" className="size-3.5" />

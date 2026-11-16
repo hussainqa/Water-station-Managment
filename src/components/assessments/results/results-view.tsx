@@ -19,6 +19,7 @@ import {
   crossedLimit,
   describeAudit,
   describeLimits,
+  formatDate,
   formatDateTime,
   formatNumber,
   periodLabel,
@@ -135,7 +136,7 @@ export function ResultsView({ results, stages = {} }: { results: AssessmentResul
                     <div className="min-w-0">
                       <p className="m-0 text-[14px] font-medium">{t(`audit.${d.key}`, d.values)}</p>
                       <p className="m-0 mt-0.5 text-[12.5px] text-fg-3">
-                        {e.actor} · <span className="num">{formatDateTime(e.at)}</span>
+                        {e.actor} · <span className="whitespace-nowrap">{formatDateTime(e.at, locale)}</span>
                       </p>
                     </div>
                   </li>
@@ -174,11 +175,11 @@ function SummaryCard({ results, period }: { results: AssessmentResults; period: 
     [
       t("results.dates"),
       <span key="d">
-        <span className="num">{header.startDate}</span> — <span className="num">{header.endDate}</span>
+        <span className="whitespace-nowrap">{formatDate(header.startDate, locale)}</span> – <span className="whitespace-nowrap">{formatDate(header.endDate, locale)}</span>
       </span>,
     ],
     [t("results.enteredBy"), header.enteredBy || "—"],
-    [t("results.approvedAt"), header.approvedAt ? <span key="a" className="num">{formatDateTime(header.approvedAt, locale)}</span> : "—"],
+    [t("results.approvedAt"), header.approvedAt ? <span key="a" className="whitespace-nowrap">{formatDateTime(header.approvedAt, locale)}</span> : "—"],
   ];
 
   return (

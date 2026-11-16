@@ -16,6 +16,8 @@ export type AuditResolvers = {
   customAction: (id: string | null, fallbackName?: string) => string;
   classification: (c: string) => string;
   stage: (s: string) => string;
+  /** 'YYYY-MM-DD' -> display date; ISO, kept in reading order, when absent */
+  date?: (day: string) => string;
 };
 
 const str = (v: unknown): string => (typeof v === "string" ? v : "");
@@ -71,7 +73,7 @@ export function describeProblemAudit(
     case "action_needs_study_cleared":
       return { key: "action_needs_study_cleared", values: { action: action() } };
     case "action_implemented":
-      return { key: "action_implemented", values: { action: action(), date: iso(str(p.implementedOn)) } };
+      return { key: "action_implemented", values: { action: action(), date: r.date ? r.date(str(p.implementedOn)) : iso(str(p.implementedOn)) } };
     case "action_implementation_cleared":
       return { key: "action_implementation_cleared", values: { action: action() } };
     case "custom_action_added":

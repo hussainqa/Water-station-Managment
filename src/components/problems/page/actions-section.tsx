@@ -2,7 +2,8 @@
 
 import { useDeferredValue, useId, useMemo, useState } from "react";
 import { BookOpen, Check, ListChecks, Plus, Search } from "lucide-react";
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
+import { formatDate } from "@/components/assessments/results/helpers";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { setObstacleOnlyAction } from "@/lib/problems/actions";
@@ -152,6 +153,7 @@ function ObstacleGroup({ group }: { group: SuggestionGroup }) {
 function Summary() {
   const t = useTranslations("problems.summary");
   const tA = useTranslations("problems.actions");
+  const locale = useLocale();
   const { problem, pick } = useProblem();
   const chosen = problem.chosenActions;
   const implemented = chosen.filter((c) => c.implementedOn).length;
@@ -205,7 +207,7 @@ function Summary() {
                 <p className={`m-0 mt-1 text-[12.5px] font-semibold ${c.implementedOn ? "text-ok" : "text-primary"}`}>
                   {c.implementedOn ? (
                     <>
-                      {tA("implementedOn")} <span className="num">{c.implementedOn}</span>
+                      {tA("implementedOn")} <span className="whitespace-nowrap">{formatDate(c.implementedOn, locale)}</span>
                     </>
                   ) : (
                     t("notImplemented")

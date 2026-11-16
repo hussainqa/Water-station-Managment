@@ -11,6 +11,7 @@ import { Callout, StatePill, card } from "./bits";
 import { countStates, formatValue, formulaText, type Details, type Evaluated } from "./lib";
 import { displayUnit } from "./unit";
 import { periodLabel } from "./lib";
+import { formatDate } from "@/components/assessments/results/helpers";
 import { cn } from "cn";
 
 type Props = {
@@ -43,7 +44,7 @@ export function StepReview({ plantName, details: d, groups, rows, ack, onAck, on
           {[
             [t("review.plant"), plantName],
             [t("review.period"), periodLabel(d.periodStart, d.months, locale)],
-            [t("review.range"), `${d.startDate} — ${d.endDate}`, true],
+            [t("review.range"), `${formatDate(d.startDate, locale)} – ${formatDate(d.endDate, locale)}`],
             [t("review.enteredBy"), d.enteredBy],
           ].map(([k, v, num]) => (
             <div key={String(k)} className="rounded-xl bg-muted p-3">

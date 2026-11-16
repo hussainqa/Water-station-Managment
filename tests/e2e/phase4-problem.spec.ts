@@ -7,6 +7,7 @@ import enProblems from "../../messages/en/problems.json";
 import arShell from "../../messages/ar/shell.json";
 import enShell from "../../messages/en/shell.json";
 import { hydrated, newEmail, PASSWORD, signInViaUi } from "./helpers";
+import { formatDate } from "../../src/components/assessments/results/helpers";
 
 /**
  * Phase 4 (part A): the problem page. Each run seeds a throwaway copy of the demo data for a
@@ -183,7 +184,7 @@ for (const lang of ["ar", "en"] as const) {
     await expect(chip(page)).toHaveAttribute("data-stage", "awaiting_obstacles");
     await expect(chip(page)).toHaveText(m.stage.awaiting_obstacles);
     await expect(page.getByTestId("fact-plant")).toContainText("الكرخ");
-    await expect(page.getByTestId("fact-detected")).toHaveText(setup.detectedOn);
+    await expect(page.getByTestId("fact-detected")).toHaveText(formatDate(setup.detectedOn, lang));
     await expect(page.getByTestId("fact-value")).toContainText("6.5");
     await expect(page.getByTestId("fact-limit")).not.toHaveText("—");
     await expect(page.getByTestId("fact-status").locator('[data-status="critical"]')).toBeVisible();
@@ -303,7 +304,7 @@ for (const lang of ["ar", "en"] as const) {
     await date.fill(setup.detectedOn);
     await card41.getByTestId("impl-save").click();
     await expect(card41).toHaveAttribute("data-implemented", "true", { timeout: 30_000 });
-    await expect(card41.getByTestId("implemented-on")).toContainText(setup.detectedOn);
+    await expect(card41.getByTestId("implemented-on")).toContainText(formatDate(setup.detectedOn, lang));
     await expect(page.getByTestId("sum-implemented-n")).toHaveText("1");
     await expect(page.getByTestId("summary-item").first()).toHaveAttribute("data-implemented", "true");
 

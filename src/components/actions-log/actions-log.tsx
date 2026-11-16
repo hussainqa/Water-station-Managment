@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { BookOpen, CircleCheck, ListChecks, SearchX, Wrench } from "lucide-react";
 import { useLocale, useTranslations } from "next-intl";
-import { periodLabel } from "@/components/assessments/results/helpers";
+import { formatDate, periodLabel } from "@/components/assessments/results/helpers";
 import { StageChip } from "@/components/problems/list/stage-chip";
 import { EmptyState } from "@/components/shell/empty-state";
 import { PageHeader } from "@/components/shell/page-header";
@@ -137,7 +137,7 @@ function LogRow({ entry: e }: { entry: ActionLogEntry }) {
             className="inline-flex items-center gap-1.5 rounded-full bg-ok-soft px-2.5 py-1 text-[12.5px] font-semibold leading-none text-ok"
           >
             <CircleCheck aria-hidden="true" className="size-3.5" />
-            {t("state.implemented")} · <span className="num">{e.implementedOn}</span>
+            {t("state.implemented")} · <span className="whitespace-nowrap">{formatDate(e.implementedOn, locale)}</span>
           </span>
         ) : e.chosen ? (
           <span
